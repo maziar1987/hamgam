@@ -1,0 +1,95 @@
+{
+  "data": [
+    {
+      "label": "شناسنامه",
+      "data": "Documents Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "certificate"
+    },
+    {
+      "label": "کاربرگ انتظارات",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "rfp"
+    },
+    {
+      "label": "تیم تخصصی",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "specialized-team"
+    },
+    {
+      "label": "پیشنهادیه",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "proposal"
+    },
+    {
+      "label": "نظریه مبنا",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "base-theory-list"
+    },
+    {
+      "label": "جلسه هیئت خبرگی",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "naja-experts-session-list"
+    },
+    {
+      "label": "تعیین ناظر",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "add-supervision"
+    },
+    {
+      "label": "قرارداد تدوین",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "compilation-contract"
+    },
+    {
+      "label": "قرارداد نظارت",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "supervision-contract"
+    },
+    {
+      "label": "پرداخت مالی",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "payment"
+    },
+    {
+      "label": "گواهینامه کارگاه",
+      "data": "Pictures Folder",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "workshop-certificate"
+    },
+    {
+      "label": "تعیین اهداف",
+      "data": "ُSpecification",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "target-specification"
+    },
+    {
+      "label": "برنامه ریزی جلسات میز تخصصی",
+      "data": "Planning",
+      "expandedIcon": "pi pi-folder-open",
+      "collapsedIcon": "pi pi-folder",
+      "path": "session-planning"
+    }
+  ]
+}

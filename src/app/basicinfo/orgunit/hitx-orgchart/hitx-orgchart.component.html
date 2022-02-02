@@ -1,0 +1,123 @@
+<app-change-detector [variable]="hitxOrgchartComponent.onaddman" (onChange)="onAddManager()"></app-change-detector>
+<app-change-detector [variable]="hitxOrgchartComponent.ondetail" (onChange)="onDetail()"></app-change-detector>
+
+<app-change-detector [variable]="hitxOrgchartComponent.onsen" (onChange)="onSentence()"></app-change-detector>
+
+<app-change-detector [variable]="hitxOrgchartComponent.onunitmode" (onChange)="loadData()"></app-change-detector>
+<app-change-detector [variable]="hitxOrgchartComponent.onpostmode" (onChange)="postModeLoadData()"></app-change-detector>
+<app-change-detector [variable]="hitxOrgchartComponent.onmovepost" (onChange)="onPostMove()"></app-change-detector>
+<app-change-detector [variable]="hitxOrgchartComponent.savehistory" (onChange)="onSaveHistory()"></app-change-detector>
+<app-change-detector [variable]="hitxOrgchartComponent.showVersion" (onChange)="onShowVersoin()"></app-change-detector>
+
+<div id="mask" class="d-none" style="background-color: black;opacity: .5;width: 100%;height: 100%;z-index: 2000;position: fixed;top: 0;left: 0;"></div>
+<div id="unitForm"style="display:none;  position:absolute;width:50%;background-color:#fff;z-index:10000" class="ui-dialog">
+
+    <div>
+        <div class="header ui-dialog-titlebar">
+            <div class="ui-dialog-title">ویرایش و
+                جزییات</div>
+        </div>
+
+        <div  style="padding: 10px;">
+            <div class="form-group">
+                <label for="unitName">نام واحد</label>
+                <input class="form-control" id="unitName" />
+            </div>
+            <div class="form-group">
+                <label for="unitCode">کد واحد</label>
+                <input class="form-control" id="unitCode" />
+            </div>
+            <!-- <div id="titleelements" class="form-group">
+                    <div id="titlecontent">
+                        <label for="title">عنوان</label>
+                        <input class="form-control"  id="title" value="" />
+                    </div>
+                </div> -->
+            <div class="" style="text-align: center;" id="unitBtns">
+                <div id="unitbtncontent">
+                    <button class="btn btn-success" id="unitSave" (click)="unitSubmit()">ذخیره</button>
+                    <button class="btn btn-danger mr-2" id="unitCancel" type="button">انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postForm" style="display:none;  position:absolute;width:50%;background-color:#fff;z-index:10000" class="ui-dialog">
+    <div>
+        <div  class="header ui-dialog-titlebar">
+            <div class="ui-dialog-title">ویرایش و
+                جزییات</div>
+        </div>
+
+        <div class="body" style="padding: 10px;">
+            <div class="form-group">
+                <label for="postTitle">نام</label>
+                <input class="form-control" id="postTitle" />
+            </div>
+            <div id="postTitleElements" class="form-group" *ngIf="hitxOrgchartComponent.onaddman==true">
+                <div id="postTitleContent">
+                    <label for="postTitle">مدیر مستقیم</label>
+                    <select class="form-control" [(ngModel)]="dirmanger">
+                        <option *ngFor="let item of posts" [ngValue]="item.id">
+                            {{ item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group ui-fluid">
+                    <label for="">نوع پست</label>
+                    <select class="form-control"[(ngModel)]="postTypeTemp">
+                        <option *ngFor="let post of postTypes|keys" [ngValue]="post.key">
+                            {{ 'orgChart.' + post.value | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group ui-fluid">
+                    <label for="">وضعیت</label>
+                    <select class="form-control"[(ngModel)]="postStatusTemp">
+                        <option *ngFor="let post1 of postStatuses|keys" [ngValue]="post1.key">
+                            {{ 'orgChart.' + post1.value | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group ui-fluid">
+                    <label for="">چیدمان</label>
+                    <select class="form-control"[(ngModel)]="postLayouTemp">
+                        <option *ngFor="let post2 of postLayouts|keys" [ngValue]="post2.key">
+                            {{ 'orgChart.' + post2.value | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div style="text-align: center;">
+
+                    <div (click)='Detail()' class="showdetail btn mb-2">
+                        <span class="ml-2">افزودن حکم</span>
+                        <span class="fa fa-angle-down rotate " [ngClass]="{'down':addDetail}"></span>
+                    </div>
+                </div> -->
+            <!-- <div *ngIf='addDetail'>
+                    <div >
+                        <label for="postTitle">نام کاربر</label>
+                        <p-multiSelect [options]="users"   optionLabel="fullname" defaultLabel="کاربران">
+                        </p-multiSelect>
+                    </div>
+                </div> -->
+            <!-- <div class="row" *ngIf='addDetail'>
+                    <div class="col-md-12 form-group ui-fluid">
+                        <p-dropdown [options]="users"  optionLabel="fullname"[filter]="true"></p-dropdown>
+                        <p-multiSelect [options]="users"  optionLabel="fullname" defaultLabel="کاربران">
+                        </p-multiSelect>
+                    </div>
+                </div> -->
+            <div class="" style="text-align: center;" id="postBtns">
+                <div id="postbtncontent">
+                    <button class="btn btn-success" id="postSave" (click)="postSubmit()">ذخیره</button>
+                    <button class="btn btn-danger mr-2" id="postCancel" type="button">انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="tree"></div>

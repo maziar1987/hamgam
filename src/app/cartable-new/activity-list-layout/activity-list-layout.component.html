@@ -1,0 +1,40 @@
+<app-spinner-border [loading]="pageLoading"></app-spinner-border>
+
+<div class="animate-bottom" *ngIf="!pageLoading">
+    <div class="row">
+        <div class="col my-2">
+            <h4 class="float-right">{{'cartable.title.title' | translate}}</h4>
+
+            <div class="ui-inputgroup float-left">
+                <button pButton type="button" icon="fa fa-list" pTooltip="نمایش لیستی" tooltipPosition="top"
+                    [class]="!isCardView ? 'ui-button-info' : 'ui-button-secondary'"
+                    (click)="toggleCardView()"></button>
+                <button pButton type="button" icon="fa fa-clipboard-list" pTooltip="نمایش کارتی" tooltipPosition="top"
+                    [class]="isCardView ? 'ui-button-info' : 'ui-button-secondary'"
+                    (click)="toggleCardView ()"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <app-activity-list *ngIf="!isCardView" [activities]="activities" [currentPageReport]="currentPageReport"
+                [loading]="loading" [activityFolderType]="activityFolderType" (view)="viewActivity($event)"
+                (create)="createActivity()" (delete)="deleteActivities($event)" (restore)="restoreActivities($event)"
+                (archive)="archiveActivities($event)" (history)="activityHistory($event)" (forward)="forward($event)"
+                (reply)="reply($event)" (sendBack)="sendBack($event)">
+            </app-activity-list>
+            <app-activity-card-list *ngIf="isCardView" [activities]="activities" [currentPageReport]="currentPageReport"
+                [loading]="loading" [activityFolderType]="activityFolderType" (view)="viewActivity($event)"
+                (create)="createActivity()" (delete)="deleteActivities($event)" (restore)="restoreActivities($event)"
+                (archive)="archiveActivities($event)" (history)="activityHistory($event)" (forward)="forward($event)"
+                (reply)="reply($event)" (sendBack)="sendBack($event)">
+            </app-activity-card-list>
+
+            <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+                (onPageChange)="onPageChange($event)" dropdownAppendTo="body"
+                currentPageReportTemplate="'cartable.pagerInfo' | translate:currentPageReport"></p-paginator>
+        </div>
+    </div>
+</div>
+

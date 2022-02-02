@@ -1,0 +1,62 @@
+<div class="row my-2">
+  <div class="col-md-12">
+    <h4>{{'regulations.baseTheory.baseTheoryList' | translate }}</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p-table #dt [value]="baseTheories" [autoLayout]="true" dataKey="id"
+             [(selection)]="selectedBaseTheory" [columns]="cols"
+             styleClass="ui-table-baseTheory" [rowHover]="true" [rows]="10"
+             [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+             [showCurrentPageReport]="true" [filterDelay]="0" [globalFilterFields]="[]"
+             currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+      <ng-template pTemplate="caption">
+        <div class="ui-table-globalfilter-container">
+          <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                 (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+          <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right ml-2"
+                  (click)="onCreate()" pTooltip="{{'action.add' | translate }}"
+                  tooltipPosition="top"></button>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th scope="col"></th>
+          <ng-container *ngFor="let col of columns">
+            <th scope="col">
+              {{col.header}}
+            </th>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td>
+            <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+            </p-menu>
+            <button pButton icon="pi pi-bars" (click)="menu.toggle($event)"
+                    class="ui-button-secondary"></button>
+          </td>
+          <ng-container *ngFor="let col of columns; let i = index">
+            <td [ngSwitch]="col.field">
+              <span *ngSwitchCase="'registrationDate'">
+                {{rowData[col.field] | persianDate:'shortDate'}}
+              </span>
+              <span *ngSwitchDefault>
+                {{rowData[col.field]}}
+              </span>
+            </td>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

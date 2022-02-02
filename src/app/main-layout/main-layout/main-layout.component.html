@@ -1,0 +1,12 @@
+<div dir="rtl" class="page-wrapper" [ngClass]="{'toggled' : getSideBarState()}">
+    <app-nav-menu [activityCount]="unSeenActivityCount"></app-nav-menu>
+    <main role="main" class="d-flex position-relative">
+        <app-sidebar></app-sidebar>
+        <div class="body-content container-fluid">
+            <div class="card p-2">
+                <router-outlet></router-outlet>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </main>
+</div>

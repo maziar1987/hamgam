@@ -1,0 +1,136 @@
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<form *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend>
+            {{editMode ? ('action.edit' | translate) + ' ' + user.login : ('user.createPageTitle' | translate)}}
+        </legend>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid"
+                [ngClass]="{ 'has-danger' : isInvalid('personId') || isInvalid('firstName') || isInvalid('lastName') }">
+                <label for="fullName">
+                    {{('user.firstName' | translate) + ' ' + ('user.lastName' | translate)}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="ui-inputgroup">
+                    <input id="fullName" type="text" pInputText [value]="fullName"
+                        [ngClass]="{ 'is-invalid' : isInvalid('personId') || isInvalid('firstName') || isInvalid('lastName') }"
+                        readonly>
+                    <button (click)="displayPerson()" pButton type="button" icon="pi pi-search"
+                        class="ui-button-primary" pTooltip="{{'action.select' | translate}}"
+                        tooltipPosition="top"></button>
+                </div>
+                <div *ngIf="personId?.errors?.required || firstName?.errors?.required || lastName?.errors?.required"
+                    class="text-danger">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('login') }">
+                <label for="login">
+                    {{('user.login' | translate)}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="login" type="text" pInputText formControlName="login"
+                    [ngClass]="{ 'is-invalid' : isInvalid('login') }">
+                <div *ngIf="login?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+                <div *ngIf="login?.errors?.duplicated" class="invalid-feedback">
+                    {{'message.duplicated' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('password') }">
+                <label for="password">
+                    {{('user.password' | translate)}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="password" type="password" pInputText formControlName="password"
+                    [ngClass]="{ 'is-invalid' : isInvalid('password') }">
+                <div *ngIf="password?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('repeatPassword') }">
+                <label for="repeatPassword">
+                    {{('user.repeatPassword' | translate)}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="repeatPassword" type="password" pInputText formControlName="repeatPassword"
+                    [ngClass]="{ 'is-invalid' : isInvalid('repeatPassword') }">
+                <div *ngIf="repeatPassword?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+                <div *ngIf="repeatPassword?.errors?.passwordMismatch" class="invalid-feedback">
+                    {{'message.passwordMismatch' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('email') }">
+                <label for="email">
+                    {{('user.email' | translate)}}
+                </label>
+                <input id="email" type="text" pInputText formControlName="email"
+                    [ngClass]="{ 'is-invalid' : isInvalid('email') }">
+                <div *ngIf="email?.errors?.email" class="invalid-feedback">
+                    {{'message.valueNotValid' | translate}}
+                </div>
+                <div *ngIf="email?.errors?.duplicated" class="invalid-feedback">
+                    {{'message.duplicated' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="policySets">
+                    {{('user.policySets' | translate)}}
+                </label>
+                <p-multiSelect [options]="policySets" formControlName="selectedPolicySets" optionLabel="name"
+                    appendTo="body" dataKey="id" maxSelectedLabels="3"
+                    emptyFilterMessage="{{'message.noResultsFound' | translate}}"
+                    selectedItemsLabel="{{'message.itemsSelected' | translate}}"
+                    defaultLabel="{{'message.choose' | translate}}"></p-multiSelect>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="col-sm-6 form-group">
+                <label for="langKey">
+                    {{('user.langKey.langKey' | translate)}}
+                </label>
+                <div class="row">
+                    <div class="col">
+                        <p-radioButton name="group1" value="fa" label="{{'user.langKey.fa' | translate}}"
+                            formControlName="langKey" inputId="opt1" class="ml-2"></p-radioButton>
+                        <p-radioButton name="group1" value="en" label="{{'user.langKey.en' | translate}}"
+                            formControlName="langKey" inputId="opt2"></p-radioButton>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-sm-6 form-group ui-fluid">
+                <p-checkbox formControlName="activated" binary="true" label="{{('user.activated' | translate)}}">
+                </p-checkbox>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <button *ngIf="!this.editMode" pButton type="submit" [disabled]="this.form.invalid"
+                    label="{{'action.create' | translate}}" icon="pi pi-plus" iconPos="right"
+                    class="ui-button-raised ui-button-success col-md-2"></button>
+                <button *ngIf="this.editMode" pButton type="submit" [disabled]="this.form.invalid"
+                    label="{{'action.saveChanges' | translate}}" icon="pi pi-check" iconPos="right"
+                    class="ui-button-raised ui-button-primary col-md-2"></button>
+                <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+                    class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+
+<app-person-search (select)="selectPerson($event)" [(visible)]="displayPersonSearch"></app-person-search>

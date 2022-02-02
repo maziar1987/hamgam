@@ -1,0 +1,251 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom">
+  <fieldset>
+    <legend>{{('action.create' | translate) + ' ' + ('regulations.proposal.formTitle' | translate)}}</legend>
+    <div class="row">
+      <div class="col-md-6 form-group ui-fluid">
+        <label for="title"> {{'regulations.proposal.regulationTitle' | translate}}</label>
+        <input id="title" type="text" pInputText [value]="certificate?.title"
+               [attr.disabled]="'disabled'">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="compilationNecessity">{{'regulations.proposal.compilationNecessity' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <textarea id="compilationNecessity" [rows]="5" formControlName="compilationNecessity" pInputTextarea></textarea>
+        <div *ngIf="compilationNecessity?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="compilationImportance">{{'regulations.proposal.compilationImportance' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <textarea id="compilationImportance" [rows]="5" formControlName="compilationImportance"
+                  pInputTextarea></textarea>
+        <div *ngIf="compilationImportance?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="mainObjective"> {{'regulations.rfp.mainObjective' | translate}} </label>
+        <textarea id="mainObjective" [rows]="1" [value]="rfp?.mainObjective"
+                  pInputTextarea [attr.disabled]="'disabled'"> </textarea>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="mainQuestion"> {{'regulations.rfp.mainQuestion' | translate}} </label>
+        <textarea id="mainQuestion" [rows]="1" [value]="rfp?.mainQuestion"
+                  pInputTextarea [attr.disabled]="'disabled'"> </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="secondaryObjectives"> {{'regulations.rfp.secondaryObjectives' | translate}} </label>
+        <textarea id="secondaryObjectives" [rows]="3" [value]="rfp?.secondaryObjectives"
+                  pInputTextarea [attr.disabled]="'disabled'"> </textarea>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="secondaryQuestions"> {{'regulations.rfp.secondaryQuestions' | translate}} </label>
+        <textarea id="secondaryQuestions" [rows]="3" [value]="rfp?.secondaryQuestions" pInputTextarea
+                  [attr.disabled]="'disabled'"> </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="applicationLevelId"> {{'regulations.certificate.applicationLevelId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="applicationLevelId" *ngFor="let basicValue of applicationBasicLevelId">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="applicationLevelId" [disabled]="true" [(ngModel)]="applicationLevelId"
+                             [ngModelOptions]="{standalone: true}"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="applicationAreaId"> {{'regulations.certificate.applicationAreaId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="applicationAreaId" *ngFor="let basicValue of applicationBasicAreaId">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="applicationAreaId" [disabled]="true" [(ngModel)]="applicationAreaId"
+                             [ngModelOptions]="{standalone: true}"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="regulationType">{{'regulations.certificate.regulationTypeId' | translate}} </label>
+        <input id="regulationType" type="text" pInputText [value]="regulationTypeDesc"
+               [attr.disabled]="'disabled'">
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="regulationAbstract"> {{'regulations.proposal.regulationAbstract' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <textarea id="regulationAbstract" [rows]="3" formControlName="regulationAbstract" pInputTextarea> </textarea>
+        <div *ngIf="regulationAbstract?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="history">{{'regulations.proposal.history' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <textarea id="history" [rows]="5" formControlName="history" pInputTextarea></textarea>
+        <div *ngIf="history?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="generalFramework">{{'regulations.proposal.generalFramework' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <textarea id="generalFramework" [rows]="5" formControlName="generalFramework" pInputTextarea></textarea>
+        <div *ngIf="generalFramework?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-md-12">
+        <label for="attachList"> {{'regulations.proposal.attachListTitle' | translate}} </label>
+        <div class="row" id="attachFile">
+          <div class="col-sm-6 form-group">
+            <div class="ui-inputgroup d-inline">
+              <button pButton type="button" label="" style="display: none;"></button>
+              <button pButton type="button" label="افزودن" (click)="showModal()"
+                      class="ui-button-rounded"></button>
+              <a href="javascript:;" (click)="appFileManager.openFile(file)" class="mr-2"
+                 style="display: none;">{{file?.name}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin: auto;" class="row ">
+      <p-table id="attachList" [value]="attachments">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 5%;text-align: center;"> {{'regulations.proposal.attachList.row' | translate}} </th>
+            <th
+              style="width: 20%;text-align: center;">{{'regulations.proposal.attachList.documentName' | translate}}</th>
+            <th
+              style="width: 30%;text-align: center;"> {{'regulations.proposal.attachList.description' | translate}} </th>
+            <th
+              style="width: 15%;text-align: center;"> {{'regulations.proposal.attachList.operation' | translate}} </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-attach let-i="rowIndex">
+          <tr>
+            <td style="text-align: center;">{{i + 1}}</td>
+            <td>{{attach.title}}</td>
+            <td>{{attach.description}}</td>
+            <td style="text-align: center;">
+              <a style="font-size: 25px;" href="javascript:;"
+                 (click)="downloadAttachment(attach)" class="mr-2">
+                <i class="pi pi-download"></i>
+              </a>
+              <a style="color: red;font-size: 25px;" href="javascript:;" (click)="DeleteAttach(attach)"
+                 class="mr-2">
+                <i class="pi pi-times"></i>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="row m-3">
+      <div class="col-md-12">
+        <label for="organize"> {{'regulations.proposal.organize.organize' | translate}} </label>
+        <p-table id="organize" [value]="proposalOrganizing">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 10%"> {{'regulations.proposal.organize.step' | translate}} </th>
+              <th style="width: 20%"> {{'regulations.proposal.organize.title' | translate}} </th>
+              <th style="width: 50%"> {{'regulations.proposal.organize.description' | translate}} </th>
+              <th> {{'regulations.proposal.organize.timeEstimate' | translate}} </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData>
+            <tr>
+              <td> {{rowData.step}} </td>
+              <td> {{rowData.title}} </td>
+              <td> {{rowData.description}} </td>
+              <td pEditableColumn>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input type="number" min="0" style="text-align: center" [(ngModel)]="rowData.needTime"
+                           [ngModelOptions]="{standalone: true}">
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{rowData.needTime}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <div class="row m-3">
+      <div class="col-md-12">
+        <label for="worksheetProposal"> {{'regulations.proposal.worksheet.worksheet' | translate}} </label>
+        <p-table id="worksheetProposal" [value]="worksheetProposal">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 20%"> {{'regulations.proposal.worksheet.title' | translate}} </th>
+              <th style="width: 80%">
+                <div class="row">
+                  <div class="col div-header-title">{{'regulations.proposal.worksheet.worksheetTitle' | translate}}</div>
+                  <div class="col div-header-title">{{'regulations.proposal.worksheet.worksheetCount' | translate}}</div>
+                  <div class="col div-header-title">{{'regulations.proposal.worksheet.worksheetAmount' | translate}}</div>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData>
+            <tr>
+              <td>{{rowData.title}}</td>
+              <td>
+                <table>
+                  <tr *ngFor="let child of rowData.children">
+                    <td>
+                      <li> {{child.title}}</li>
+                    </td>
+                    <td class="td-text-align">
+                      <input type="number" min="0" style="text-align: center" [(ngModel)]="child.worksheetCount"
+                             [ngModelOptions]="{standalone: true}">
+                    </td>
+                    <td class="td-text-align">
+                      {{child.worksheetAmount | currency: 'IRR' : true}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <tr>
+              <td colspan="1">مجموع</td>
+              <td class="sum-text-style" style="padding-left: 10%;">{{sumAmount | currency: 'IRR' : true}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-workflow-button-group></app-workflow-button-group>
+      </div>
+    </div>
+  </fieldset>
+</form>
+

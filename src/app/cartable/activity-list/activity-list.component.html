@@ -1,0 +1,208 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="float-right">{{ 'cartable.title.title' | translate }} </h4>
+
+        <button pButton type="button" icon="fa fa-list" pTooltip="نمایش لیستی" tooltipPosition="top"
+            class="float-left mr-1"
+            [class]="!activityService.activitiesListChartView?'ui-button-info':'ui-button-secondary'"
+            (click)="activityService.activitiesListChartView=false"></button>
+        <button pButton type="button" icon="fa fa-sign" pTooltip="نمایش چارتی" tooltipPosition="top" class="float-left"
+            [class]="activityService.activitiesListChartView?'ui-button-info':'ui-button-secondary'"
+            (click)="activityService.activitiesListChartView=true"></button>
+    </div>
+</div>
+<hr />
+
+<div *ngIf="activityService.activitiesListChartView">
+    <div class="row">
+        <div class="col-md-12 mb-2">
+            <input type="text" class="col-md-2 float-left" pInputText placeholder="{{'cartable.search' | translate}}"
+                (keyup)="onSearch($event)">
+
+            <button pButton type="button" icon="fa fa-plus" pTooltip="{{'cartable.compose' | translate }}"
+                tooltipPosition="top" (click)="newActivity()" class="ui-button-success float-right"></button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngFor="let activity of activities" class="card mb-2"
+                [ngClass]="!IsItRead(activity) ? 'background': ''">
+                <div class="card-body">
+                    <div class="row border-bottom mb-2">
+                        <div class="col-md-6">
+                            <button pButton type="button" icon="fa fa-eye" pTooltip="{{'cartable.view' | translate }}"
+                                tooltipPosition="top" (click)="view(activity)"
+                                class="ui-button-secondary float-right mb-1"></button>
+                        </div>
+                        <div class="col-md-6">
+                            <p-menu #menu [popup]="true" [model]="getMenuItems(activity)" appendTo="body"></p-menu>
+                            <button pButton icon="fa fa-bars" (click)="menu.toggle($event)"
+                                class="ui-button-secondary float-left mb-1"></button>
+
+                        </div>
+                    </div>
+
+                    <div class="row cursor-pointer" (click)="view(activity)">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="assets/img/user1.jpg" class="float-right ml-3"
+                                        style="height: 60px;border-radius: 36px;">
+                                    <h6 class="card-title pt-4">
+                                        {{activity.sender.user?.firstName + " " + activity.sender.user?.lastName}}
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="row pt-4">
+                                <div class="col-md-12">
+                                    <span class="fa fa-paper-plane ml-2 text-success"></span>
+                                    <span>
+                                        {{'cartable.sendType.' + sendTypes[activity.sendType.toString()] | translate}}
+                                        {{transcriptType(activity)}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <i class="fa fa-list-alt  text-info"></i> <span
+                                        class="email mr-2">{{activity.priority?.title}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title"> {{activity.subject}}</h5>
+                            <p class="card-text">{{fitText(activity.text)}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-8">
+                            <label for="receivers">
+                                {{'cartable.receivers' | translate}}:
+                            </label>
+                            {{getReceivers(activity)}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-user-secret text-info"></i> <span
+                                class="phone mr-2">{{activity.classification?.title}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fa fa-calendar ml-2 text-info"></span>تاریخ ارسال:
+                            <span dir="ltr">{{activity.creationTime | persianDate:'shortDate'}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="float-left">
+                                <span class="fa fa-paperclip"></span>
+                                <a class="card-link mr-2">{{activity.attachmentsCount}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <p-paginator [rows]="10" totalRecords="activities?.length" (onPageChange)="chartPaging($event)">
+            </p-paginator> -->
+            <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+                (onPageChange)="onPageChange($event)" dropdownAppendTo="body"
+                currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}"></p-paginator>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!activityService.activitiesListChartView">
+    <div class="col-md-12">
+        <p-table #dt [value]="activities" [(selection)]="selectedActivities" dataKey="id" [autoLayout]="true"
+            styleClass="ui-table-activity" [rowHover]="true" [columns]="cols" [rowsPerPageOptions]="[10,25,50]"
+            [loading]="loading" [showCurrentPageReport]="true" [filterDelay]="0" [globalFilterFields]="['id', 'text']"
+            currentPageReportTemplate="{{ 'cartable.pagerInfo' | translate:currentPageReport }}">
+
+            <ng-template pTemplate="caption">
+                <div class="ui-table-globalfilter-container">
+
+                    <input type="text" pInputText placeholder="{{'cartable.search' | translate}}"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+                    <button pButton type="button" icon="fa fa-plus" pTooltip="{{'cartable.compose' | translate }}"
+                        tooltipPosition="top" (click)="newActivity()" class="ui-button-success float-right"></button>
+
+                    <!-- <button pButton type="button" icon="fa fa-archive" *ngIf="folderName!='archive'"
+                        pTooltip="{{'cartable.archive' | translate }}" tooltipPosition="top"
+                        (click)="archive(selectedActivities)" class="ui-button-secondary float-right mr-2"
+                        [disabled]="isButtonsDisabled()"></button>
+
+                    <button pButton type="button" icon="fa fa-trash-restore"
+                        *ngIf="folderName!='inbox' && folderName!='sent'" pTooltip="{{'cartable.restore' | translate }}"
+                        tooltipPosition="top" (click)="restore(selectedActivities)"
+                        class="ui-button-secondary float-right mr-2" [disabled]="isButtonsDisabled()"> </button>
+
+                    <button pButton type="button" icon="fa fa-trash" *ngIf="folderName!='trash'"
+                        pTooltip="{{'cartable.delete' | translate }}" tooltipPosition="top"
+                        (click)="trash(selectedActivities)" class="ui-button-secondary float-right mr-2"
+                        [disabled]="isButtonsDisabled()"> </button>
+
+                    <button pButton type="button" icon="fa fa-share-square-o"
+                        pTooltip="{{'cartable.move' | translate }}" tooltipPosition="top"
+                        (click)="moveActivityDialog(selectedActivities)" class="ui-button-secondary float-right mr-2"
+                        [disabled]="isButtonsDisabled()"></button> -->
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th></th>
+                    <th>
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [ngSwitch]="col.header">
+                        <span *ngSwitchCase="'sendType'">
+                            {{ 'cartable.sendType.' + col.header | translate }}
+                        </span>
+                        <span *ngSwitchDefault>
+                            {{ 'cartable.' + col.header | translate }}
+                        </span>
+                    </th>
+                    <th></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [ngClass]="!IsItRead(rowData) ? 'background': ''">
+                    <td>
+                        <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body"></p-menu>
+                        <button pButton icon="fa fa-bars" (click)="menu.toggle($event)"
+                            class="ui-button-secondary"></button>
+                    </td>
+                    <td>
+                        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td>{{rowData.id}}</td>
+                    <td>{{rowData.sender.user?.firstName + " " + rowData.sender.user?.lastName}}</td>
+                    <td style="max-width: 10px;">{{fitText(rowData.text)}}</td>
+                    <td>{{rowData.receivers[0].user?.firstName +" "+ rowData.receivers[0].user?.lastName}}</td>
+                    <td>{{'cartable.sendType.' + sendTypes[rowData.sendType.toString()] | translate}}</td>
+                    <td>
+                        <button pButton type="button" icon="fa fa-eye" pTooltip="{{'cartable.view' | translate }}"
+                            tooltipPosition="top" (click)="view(rowData)" class="ui-button-primary"></button>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8" style="text-align:center">{{'cartable.message.emptyTableInfo' | translate }}
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+            (onPageChange)="onPageChange($event)" dropdownAppendTo="body"
+            currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}"></p-paginator>
+    </div>
+
+</div>
+

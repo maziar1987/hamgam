@@ -1,0 +1,87 @@
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div class="row">
+    <div class="col-md-12  my-3">
+      <h4>{{'user.user' | translate }}</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p-table #dt [value]="users" [autoLayout]="true" dataKey="id" selectionMode="single" [(selection)]="selectedUser"
+        [columns]="cols" styleClass="ui-table-users" [rowHover]="true" [loading]="loading" [filterDelay]="0"
+        (onFilter)="utils.filterTree($event)"
+        [globalFilterFields]="['login', 'email', 'langKey', 'lastModifiedBy', 'createdDate', 'lastModifiedDate', 'authorities']">
+
+        <ng-template pTemplate="caption">
+          <div class="ui-table-globalfilter-container">
+            <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+              (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+            <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right" (click)="onCreate()"
+              pTooltip="{{'action.add' | translate }}" tooltipPosition="top"></button>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" *ngFor="let col of columns">
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [ngClass]="{'text-warning' : rowData.inactive}">
+            <td>
+              <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+              </p-menu>
+              <button pButton icon="pi pi-bars" (click)="menu.toggle($event)" class="ui-button-secondary"></button>
+            </td>
+            <ng-container *ngFor="let col of columns; let i = index">
+              <td [ngSwitch]="col.field">
+                <span *ngSwitchCase="'activated'">
+                  <span *ngIf="rowData[col.field] === true" class="text-success ml-2">{{'action.active'
+                    | translate}}</span>
+                  <span *ngIf="rowData[col.field] === true" class="pi pi-check text-success"></span>
+                  <span *ngIf="rowData[col.field] === false" class="text-danger ml-2">{{'action.inactive'
+                    | translate}}</span>
+                  <span *ngIf="rowData[col.field] === false" class="pi pi-times text-danger"></span>
+                </span>
+                <span *ngSwitchCase="'createdDate'">
+                  {{rowData[col.field] | persianDate:'shortDateTime'}}
+                </span>
+                <span *ngSwitchCase="'lastModifiedDate'">
+                  {{rowData[col.field] | persianDate:'shortDateTime'}}
+                </span>
+                <span *ngSwitchDefault>
+                  {{rowData[col.field]}}
+                </span>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+      <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+        (onPageChange)="onPageChange($event)" dropdownAppendTo="body"
+        currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}"></p-paginator>
+    </div>
+  </div>
+</div>
+
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

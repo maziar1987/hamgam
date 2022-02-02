@@ -1,0 +1,234 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom">
+  <fieldset>
+    <legend>{{'regulations.najaExpertsSession.najaExpertsSession' | translate}}</legend>
+    <div class="row">
+      <div class="col-md-12 form-group ui-fluid">
+        <label for="certificateId">{{'regulations.najaExpertsSession.certificate' | translate}}</label>
+        <input id="certificateId" type="text" pInputText [value]="certificateTitle" readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div [ngClass]="{ 'has-danger' : isInvalid('sessionTypeId') }"
+           class="col form-group ui-fluid">
+        <label>{{'regulations.najaExpertsSession.sessionType' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <!--                    <app-basic-value-dropdown [basicValueType]="getBasicValueType('najaExpertsSessionType')"-->
+        <!--                        formControlName="sessionTypeId" [showClear]="false" (selectedItem)="selectBasicValueType($event)">-->
+        <!--                    </app-basic-value-dropdown>-->
+        <app-basic-value-dropdown id="sessionTypeId" [basicValueType]="getBasicValueType('najaExpertsSessionType')"
+                                  formControlName="sessionTypeId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="false"
+                                  [placeholder]="'regulations.najaExpertsSession.sessionType' | translate">
+        </app-basic-value-dropdown>
+      </div>
+      <div class="col form-group ui-fluid">
+        <label for="sessionDate">{{'regulations.najaExpertsSession.sessionDate' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <app-datepicker-popup-jalali id="sessionDate" formControlName="sessionDate" class="w-100">
+        </app-datepicker-popup-jalali>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <label for="sessionTitle">{{'regulations.najaExpertsSession.sessionTitle' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="sessionTitle" type="text" pInputText formControlName="sessionTitle">
+      </div>
+      <div class="col form-group ui-fluid">
+        <label for="startTime">{{'regulations.najaExpertsSession.startTime' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="col-md-4">
+          <p-inputMask id="startTime" mask="99:99" formControlName="startTime" placeholder="99:99"
+                       slotChar="--:--">
+          </p-inputMask>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <label for="sessionSubject">{{'regulations.najaExpertsSession.sessionSubject' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="sessionSubject" type="text" pInputText formControlName="sessionSubject">
+      </div>
+      <div class="col form-group ui-fluid">
+        <label for="endTime">{{'regulations.najaExpertsSession.endTime' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="col-md-4">
+          <p-inputMask id="endTime" mask="99:99" formControlName="endTime" placeholder="99:99"
+                       slotChar="--:--">
+          </p-inputMask>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <label for="sessionCoordinator">{{'regulations.najaExpertsSession.sessionCoordinator' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="sessionCoordinator" type="text" pInputText formControlName="sessionCoordinator">
+      </div>
+      <div class="col form-group ui-fluid">
+        <label>{{'regulations.najaExpertsSession.sessionNo' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="sessionNo" type="number" pInputText formControlName="sessionNo">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <label for="sessionPlace">{{'regulations.najaExpertsSession.sessionPlace' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="sessionPlace" type="text" pInputText formControlName="sessionPlace">
+      </div>
+      <div class="col form-group ui-fluid">
+        <label for="invitationNo">{{'regulations.najaExpertsSession.invitationNo' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="invitationNo" type="number" pInputText formControlName="invitationNo">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <label>{{'regulations.najaExpertsSession.sessionMembers.sessionMembers' | translate}}</label>
+        <app-naja-experts-session-members formControlName="sessionMembers">
+        </app-naja-experts-session-members>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <label>{{'regulations.najaExpertsSession.enactments.enactments' | translate}}</label>
+        <app-naja-experts-session-enactments formControlName="enactments">
+        </app-naja-experts-session-enactments>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <label for="sessionSummary">{{'regulations.najaExpertsSession.sessionSummary' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <textarea formControlName="sessionSummary" id="sessionSummary" [rows]="1" pInputTextarea></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label for="confirmationStatusRfpID">
+          {{'regulations.najaExpertsSession.confirmationStatusRfpID' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="radio-button-row-class">
+          <div id="confirmationStatusRfpID" *ngFor="let basicValue of confirmationRfpValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="confirmationStatusRfpID" formControlName="confirmationStatusRfpID"
+                             [(ngModel)]="selectedConfirmationRfp"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmationDescriptionRfp">
+          {{'regulations.najaExpertsSession.confirmationDescriptionRfp' | translate}}
+        </label>
+        <textarea formControlName="confirmationDescriptionRfp" id="confirmationDescriptionRfp" [rows]="1"
+                  pInputTextarea></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label for="confirmationStatusTeamID">
+          {{'regulations.najaExpertsSession.confirmationStatusTeamID' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="radio-button-row-class">
+          <div id="confirmationStatusTeamID" *ngFor="let basicValue of confirmationTeamValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="confirmationStatusTeamID" formControlName="confirmationStatusTeamID"
+                             [(ngModel)]="selectedConfirmationTeam"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+        <!--          <div class="row">-->
+        <!--            <div class="col">-->
+        <!--              <p-radioButton *ngFor="let item of confirmationStatusTeams; index as i;" value="{{item.id}}"-->
+        <!--                             label="{{item.title}}" formControlName="confirmationStatusTeamID"-->
+        <!--                             name="confirmationStatusTeamID" styleClass="{{i>0 ? 'mr-2' : ''}}">-->
+        <!--              </p-radioButton>-->
+        <!--            </div>-->
+        <!--          </div>-->
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmationDescriptionTeam">
+          {{'regulations.najaExpertsSession.confirmationDescriptionTeam' | translate}}
+        </label>
+        <textarea formControlName="confirmationDescriptionTeam" id="confirmationDescriptionTeam" [rows]="1"
+                  pInputTextarea></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label for="confirmationStatusProposalID">
+          {{'regulations.najaExpertsSession.confirmationStatusProposalID' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div id="confirmationStatusProposalID" class="radio-button-row-class">
+          <div *ngFor="let basicValue of confirmationProposalValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="confirmationStatusProposalID" formControlName="confirmationStatusProposalID"
+                             [(ngModel)]="selectedConfirmationProposal"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+        <!--          <div class="row">-->
+        <!--            <div class="col">-->
+        <!--              <p-radioButton *ngFor="let item of confirmationStatusProposals; index as i;"-->
+        <!--                             value="{{item.id}}" label="{{item.title}}" name="confirmationStatusProposalID"-->
+        <!--                             formControlName="confirmationStatusProposalID" styleClass="{{i>0 ? 'mr-2' : ''}}">-->
+        <!--              </p-radioButton>-->
+        <!--            </div>-->
+        <!--          </div>-->
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmationDescriptionProposal">
+          {{'regulations.najaExpertsSession.confirmationDescriptionProposal' | translate}}
+        </label>
+        <textarea formControlName="confirmationDescriptionProposal" id="confirmationDescriptionProposal"
+                  [rows]="1" pInputTextarea></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group ui-fluid">
+        <div class="ui-inputgroup d-inline">
+          <label pButton type="button" icon="pi pi-plus" iconPos="right" class="ui-button-primary"
+                 label="{{'regulations.najaExpertsSession.attachment' | translate}}">
+            <input type="file" single (change)="onUpload($event, 'attachment')" class="d-none"
+                   [disabled]="form.disabled">
+          </label>
+          <button *ngIf="attachmentFile" (click)="onRemoveUpload('attachment')" pButton type="button"
+                  icon="pi pi-times" class="ui-button-danger"></button>
+        </div>
+        <a href="javascript:;"
+           (click)="appFileManager.openFile(attachmentFile, najaExpertSession?.attachment)"
+           download="{{najaExpertSession?.attachment?.fileName}}"
+           class="mr-2">{{attachmentFileName}}</a>
+      </div>
+    </div>
+    <hr/>
+    <div class="row">
+      <div class="col">
+        <app-workflow-button-group></app-workflow-button-group>
+      </div>
+    </div>
+  </fieldset>
+</form>

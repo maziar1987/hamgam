@@ -1,0 +1,104 @@
+ngb-datepicker-navigation {
+  // display: flex;
+  // flex-direction: row-reverse;
+  // align-items: center;
+}
+
+.ngb-dp {
+  &-navigation-chevron {
+    border-style: solid;
+    border-width: 0.2em 0.2em 0 0;
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    // margin-left: 0.15em;
+    // margin-right: 0.15em;
+    transform: rotate(-180deg);
+  }
+
+  &-arrow {
+    // display: flex;
+    // flex: 1 1 auto;
+    // padding-right: 0;
+    // padding-left: 0;
+    // margin: 0;
+    // width: .2rem;
+    height: 1.5rem;
+
+    &.right {
+      justify-content: flex-start;
+
+      .ngb-dp-navigation-chevron {
+        transform: rotate(-135deg);
+        // margin-left: 0.15em;
+        // margin-right: 0.25em;
+      }
+    }
+
+  }
+
+  &-arrow-btn {
+   padding: 0 2px;
+    margin: 0 2px;
+    border: none;
+    background-color: transparent;
+    z-index: 1;
+
+    &:focus {
+      outline-width: 1px;
+      outline-style: auto;
+    }
+
+    // IE workaround, as outline-style: auto doesn't work
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      &:focus {
+        outline-style: solid;
+      }
+    }
+  }
+
+  &-month-name {
+    font-size: larger;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+  }
+
+  &-navigation-select {
+    display: flex;
+    flex: 1 1 9rem;
+  }
+}
+.custom-select {
+ flex: 1 1 auto;
+  border: 1px solid rgba($color: #34495e, $alpha: 0.12);
+  border-radius: 4px;
+  background: white;
+  font-size: 13px;
+  text-align: right;
+  // margin: 3px;
+  // margin-top: 15px;
+  height: 35px;
+  direction: rtl;
+  &:focus {
+    z-index: 1;
+  }
+  &::-ms-value {
+    background-color: transparent !important;
+  }
+}
+// .custom-select {
+  // flex: 1 1 auto;
+  // padding: 0 0.5rem;
+  // font-size: 0.875rem;
+  // height: 1.85rem;
+
+  // &:focus {
+  //   z-index: 1;
+  // }
+
+  // IE11, Edge: Fix arrow icon disappears on focus
+//   &::-ms-value {
+//     background-color: transparent !important;
+//   }
+// }

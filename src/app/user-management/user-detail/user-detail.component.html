@@ -1,0 +1,78 @@
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<fieldset *ngIf="!isLoading">
+    <legend>{{user?.login}}</legend>
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="fullName">
+                {{('user.firstName' | translate) + ' ' + ('user.lastName' | translate)}}
+            </label>
+            <input id="fullName" type="text" pInputText readonly [value]="fullName">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="login">
+                {{('user.login' | translate)}}
+            </label>
+            <input id="login" type="text" pInputText [value]="user.login" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="email">
+                {{('user.email' | translate)}}
+            </label>
+            <input id="email" type="text" pInputText [value]="user.email" readonly>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label for="policySets">
+                {{('user.policySets' | translate)}}
+            </label>
+            <div class="row">
+                <div class="col">
+                    <h6>
+                        <span *ngFor="let policy of user.policySets" class="badge badge-primary ml-2">
+                            {{policy.name}}
+                        </span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-sm-6 form-group">
+            <label for="langKey">
+                {{('user.langKey.langKey' | translate)}}
+            </label>
+            <div class="row">
+                <div class="col">
+                    <p-radioButton name="langKey" value="fa" label="{{'user.langKey.fa' | translate}}"
+                        [(ngModel)]="user.langKey" inputId="opt1" class="ml-2" disabled></p-radioButton>
+                    <p-radioButton name="langKey" value="en" label="{{'user.langKey.en' | translate}}"
+                        [(ngModel)]="user.langKey" inputId="opt2" disabled></p-radioButton>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-sm-6 form-group ui-fluid">
+            <p-checkbox [(ngModel)]="user.activated" binary="true" label="{{('user.activated' | translate)}}" disabled>
+            </p-checkbox>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <button pButton type="button" (click)="onEdit()" label="{{'action.edit' | translate}}" icon="pi pi-pencil"
+                iconPos="right" class="ui-button-raised ui-button-primary col-md-2"></button>
+            <button pButton type="button" (click)="onDelete()" label="{{'action.delete' | translate}}"
+                icon="pi pi-minus" iconPos="right" class="ui-button-raised ui-button-danger mr-2 col-md-1"></button>
+            <button pButton type="button" (click)="onBack()" label="{{'action.back' | translate}}"
+                class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+            </button>
+        </div>
+    </div>
+</fieldset>
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

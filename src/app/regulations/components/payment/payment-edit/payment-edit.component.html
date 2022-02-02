@@ -1,0 +1,77 @@
+<app-spinner-border [loading]="loading"></app-spinner-border>
+<div class="animate-bottom" *ngIf="!loading">
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="accomplishmentDate">نام و نام خانوادگی</label>
+            <input id="title" type="text" pInputText [value]="paymentInit.fullName" [attr.disabled]="'disabled'">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="expireDate">سمت </label>
+            <input id="title" type="text" pInputText [value]="paymentInit.responsibilityName"
+                [attr.disabled]="'disabled'">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 form-group ui-fluid">
+            <label for="accomplishmentDate">مرحله</label>
+            <input id="title" type="number" pInputText [value]="paymentInit.stepNumber" [attr.disabled]="'disabled'">
+        </div>
+        <div class="col-sm-3 form-group ui-fluid">
+            <label for="expireDate">درصد </label>
+            <input id="title" type="number" pInputText [value]="paymentInit.stepPercent" [attr.disabled]="'disabled'">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="expireDate">مبلغ - ریال</label>
+            <input id="title" type="number" pInputText [value]="paymentInit.amount" [attr.disabled]="'disabled'">
+        </div>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <fieldset>
+
+            <div class="row" style="align-items: flex-end;">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="paymentDate">تاریخ پرداخت<span class="text-danger mr-2">*</span></label>
+                    <app-datepicker-popup-jalali id="paymentDate" [placement]="placement" formControlName="paymentDate"
+                        class="w-100">
+                    </app-datepicker-popup-jalali>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <div class="ui-inputgroup d-inline">
+                        <label pButton type="button" icon="pi pi-plus" iconPos="right" class="ui-button-primary"
+                            label="تصویر فیش واریز">
+                            <input type="file" single (change)="onUpload($event)" class="d-none">
+                        </label>
+                        <button *ngIf="attachmentFile" (click)="onRemoveUpload()" pButton type="button"
+                            icon="pi pi-times" class="ui-button-danger"></button>
+                    </div>
+                    <span class="text-danger mr-2">*</span>
+                    <a href="javascript:;" (click)="appFileManager.openFile(attachmentFile)"
+                        class="mr-2">{{attachmentFile?.name}}</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 form-group ui-fluid">
+                    <label for="description">
+                        توضیحات
+                    </label>
+                    <textarea id="description" formControlName="description" [rows]="3" pInputTextarea [placeholder]="">
+            </textarea>
+                </div>
+
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <button pButton type="submit" label="ذخیره" [disabled]="this.form.invalid"
+                    class="ui-button-raised ui-button-success col-md-2  mr-2"></button>
+
+                <button pButton type="button" label="بازگشت" (click)="onBack()"
+                    class="ui-button-raised ui-button-secondary mr-2 col-md-2">
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

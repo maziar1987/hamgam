@@ -1,0 +1,27 @@
+<div class="ui-inputgroup">
+    <p-dropdown [options]="defaultTexts" [(ngModel)]="selectedDefaultText" placeholder="متن پیش فرض" optionLabel="text"
+        [showClear]="true" (onChange)="onChangeValue()"></p-dropdown>
+    <button pButton type="button" icon="fa fa-plus" pTooltip="{{'cartable.compose' | translate }}" tooltipPosition="top"
+        (click)="showCreate()" class="ui-button-success"></button>
+    <button pButton type="button" icon="fa fa-trash" pTooltip="{{'cartable.delete' | translate }}" tooltipPosition="top"
+        (click)="deleteConfirmation()" class="ui-button-danger" [disabled]="!this.selectedDefaultText"></button>
+</div>
+
+<p-dialog [(visible)]="displayCreate" [style]="{width: '50vw'}">
+    <p-header>
+        {{('action.create' | translate) + ' ' + ('defaultText.defaultText' | translate)}}
+    </p-header>
+    <div class="row">
+        <div class="col-md-12 form-group ui-fluid">
+            <input type="text" pInputText [(ngModel)]="text" placeholder="{{'defaultText.text' | translate}}" />
+        </div>
+    </div>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" iconPos="right" (click)="create()" label="{{'action.create'
+        | translate}}" class="ui-button-success"></button>
+        <button type="button" pButton icon="pi pi-times" iconPos="right" (click)="displayCreate=false"
+            label="{{'action.cancel' | translate}}" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>

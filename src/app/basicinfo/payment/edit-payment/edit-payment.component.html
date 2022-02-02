@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-md-12 my-2">
+        <h5>افزودن روش پرداخت</h5>
+        <hr />
+    </div>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom">
+    <fieldset>
+        <div class="row">
+            <div class="col-md-4 form-group ui-fluid">
+                <label for="methodName"> نام روش </label>
+                <span class="text-danger mr-2">*</span>
+                <input id="methodName" type="text" pInputText class="ui-fluid" formControlName="methodName"
+                    class="form-control">
+            </div>
+        </div>
+        <fieldset>
+            <div class="row">
+                <div class="col-md-6 form-group ui-fluid">
+                    <div class="Step-contaner">
+                        <div style="position: relative; margin-bottom: 10px;">
+                            <label style="font-weight: bold;">مراحل </label>
+                            <span class="text-danger">*</span>
+                            <a *ngIf="!disabled" style="color: rgb(8, 138, 84);font-size: 25px;position:absolute;top: -8px;right: 45px;"
+                                href="javascript:;" (click)="addNewStep($event)" class="mr-2"><i
+                                    class="pi pi-plus"></i></a>
+                        </div>
+                        <div formArrayName="steps">
+                            <div *ngFor="let item of steps.controls; let i = index">
+                                <div [formGroupName]="i" style="height: 35px;">
+                                    <div style="display: flex;">
+                                        <div style="width: 60px;"><label>مرحله {{i+1}}</label></div>
+                                        <div><input [attr.disabled]="disabled ? '' : null" type="number" formControlName="step" min="1" max="100" /></div>
+                                        <div style="width: 50px;text-align: center;"><label>درصد</label></div>
+                                        <div *ngIf="!disabled"><a style="color: red;font-size: 20px;" href="javascript:;" *ngIf="i > 0"
+                                                (click)="removeStep($event,i)">
+                                                <i class="pi pi-times"></i>
+                                            </a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex;">
+                                <div style="width: 60px;"><label>جمع</label><i pTooltip="باید جمع مراحل صد باشد"
+                                        class="pi pi-exclamation-circle text-info"></i></div>
+                                <div style="width: 60px;"><span *ngIf="sumd !== 100" class="text-danger"
+                                        style="font-weight: bold;">{{sumd}}</span>
+                                    <span *ngIf="sumd === 100" class="text-success"
+                                        style="font-weight: bold;">{{sumd}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </fieldset>
+
+
+
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="description">
+                    توضیحات
+                </label>
+                <textarea id="description" formControlName="description" [rows]="3" pInputTextarea [placeholder]="">
+            </textarea>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <input id="status" type="checkbox" formControlName="status" />
+                <label for="status" style="margin: 5px;">فعال</label>
+            </div>
+
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <button pButton type="submit" label="ذخیره" [disabled]="this.form.invalid"
+                    class="ui-button-raised ui-button-success col-md-2"></button> -->
+                <button pButton type="submit" label="ذخیره" [disabled]="sumv"
+                    class="ui-button-raised ui-button-success col-md-2"></button>
+                <button pButton type="button" (click)="onBack()" label="بازگشت"
+                    class="ui-button-raised ui-button-secondary mr-2 col-md-2"></button>
+            </div>
+        </div>
+    </fieldset>
+</form>

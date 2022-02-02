@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4>{{ 'cartable.view' | translate }}</h4>
+        <hr />
+    </div>
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <button pButton type="button" label="{{'cartable.back' | translate}}" (click)="clickBack()"
+                class="ui-button-raised ui-button-secondary col-md-1 "></button>
+        </div>
+    </div>
+</div>
+<div class="person-info row">
+    <div class="col-lg-4 col-md-12 no-padding">
+        <!-- <img class="human-picture" src="assets/img/user1.jpg"> -->
+        <div class="name ">
+            <h2>{{activity?.sender?.user?.firstName + ' ' + activity?.sender?.user?.lastName}}</h2>
+            <!-- <h2 class="name-h second-name">{{activity.sender.surname}}</h2> -->
+            <!-- <div>
+                <span class="mail-tag tag label family">وزارت صنعت</span>
+            </div> -->
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-xs-12 no-padding">
+        <div class="contact-info phone-email">
+            <div>
+                <i class="fa fa-user-secret"></i> <span class="phone mr-2">{{activity?.classification?.title}}</span>
+            </div>
+            <div>
+                <i class="fa fa-list-alt"></i> <span class="email mr-2">{{activity?.priority?.title}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-xs-12 no-padding">
+        <div class="contact-info position-address">
+            <div>
+                <i class="fa fa-send"></i><span class="position mr-2">
+                    {{'cartable.sendType.' + sendTypes[activity?.sendType.toString()] | translate}}
+                    <span *ngIf="sendTypeCC">({{sendTypeCC}})</span></span>
+            </div>
+            <div>
+                <i class="fa fa-calendar"></i><span class="date mr-2">مهلت انجام : {{activity?.deadTime | persianDate:'shortDate'}}
+                </span>
+                <!-- <span class="address">{{activity.receivers[0].receiverUser.name +' '+ activity.receivers[0].receiverUser.surname}}</span> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 mt-3">
+        <div class="contact-info position-address">
+            <div *ngIf="activity?.receivers?.length>0">
+                <span>گیرندگان : </span>
+                <span class="address">{{receiversName}}</span>
+            </div>
+            <div *ngIf="activity?.receiverCCs?.length>0">
+                <span>رونوشت : </span>
+                <span class="address">{{receiversCCName}}</span>
+                <!-- <span class="address">{{activity.receivers[0].receiverUser.name +' '+ activity.receivers[0].receiverUser.surname}}</span> -->
+            </div>
+            <div *ngIf="activity?.receiverBCCs?.length>0">
+                <span>رونوشت مخفی : </span>
+                <span class="address">{{receiversBCCName}}</span>
+                <!-- <span class="address">{{activity.receivers[0].receiverUser.name +' '+ activity.receivers[0].receiverUser.surname}}</span> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="line-top"></div>
+<div class="message-details">
+    <span class="subject">{{activity?.subject}} &nbsp;</span>
+    <span class="date">تاریخ ارسال : {{activity?.creationTime | persianDate:'shortDate'}} </span>
+</div>
+<div class="line"></div>
+<div class="message-body">
+    <p #textView></p>
+</div>
+<div class="line"></div>
+<div class="attachment col-lg-12" *ngIf="activity?.attachmentsCount > 0">
+    <span class="file-links">{{ 'cartable.attachmentFiles' | translate }} </span>
+    <div class="row">
+        <i class="file-icon ion-document"></i>
+
+        <button pButton type="button" *ngFor="let item of activity?.attachments" (click)="showFile(item)"
+            [ngClass]="item==selected ? 'selecteditem': ''"
+            label="{{item.name.length <= 15 ? item.name : item.name.substring(0, 15) + '...'}}"
+            class="ui-button-secondary col-md-2 mr-2 mt-2 p-2 fa fa-picture-o"></button>
+
+        <!-- <div pButton class="ui-button-raised ui-button-secondary col-md-2 mt-2 mr-1 box-file-name" *ngFor="let item of activity.attachments" (click)="showFile(item)">
+<div style=" text-align: center;">
+            <span *ngIf="findType(item.objectName)=='img'" class="fa fa-picture-o"></span>
+
+            <span *ngIf="findType(item.objectName)=='pdf'" class="fa fa-file-pdf-o"></span>
+            <span *ngIf="findType(item.objectName)=='other'" class="fa fa-file-archive-o"></span>
+            <br>
+            <span
+                class="file-name ng-binding">{{item.objectName.length <= 7 ? item.objectName : item.objectName.substring(0, 7) + '...'}}
+            </span>
+        </div>
+    </div> -->
+
+    </div>
+
+</div>
+<div class=" row">
+
+
+    <div class="attachment col-lg-12" *ngIf="urls?.length>0">
+        <app-image-viewer [images]="urls" [idContainer]="'idOnHTML'" [loadOnInit]="true"></app-image-viewer>
+
+    </div>
+</div>
+
+<!-- <div class="line" *ngIf="activity.attachedFiles.length>0"></div> -->
+<div class="answer-container" *ngIf="isNotYours()">
+    <button type="button" class="btn btn-primary btn-with-icon mr-2" (click)="forward(activity?.id)"><i
+            class="ion-reply"></i>{{'cartable.forward' | translate }}</button>
+    <button type="button" class="btn btn-primary btn-with-icon mr-2" (click)="reply(activity?.id)"><i
+            class="ion-forward"></i>{{'cartable.reply' | translate }}</button>
+    <button type="button" class="btn btn-primary btn-with-icon mr-2" (click)="return(activity?.id)"><i
+            class="ion-printer"></i>{{'cartable.return' | translate }}</button>
+</div>

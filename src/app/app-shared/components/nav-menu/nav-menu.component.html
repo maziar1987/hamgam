@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button *ngIf="getSideBarState()" (click)="toggleSidebar()" pButton type="button"
+    class="navbar-toggler d-inline-block" icon="fa fa-angle-double-left"></button>
+  <button *ngIf="!getSideBarState()" (click)="toggleSidebar()" pButton type="button"
+    class="navbar-toggler d-inline-block" icon="fa fa-angle-double-right"></button>
+  <a class="navbar-brand mr-2" href="/">
+    <img src="../../../../assets/img/logo.png" width="24" height="30" class="d-inline-block align-middle" alt="">
+    <span class="mr-2">{{'app.brand.brand' | translate}}</span>
+    <span class="mr-2 part2-font"><small>{{'app.brand.part1' | translate}}</small></span>
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav ml-auto">
+      <li *ngFor="let menuItem of menuItems" class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="[menuItem.link]">
+          {{menuItem.lable | translate}}
+        </a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <!-- <a [routerLink]="['/cartable/inbox']">
+        <span *ngIf="unSeenActivityBadge" class="badge badge-secondary bg-danger">
+          {{unSeenActivityBadge}}
+        </span>
+      </a> -->
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="fa fa-bell">
+              <span *ngIf="activityCount">
+                <span class="ml-2">{{activityCount}}</span>
+                <span class="fa fa-circle text-danger notification-dot"></span>
+              </span>
+            </span>
+          </a>
+          <div *ngIf="activityCount" class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="['/cartable/inbox']">
+              {{ activityCount + ' ' +
+              ('activity.activity' | translate) + ' ' +
+              ('action.new' | translate)}}</a>
+          </div>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/account/login']" (click)="logout()">
+            {{'navMenu.logout' | translate}}
+          </a>
+        </li>
+      </ul>
+      <img src="../../../../assets/img/flag.gif" width="47" height="30" class="d-inline-block align-middle ml-4 mr-2"
+        alt="">
+    </form>
+  </div>
+</nav>

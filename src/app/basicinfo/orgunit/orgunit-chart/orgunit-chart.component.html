@@ -1,0 +1,47 @@
+<!-- <p-organizationChart [value]="treeNodes" style="direction: ltr;overflow-x: scroll;" selectionMode="single"
+    class="overflow">
+    <ng-template let-node pTemplate="chart">
+        <div class=" bg-primary text-white  py-2 px-2 ui-corner-top">
+            <div class="row" style="direction: rtl;">
+                <div class="float-right col pr-0 mr-3">
+                    {{node.label}}
+                </div>
+                <div class="float-left col pl-0 ml-3 text-left">
+                    <p-menu #menu [popup]="true" [model]="getMenuItems(node)" appendTo="body">
+                    </p-menu>
+                    <button pButton icon="pi pi-bars" (click)="menu.toggle($event)"
+                        class="ui-button-secondary"></button>
+                </div>
+            </div>
+
+        </div>
+        <div class="node-content">
+            <img src="http://www.hamgamit.com/wp-content/uploads/2016/08/logo.png" width="32">
+            <div>{{node.data.code}}</div>
+        </div>
+    </ng-template>
+</p-organizationChart>
+
+<app-accept #accept_modal (accept)="deleteNode(this.selectedNode)"></app-accept> -->
+<!-- <app-accept #accept_modal ></app-accept> -->
+<div class="row">
+    <div class="col-md-3" style="border-left: 1px solid #bdbcbc;">
+        <div class="row">
+            <div class="col-md-12">
+
+                <app-orgunit-tree (orgUnitIdout)="orgUnitIdEmited($event)"(dblorgUnitId)="dblorgUnitIdEmited($event)"></app-orgunit-tree>
+            </div>
+            <div class="col-md-12 mt-2" style="border-top: 1px solid #bdbcbc;">
+                <app-orgunit-detail [orgunitid]="orgunitid"></app-orgunit-detail>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="col-md-12">
+            <app-hitx-orgchart [orgUnitId]="dblorgunitid" (orgUnitIdout)="orgUnitIdEmited($event)"(dblorgUnitId)="dblorgUnitIdEmited($event)"></app-hitx-orgchart>
+        </div>
+        <div class="col-md-12 p-0 pt-2" style="border-top: 1px solid #bdbcbc;" >
+            <app-orguni-posts-detail [orgUnitId]="orgunitid"></app-orguni-posts-detail>
+        </div>
+    </div>
+</div>

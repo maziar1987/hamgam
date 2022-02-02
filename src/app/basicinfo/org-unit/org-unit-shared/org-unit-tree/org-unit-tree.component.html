@@ -1,0 +1,23 @@
+<!-- <div class="row">
+    <div class="col">
+        <button pButton type="button" label="بازکردن همه" (click)="expandAll()" class="mr-1"></button>
+        <button pButton type="button" label="بستن همه" (click)="collapseAll()"></button>
+    </div>
+</div> -->
+<p-tree [value]="orgunitTreeNodes"
+        selectionMode="single"
+        [(selection)]="orgUnitService.selectedTreeNode"
+        (onNodeSelect)="nodeSelect($event)"
+        (onNodeExpand)="nodeExpand($event)"
+        [emptyMessage]="emptyMessage"
+        (onFilter)="utils.filterTree($event)"
+        [filter]="true"
+        [loading]="loading"
+        filterMode="strict">
+  <ng-template let-node pTemplate="default">
+    <span [pTooltip]="minLengthLabel ? node.label : ''" tooltipPosition="left">{{ node.label }}</span>
+<!--    <p-menu #menu [popup]="true" [model]="getMenuItems(node)" appendTo="body"></p-menu>-->
+<!--    <button *ngIf="buttonDisplay" type="button" class="btn-option ui-button-secondary mr-2" pButton-->
+<!--            icon="pi pi-bars" (click)="menu.toggle($event); $event.stopPropagation();"></button>-->
+  </ng-template>
+</p-tree>

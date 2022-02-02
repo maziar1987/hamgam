@@ -1,0 +1,46 @@
+<p-dialog [(visible)]="display" (onHide)="onHide($event)" [style]="{width: '40vw'}" [transitionOptions]="'60ms'">
+    <p-header>
+        {{('action.send' | translate)}}
+    </p-header>
+    <form [formGroup]="form">
+        <div class="row ">
+            <div class="col form-group ui-fluid">
+                <input id="subject" type="text" pInputText formControlName="subject"
+                    placeholder="{{'activity.subject' | translate }}" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group ui-fluid">
+                <p-dropdown [options]="classifications" formControlName="classification"
+                    placeholder="{{'activity.classification' | translate }}" optionLabel="title" [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group ui-fluid">
+                <p-dropdown [options]="priorities" formControlName="priority"
+                    placeholder="{{'activity.priority' | translate }}" optionLabel="title" [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group ui-fluid">
+                <app-activity-default-text-dropdown (textSelected)="defaultTextSelected($event)">
+                </app-activity-default-text-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group ui-fluid">
+                <p-editor formControlName="text" [style]="{'height':'100px'}"></p-editor>
+            </div>
+        </div>
+    </form>
+    <p-footer>
+        <button pButton type="button" (click)="onSubmit()" label="{{'action.send' | translate}}"
+            class="ui-button-raised ui-button-primary" [disabled]="this.form.invalid">
+        </button>
+        <button pButton type="button" (click)="onCancel()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+        </button>
+    </p-footer>
+</p-dialog>

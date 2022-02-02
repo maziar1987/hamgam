@@ -1,0 +1,82 @@
+<a class="download-zip-link" #downloadZipLink></a>
+<div id="{{idContainer}}" class="image-gallery-2">
+    <div class="image-container"></div>
+    <div class="inline-icon bg-secondary">
+        <div>
+            <a class="image-viewer-tooltip" (click)="showPDFOnly()" *ngIf="showPDFOnlyOption">
+                <span *ngIf="enableTooltip" class="tooltiptext filterTooltip">
+                    <span>{{showPDFOnlyLabel}}:</span>
+                    <i *ngIf="showOnlyPDF" class="fa fa-check"></i>
+                    <i *ngIf="!showOnlyPDF" class="fa fa-times"></i>
+                </span>
+                <i class="fa fa-file-pdf-o footer-icon"></i>
+            </a>
+        </div>
+        <div *ngIf="showOptions" class="options-image-viewer">
+            <a class="image-viewer-tooltip" *ngIf="zoomInButton"
+               (click)="zoomIn()" 
+               (mouseover)="atualizarCorHoverIn($event)"
+               (mouseout)="atualizarCorHoverOut($event)">
+                <span *ngIf="enableTooltip" class="tooltiptext">{{zoomInTooltipLabel}}</span>
+                <i class="fa fa-search-plus footer-icon"></i>
+            </a>
+            <a class="image-viewer-tooltip"
+               *ngIf="zoomOutButton"
+               (click)="zoomOut()" 
+               (mouseover)="atualizarCorHoverIn($event)"
+               (mouseout)="atualizarCorHoverOut($event)">
+                <span *ngIf="enableTooltip" class="tooltiptext">{{zoomOutTooltipLabel}}</span>
+                <i class="fa fa-search-minus footer-icon"></i>
+            </a>
+
+            <a class="image-viewer-tooltip"
+               *ngIf="rotate"
+               (click)="rotacionarDireita()" 
+               (mouseover)="atualizarCorHoverIn($event)"
+               (mouseout)="atualizarCorHoverOut($event)">
+                <span *ngIf="enableTooltip" class="tooltiptext">{{rotateRightTooltipLabel}}</span>
+                <i class="fa fa-rotate-right footer-icon"></i>
+            </a>
+            <a class="image-viewer-tooltip"
+               *ngIf="rotate"
+               (click)="rotacionarEsquerda()" 
+               (mouseover)="atualizarCorHoverIn($event)"
+               (mouseout)="atualizarCorHoverOut($event)">
+                <span *ngIf="enableTooltip" class="tooltiptext">{{rotateLeftTooltipLabel}}</span>
+                <i class="fa fa-rotate-left footer-icon"></i>
+            </a>
+            <a class="image-viewer-tooltip"
+               *ngIf="resetZoom"
+               (click)="resetarZoom()" 
+               (mouseover)="atualizarCorHoverIn($event)"
+               (mouseout)="atualizarCorHoverOut($event)">
+                <span *ngIf="enableTooltip" class="tooltiptext">{{resetZoomTooltipLabel}}</span>
+                <i class="fa fa-refresh footer-icon"></i>
+            </a>
+            <a class="image-viewer-tooltip"
+               *ngIf="fullscreen"
+               (click)="mostrarFullscreen()"  
+               (mouseover)="atualizarCorHoverIn($event)"
+               (mouseout)="atualizarCorHoverOut($event)">
+                <span *ngIf="enableTooltip" class="tooltiptext">{{fullscreenTooltipLabel}}</span>
+                <i class="fa fa-window-maximize footer-icon"></i>
+            </a>
+            <a class="image-viewer-tooltip" target="_blank" href="{{stringDownloadImagem}}"
+               download="{{defaultDownloadName}} {{indexImagemAtual}}.png"
+               *ngIf="download"
+               (mouseover)="atualizarCorHoverIn($event)"
+               (mouseout)="atualizarCorHoverOut($event)">
+                <span *ngIf="enableTooltip" class="tooltiptext">{{isURlImagem() ? openInNewTabTooltipLabel : downloadTooltipLabel}}</span>
+                <i *ngIf="isURlImagem()" class="fa fa-external-link footer-icon"></i>
+                <i *ngIf="!isURlImagem()" class="fa fa-download footer-icon"><!-- {{isURlImagem() ? 'open_in_browser' : 'file_download'}} --></i>
+            </a>
+        </div>
+    </div>
+    <!-- <i class="fa fa-arrow-left prev" (click)="imagemAnterior()"></i>
+    <i class="fa fa-arrow-right next" (click)="proximaImagem()"></i> -->
+    <div class="footer-info bg-secondary" >
+        <span style="display: none;" id="current"></span>
+        <!-- / -->
+        <span style="display: none;" class="total"></span>
+    </div>
+</div>

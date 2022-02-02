@@ -1,0 +1,51 @@
+<div class="row my-2">
+  <div class="col-md-12">
+    <h4>{{'notify-program.certificates' | translate }}</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p-table #dt [value]="tableDataCertificates" [autoLayout]="true" dataKey="id"  [paginator]="true" [(selection)]="selectedCertificates"
+             [rowHover]="true" [rows]="10" [loading]="loading" [showCurrentPageReport]="true" >
+      <ng-template pTemplate="caption">
+        <div class="ui-table-globalfilter-container" style="text-align: end">
+          <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                 (input)="filterGlobal($event.target.value)">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 1%"></th>
+          <th style="width: 40%">{{'notify-program.certificate.title' | translate}}</th>
+          <th style="width: 20%">{{'notify-program.certificate.status' | translate}}</th>
+          <th>{{'notify-program.certificate.type' | translate}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr>
+<!--          <td><p-tableCheckbox [value]="item"></p-tableCheckbox></td>-->
+          <td><p-checkbox (onChange)="itemCheckedClick(item, $event)" value="checked" [(ngModel)]="item.selected" binary="true" ></p-checkbox></td>
+          <td>{{item.title}}</td>
+          <td>{{item.status}}</td>
+          <td>{{item.type}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" style="text-align:center">{{'notify-program.certificate.noData' | translate }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <button pButton type="button" style="width: auto;"
+            label="{{'action.select' | translate}}" (click)="onSelect()"
+            class="ui-button-raised ui-button-success col-md-2"></button>
+    <button pButton type="button" (click)="onCancel()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+    </button>
+  </div>
+</div>

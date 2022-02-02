@@ -1,0 +1,127 @@
+<form [formGroup]="form">
+  <fieldset>
+    <legend>{{('regulations.certificate.status' | translate)}}</legend>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="statusId"> {{'regulations.certificate.certificateStatus.statusId' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <app-basic-value-dropdown id="statusId" [basicValueType]="getBasicValueType('regulationStatus')"
+                                  formControlName="statusId" (selectedItem)="selectStatusValueType($event)"
+                                  [showClear]="false" [readonly]="viewMode"
+                                  [placeholder]="'regulations.certificate.certificateStatus.statusId' | translate">
+        </app-basic-value-dropdown>
+        <div *ngIf="statusId?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div *ngIf="causeVisible" class="col-sm-6 form-group ui-fluid">
+        <label for="causeId"> {{'regulations.certificate.certificateStatus.causeId' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <app-basic-value-dropdown id="causeId" [basicValueType]="getBasicValueType('cause')"
+                                  formControlName="causeId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="false" [readonly]="viewMode"
+                                  [placeholder]="'regulations.certificate.certificateStatus.causeId' | translate">
+        </app-basic-value-dropdown>
+        <div *ngIf="causeId?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="revisionVisible">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="revisionLevelId"> {{'regulations.certificate.certificateStatus.revisionLevelId' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <app-basic-value-dropdown id="revisionLevelId" [basicValueType]="getBasicValueType('revisionLevel')"
+                                  formControlName="revisionLevelId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="false" [readonly]="viewMode"
+                                  [placeholder]="'regulations.certificate.certificateStatus.revisionLevelId' | translate">
+        </app-basic-value-dropdown>
+        <div *ngIf="revisionLevelId?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="revisionCauseId"> {{'regulations.certificate.certificateStatus.revisionCauseId' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <app-basic-value-dropdown id="revisionCauseId" [basicValueType]="getBasicValueType('revisionCause')"
+                                  formControlName="revisionCauseId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="false" [readonly]="viewMode"
+                                  [placeholder]="'regulations.certificate.certificateStatus.revisionCauseId' | translate">
+        </app-basic-value-dropdown>
+        <div *ngIf="revisionCauseId?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="estimateVisible">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="timeEstimate"> {{'regulations.certificate.certificateStatus.timeEstimate' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <div class="ui-inputgroup">
+          <input id="timeEstimate" type="number" pInputText formControlName="timeEstimate" [readOnly]="viewMode">
+          <span class="span-margin-class">{{'regulations.certificate.certificateStatus.day' | translate}}</span>
+          <div *ngIf="timeEstimate?.errors?.required" class="invalid-feedback">
+            {{'message.required' | translate}}
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="creditEstimate"> {{'regulations.certificate.certificateStatus.creditEstimate' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <div class="ui-inputgroup">
+          <p-inputNumber  mode="currency" id="creditEstimate" formControlName="creditEstimate" [disabled]="viewMode"
+                          currency="IRR"></p-inputNumber>
+<!--          <input id="creditEstimate" type="number" pInputText formControlName="creditEstimate"-->
+<!--                 [placeholder]="placeholder('creditEstimate')" [ngClass]="cssClass('creditEstimate')">-->
+          <span class="span-margin-class">{{'regulations.certificate.certificateStatus.currency' | translate}}</span>
+          <div *ngIf="creditEstimate?.errors?.required" class="invalid-feedback">
+            {{'message.required' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid" *ngIf="prepareDateVisible">
+        <label for="prepareDate"> {{'regulations.certificate.certificateStatus.prepareDate' | translate}}</label>
+        <app-datepicker-popup-jalali id="prepareDate" [placement]="placement"  formControlName="prepareDate" [disabled]="viewMode"
+                                     class="w-100">
+        </app-datepicker-popup-jalali>
+      </div>
+      <div class="col-sm-6 form-group" *ngIf="attachmentVisible">
+        <div class="d-inline" [ngClass]="{'ui-inputgroup': attachmentFile}">
+          <label pButton type="button" icon="pi pi-plus" iconPos="right" class="ui-button-primary mr-2"
+                 label="{{'regulations.certificate.certificateStatus.attachment' | translate}}">
+            <span class="text-danger mr-2">*</span>
+            <input type="file" single (change)="onUpload($event)"  class="d-none">
+          </label>
+          <button *ngIf="attachmentFile" (click)="onRemoveUpload()" pButton type="button" [disabled]="viewMode"
+                  icon="pi pi-times" class="ui-button-danger mr-1"></button>
+        </div>
+        <a href="javascript:;"
+           (click)="appFileManager.openFile(attachmentFile)"
+           download="{{attachmentFile?.fileName}}"
+           class="mr-2">{{attachmentFileName}}</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="description"> {{'regulations.certificate.certificateStatus.description' | translate}}</label>
+        <textarea id="description" [rows]="3" pInputTextarea formControlName="description" [readOnly]="viewMode"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button *ngIf="!this.editMode" pButton type="button" [disabled]="this.form.invalid" (click)="onSave()"
+                label="{{'action.save' | translate}}"
+                class="ui-button-raised ui-button-success col-md-2"></button>
+<!--        <button *ngIf="this.editMode" pButton type="submit" [disabled]="this.form.invalid"-->
+<!--                label="{{'action.saveChanges' | translate}}" icon="pi pi-check" iconPos="right"-->
+<!--                class="ui-button-raised ui-button-primary col-md-3"></button>-->
+        <button pButton type="button" (click)="onCancel()" label="{{'action.cancel' | translate}}"
+                class="ui-button-raised ui-button-secondary mr-2 col-md-2">
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</form>

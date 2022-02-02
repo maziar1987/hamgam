@@ -1,0 +1,23 @@
+<nav id="sidebar" class="sidebar card navbar-light bg-light shadow-sm">
+    <app-spinner-border [loading]="loading"></app-spinner-border>
+
+    <div class="sidebar-content animate-bottom" *ngIf="!loading">
+        <div class="sidebar-header"></div>
+        <div class="sidebar-profile bg-light p-2 overflow-hidden">
+            <div class="user-pic float-right p-1 ml-2 overflow-hidden">
+                <img class="w-100 h-100" src="assets/img/user1.jpg" alt="User picture">
+            </div>
+            <div class="float-right">
+                <span class="d-block">
+                    <strong>{{currentUser?.firstName}} {{currentUser?.lastName}}</strong>
+                </span>
+<!--                <span class="mt-2 d-block">{{ currentUserAuthorities | translate}}</span>-->
+                <span class="mt-2 d-block" pTooltip="{{ policies }}" tooltipPosition="top">{{ policy }}</span>
+            </div>
+        </div>
+        <div class="sidebar-menu pt-3 pb-2">
+            <p-panelMenu [model]="items" [multiple]="false"></p-panelMenu>
+        </div>
+    </div>
+    <div class="sidebar-footer"></div>
+</nav>

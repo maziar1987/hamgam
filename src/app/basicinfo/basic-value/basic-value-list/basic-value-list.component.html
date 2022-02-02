@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-12">
+    <h4>{{'basicinfo.listTitle' | translate}}</h4><hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p-table #dt [value]="basicInfos" [autoLayout]="true" dataKey="id"
+              styleClass="ui-table-basicValues" [(selection)]="selectedBasicValue"
+             [rowHover]="true" [rows]="10" [loading]="loading" [columns]="cols"
+            >
+      <ng-template pTemplate="caption">
+        <div class="ui-table-globalfilter-container">
+
+          <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                 (input)="filterGlobal($event.target.value)">
+          <button *ngIf="this.selectedBasicValue" pButton type="button" icon="fa fa-plus" class="ui-button-success float-right ml-2"
+                  (click)="onCreate()" pTooltip="{{'action.add'|translate}}" tooltipPosition="top"></button>
+          <p-breadcrumb [model]="items" styleClass="pointer" (onItemClick)="pathClick($event)"></p-breadcrumb>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th scope="col" style="width: 120px"></th>
+          <ng-container *ngFor="let col of columns">
+            <th scope="col">
+              {{col.header}}
+            </th>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [ngClass]="{'text-warning' : rowData.inactive}">
+          <td>
+            <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+            </p-menu>
+            <button pButton icon="pi pi-bars" (click)="menu.toggle($event)"
+                    class="ui-button-secondary"></button>
+            <button pButton icon="pi pi-eye" style="margin-right:2px" (click)="showChildes(rowData)"
+                    class="ui-button-secondary"></button>
+          </td>
+          <ng-container *ngFor="let col of columns; let i = index">
+            <td [ngSwitch]="col.field">
+                <span *ngSwitchCase="'status'">
+                                {{'basicinfo.' + rowData[col.field] |translate}}
+                            </span>
+              <span *ngSwitchDefault>
+                                {{rowData[col.field]}}
+                            </span>
+            </td>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+                 (onPageChange)="onPageChange($event)" dropdownAppendTo="body"
+                 currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}"></p-paginator>
+  </div>
+</div>
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>
+

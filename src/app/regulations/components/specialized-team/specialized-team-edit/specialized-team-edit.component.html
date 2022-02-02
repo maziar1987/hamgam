@@ -1,0 +1,45 @@
+<form [formGroup]="form" class="animate-bottom" (ngSubmit)="onSubmit()"
+  *ngIf="!(formContainerService.loading$ | async)">
+  <fieldset>
+    <div class="row">
+      <div class="col-md-6 form-group ui-fluid">
+        <label for="fullName">{{'regulations.specializedTeam.expertPerson' | translate}}<span class="text-danger mr-2">*</span></label>
+        <input id="title" type="text" pInputText [value]="itemEdit?.fullName" [attr.disabled]="'disabled'">
+      </div>
+
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="startDate">{{'regulations.specializedTeam.startDate' | translate}} <span
+            class="text-danger mr-2">*</span></label>
+        <app-datepicker-popup-jalali id="startDate" [placement]="placement" formControlName="startDate" class="w-100">
+        </app-datepicker-popup-jalali>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label>{{'regulations.specializedTeam.responsibility' | translate}}<span
+            class="text-danger mr-2">*</span></label>
+        <app-basic-value-dropdown #responsibilityTeamCombo [basicValueType]="getBasicValueType('responsibilityTeam')"
+          formControlName="responsibilityId" (selectedItem)="selectBasicValueType($event)" [showClear]="true"
+          [placeholder]="'regulations.specializedTeam.selectResponsibility' | translate">
+        </app-basic-value-dropdown>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="endDate"> {{'regulations.specializedTeam.endDate' | translate}}</label>
+        <app-datepicker-popup-jalali id="endDate" [placement]="placement" formControlName="endDate" class="w-100">
+        </app-datepicker-popup-jalali>
+      </div>
+    </div>
+
+  </fieldset>
+  <div class="row">
+    <div class="col-md-12" style="padding-top: 30px;">
+
+      <button pButton label="ویرایش" type="submit" [disabled]="this.form.invalid" icon="pi pi-pencil" iconPos="right"
+        class="ui-button-raised ui-button-success "></button>
+
+      <button pButton type="button" (click)="onBack()" label="بستن"
+        class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+      </button>
+    </div>
+  </div>
+</form>

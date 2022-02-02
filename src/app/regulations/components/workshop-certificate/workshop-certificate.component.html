@@ -1,0 +1,90 @@
+<app-spinner-border [loading]="loading"></app-spinner-border>
+<div class="animate-bottom" *ngIf="!loading">
+    <div class="row">
+        <div class="col-md-12">
+            <h5>ثبت گواهینامه کارگاه</h5>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group ui-fluid">
+            <label for="title"> {{'regulations.rfp.regulationTitle' | translate}}</label>
+            <input id="title" type="text" pInputText [value]="certificate?.title" [attr.disabled]="'disabled'">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p-table #dt [value]="workshopTeam" [autoLayout]="true" dataKey="id" [columns]="cols"
+                styleClass="ui-table-baseTheory" [rowHover]="true" [filterDelay]="0"
+                [globalFilterFields]="['teamFullName','responsibilityName']">
+                <ng-template pTemplate="caption">
+                    <div class="ui-table-globalfilter-container">
+                        <div><span>اعضا تیم</span></div>
+                        <div> <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                            (input)="dt.filterGlobal($event.target.value, 'contains')"></div>
+
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th scope="col"></th>
+                        <ng-container *ngFor="let col of columns">
+                            <th scope="col">
+                                {{col.header}}
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td>
+                            <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+                            </p-menu>
+                            <button pButton icon="pi pi-bars" (click)="menu.toggle($event)"
+                                class="ui-button-secondary"></button>
+                        </td>
+                        <ng-container *ngFor="let col of columns; let i = index">
+                            <td [ngSwitch]="col.field">
+                                <span *ngSwitchCase="'registrationDate'">
+                                    {{rowData[col.field] | persianDate:'shortDate'}}
+                                </span>
+                                <span *ngSwitchCase="'teamFullName'">
+                                    {{rowData[col.field]}}<i pTooltip="عضو غیر فعال" tooltipPosition="bottom"
+                                        *ngIf="!rowData.isActive" style="font-size: smaller; color: crimson;"
+                                        class="pi pi-circle-on"></i><i pTooltip="عضو فعال" tooltipPosition="bottom"
+                                        *ngIf="rowData.isActive" style="font-size: smaller; color: chartreuse;"
+                                        class="pi pi-circle-on"></i>
+                                </span>
+                                <span *ngSwitchCase="'hasCertificate'">
+                                    <span *ngIf="rowData[col.field]" class="text-success">گواهینامه دارد</span>
+                                    <span *ngIf="rowData[col.field] == false" class="text-warning">درخواست کارگاه</span>
+                                    <span *ngIf="rowData[col.field]" class="pi pi-check text-success"></span>
+                                    <span *ngIf="rowData[col.field] == false"
+                                        class="pi pi-exclamation-circle text-warning"></span>
+                                </span>
+                                <span *ngSwitchCase="'fileId'">
+                                    <button *ngIf="rowData[col.field] > 0" pButton icon="pi pi-download" (click)="downloadAttach(rowData)"
+                                        class="ui-button-raised ml-1"></button>
+                                </span>
+                                <span *ngSwitchDefault>
+                                    {{rowData[col.field]}}
+                                </span>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-workflow-button-group></app-workflow-button-group>
+        </div>
+    </div>
+</div>

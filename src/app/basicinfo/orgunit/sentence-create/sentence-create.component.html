@@ -1,0 +1,64 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" style="direction: rtl;text-align: right;">
+    <div class="row">
+      <div class="col-md-12 form-group" [ngClass]="{'has-danger' : hasError('startDate')}">
+        <label for="name">تاریخ شروع</label>
+        
+        <app-datepicker-popup-jalali id="startDate" formControlName="startDate"  style="width: 100%;"
+        class="float-right"></app-datepicker-popup-jalali>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label for="code">تاریخ پایان</label>
+        
+        <app-datepicker-popup-jalali id="endDate" formControlName="endDate"  style="width: 100%;"
+                    class="float-right"></app-datepicker-popup-jalali>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 form-group" [ngClass]="{'has-danger' : hasError('startDate')}">
+        <label for="name">شماره نامه</label>
+        <input formControlName="paperNumber" class="form-control" id="paperNumber">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label for="code">تاریخ نامه</label>
+        
+        <app-datepicker-popup-jalali id="paperDate" formControlName="paperDate"  style="width: 100%;"
+                    class="float-right"></app-datepicker-popup-jalali>
+      </div>
+    </div>
+    <div class="row">
+      
+      <div class="col-md-12 form-group ui-fluid">
+        <label for="name">فرد</label>
+<p-dropdown style="direction: rtl;" [options]="persons" formControlName="personId" optionLabel="fullName"  placeholder="فرد را انتخاب کنید" [showClear]="true"></p-dropdown>
+      </div>
+    </div>
+    
+    <!-- <div class="row">
+      <div class="col-md-12 form-group">
+        <label for="classification">طبقه بندی</label>
+        <input formControlName="classification" type="number" class="form-control" id="classification">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-check">
+          <input formControlName="paperaccess" type="checkbox" class="form-check-input" id="paperaccess">
+          <label class="form-check-label" for="paperaccess">اجازه صدور نامه</label>
+        </div>
+      </div>
+    </div> -->
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <!-- <input formControlName="parentid" type="hidden" value="{{form.parentid}}" class="form-control" id="parentid"> -->
+        <!-- <button type="submit" class="btn btn-primary">ذخیره</button> -->
+        <button pButton type="submit" label="افزودن" icon="pi pi-plus" iconPos="right"[disabled]="this.form.invalid"
+          class="ui-button-raised ui-button-success col-md-2">
+        </button>
+      </div>
+    </div>
+  </form>

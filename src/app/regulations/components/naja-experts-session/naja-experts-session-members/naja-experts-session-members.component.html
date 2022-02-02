@@ -1,0 +1,123 @@
+<p-table #dt [value]="sessionMembers" [autoLayout]="true" dataKey="id" selectionMode="single"
+    [columns]="sessionMembersCols" styleClass="ui-table-najaExpertsSessionMember" [rowHover]="true" [rows]="10"
+    [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true" [showCurrentPageReport]="true"
+    [filterDelay]="0" [globalFilterFields]="[]"
+    currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+
+    <ng-template pTemplate="caption">
+        <div class="ui-table-globalfilter-container">
+            <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+            <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right" (click)="onCreate()"
+                pTooltip="{{('action.add' | translate) + ' ' + ('regulations.najaExpertsSession.sessionMembers.sessionMembers' | translate)}}"
+                tooltipPosition="top"></button>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th></th>
+            <ng-container *ngFor="let col of columns">
+                <th scope="col">
+                    {{col.header}}
+                </th>
+            </ng-container>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td>
+                <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+                </p-menu>
+                <button pButton icon="pi pi-bars" type="button" (click)="menu.toggle($event)"
+                    class="ui-button-secondary"></button>
+            </td>
+            <ng-container *ngFor="let col of columns; let i = index">
+                <td [ngSwitch]="col.field">
+                    <span *ngSwitchCase="'precense'">
+                        <span *ngIf="rowData[col.field]">
+                            {{'regulations.najaExpertsSession.sessionMembers.precense.present' |translate}}
+                        </span>
+                        <span *ngIf="!rowData[col.field]">
+                            {{'regulations.najaExpertsSession.sessionMembers.precense.absent' |translate}}
+                        </span>
+                    </span>
+                    <span *ngSwitchDefault>
+                        {{rowData[col.field]}}
+                    </span>
+                </td>
+            </ng-container>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
+
+<p-dialog
+    header="{{('action.add' | translate) + ' ' + ('regulations.najaExpertsSession.sessionMembers.sessionMembers' | translate)}}"
+    [(visible)]="displaySessionMember" [style]="{width: '40vw'}">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('fullname') }">
+                <label for="fullname">
+                    {{'regulations.najaExpertsSession.sessionMembers.fullname' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="fullname" type="text" pInputText formControlName="fullname" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('fullname') }">
+                <div *ngIf="fullname?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('proxyName') }">
+                <label for="proxyName">
+                    {{'regulations.najaExpertsSession.sessionMembers.proxyName' | translate}}
+                </label>
+                <input id="proxyName" type="text" pInputText formControlName="proxyName" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('proxyName') }">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('responsibility') }">
+                <label for="responsibility">
+                    {{'regulations.najaExpertsSession.sessionMembers.responsibility' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="responsibility" type="text" pInputText formControlName="responsibility" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('responsibility') }">
+                <div *ngIf="responsibility?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('precense') }">
+                <label for="responsibility">
+                    {{'regulations.najaExpertsSession.sessionMembers.precense.precense' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <p-checkbox name="precense" binary="true" class="form-control"
+                    label="{{this.selectedSessionMember?.precense ? ('regulations.najaExpertsSession.sessionMembers.precense.present' | translate) : ('regulations.najaExpertsSession.sessionMembers.precense.absent' | translate) }}"
+                    formControlName="precense" inputId="precense"></p-checkbox>
+            </div>
+        </div>
+    </form>
+    <p-footer>
+        <button *ngIf="!this.form.value.id" pButton type="button" (click)="addNewMember()"
+            label="{{'action.add' | translate}}" icon="pi pi-plus" iconPos="right"
+            class="ui-button-raised ui-button-success" [disabled]="this.form.invalid"></button>
+        <button *ngIf="this.form.value.id" pButton type="button" (click)="editMember()"
+            label="{{'action.edit' | translate}}" icon="pi pi-plus" iconPos="right"
+            class="ui-button-raised ui-button-success" [disabled]="this.form.invalid"></button>
+        <button pButton type="button" (click)="cancel()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+        </button>
+    </p-footer>
+</p-dialog>
+

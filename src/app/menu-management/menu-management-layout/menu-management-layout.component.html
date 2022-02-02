@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12  my-3">
+        <h4>{{'menu-management.menu-management' | translate }}</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col ui-fluid">
+        <label>{{'policy.policy' | translate}}</label>
+        <app-policy-set-name-list (change)="selectedPolicyChanged($event)" [filterAdmin]="true"></app-policy-set-name-list>
+    </div>
+    <div class="col ui-fluid">
+        <label>{{'menu-management.menus' | translate}}</label>
+        <p-tree [value]="menus" selectionMode="checkbox" [(selection)]="selectedMenus" [propagateSelectionUp]="false"
+            [propagateSelectionDown]="false" (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col">
+        <!-- <button *ngIf="!this.editMode" pButton type="submit" [disabled]="this.form.invalid"
+            label="{{'action.create' | translate}}" icon="pi pi-plus" iconPos="right"
+            class="ui-button-raised ui-button-success col-md-2"></button> -->
+        <button pButton type="button" (click)="onSubmit()"
+            label="{{'action.saveChanges' | translate}}" icon="pi pi-check" iconPos="right"
+            class="ui-button-raised ui-button-primary col-md-2"></button>
+        <!-- <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+        </button> -->
+    </div>
+</div>

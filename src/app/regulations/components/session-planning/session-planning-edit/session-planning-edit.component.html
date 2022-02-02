@@ -1,0 +1,54 @@
+<app-spinner-border [loading]="loading"></app-spinner-border>
+
+<div class="animate-bottom" *ngIf="!loading">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <fieldset>
+            <legend class="my-2">{{editMode ? ('action.edit' | translate) + ' ' +
+                sessionPlanning?.targetSpecification?.targetTitle :
+                ('sessionPlanning.createPageTitle' | translate)}}</legend>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label>
+                        {{'sessionPlanning.sessionDate' | translate}}
+                        <span class="text-danger mr-2">*</span>
+                    </label>
+                    <app-datepicker-popup-jalali formControlName="sessionDate" class="w-100">
+                    </app-datepicker-popup-jalali>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label>
+                        {{'sessionPlanning.sessionTime' | translate}}
+                        <span class="text-danger mr-2">*</span>
+                    </label>
+                    <p-inputMask mask="99:99" formControlName="sessionTime" placeholder="99:99" slotChar="--:--"
+                        styleClass="text-center">
+                    </p-inputMask>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group ui-fluid">
+                    <label>
+                        {{'sessionPlanning.targetSpecification' | translate}}
+                        <span class="text-danger mr-2">*</span>
+                    </label>
+                    <p-dropdown [options]="targets" formControlName="targetSpecification" optionLabel="targetTitle"
+                        (onChange)="onChangeTarget($event.value)"></p-dropdown>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group ui-fluid">
+                    <label>
+                        {{'sessionPlanning.sessionMemberDuties' | translate}}
+                        <span class="text-danger mr-2">*</span>
+                    </label>
+                    <app-session-member-duty-edit formControlName="sessionMemberDuties"></app-session-member-duty-edit>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <app-workflow-button-group></app-workflow-button-group>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

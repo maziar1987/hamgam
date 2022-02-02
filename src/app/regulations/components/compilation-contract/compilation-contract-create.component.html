@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-md-12">
+        <h5>قرارداد تدوین آیین‌نامه</h5>
+        <hr />
+    </div>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="title"> {{'regulations.rfp.regulationTitle' | translate}}</label>
+                <input id="title" type="text" pInputText class="ui-fluid form-control" [value]="certificateTitle"
+                    [attr.disabled]="'disabled'">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="contractDate">تاریخ قرارداد</label>
+                <span class="text-danger mr-2">*</span>
+                <app-datepicker-popup-jalali id="contractDate" formControlName="contractDate">
+                </app-datepicker-popup-jalali>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="contractDuration">مدت قرارداد</label>
+                <span class="text-danger mr-2">*</span>
+                <input id="contractDuration" type="number" pInputText class="ui-fluid"
+                    formControlName="contractDuration" class="form-control">
+                <!-- <div class="row">
+
+                    <div class="col-md-3">
+
+                        <input id="input" type="number" pInputNumber class="ui-fluid" placeholder="روز"
+                            class="form-control">
+                    </div>
+                    <div class="col-md-3">
+
+                        <input id="input" type="number" pInputNumber class="ui-fluid" placeholder="ماه"
+                            class="form-control">
+                    </div>
+                    <div class="col-md-3">
+
+                        <input id="input" type="number" pInputNumber class="ui-fluid" placeholder="سال"
+                            class="form-control">
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="contractNo">
+                    شماره قرارداد
+                </label>
+                <span class="text-danger mr-2">*</span>
+                <input id="contractNo" type="text" pInputText class="ui-fluid" formControlName="contractNo"
+                    class="form-control">
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="contractAmountExecutor">
+                    مبلغ قرارداد مجری {{bossFullName}} (ریال)
+                </label>
+
+                <input id="contractAmountExecutor" type="text" pInputText class="ui-fluid"
+                    formControlName="contractAmountExecutor" [attr.disabled]="'disabled'" class="form-control">
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="contractAmountMaster">
+                    مبلغ قرارداد استاد راهنما {{SupervisorFullName}} (ریال)
+                </label>
+
+                <input id="contractAmountMaster" type="text" pInputText class="ui-fluid"
+                    formControlName="contractAmountMaster" [attr.disabled]="'disabled'" class="form-control">
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="">نوع پرداخت</label>
+                <span class="text-danger mr-2">*</span>
+                <select class="form-control" [attr.disabled]="'disabled'">
+                    <option>
+                        3 مرحله‌ای
+                    </option>
+                </select>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="">نوع پرداخت</label>
+                <span class="text-danger mr-2">*</span>
+                <p-dropdown [disabled]="hasPayment" [options]="paymentItems" formControlName="payment"
+                    placeholder="نوع پرداخت را انتخاب نمایید" [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6 form-group">
+                <div class="ui-inputgroup d-inline">
+                    <label pButton type="button" icon="pi pi-plus" iconPos="right" class="ui-button-primary"
+                        label="فایل قرارداد تدوین">
+                        <input type="file" single (change)="onUpload($event)" class="d-none">
+                    </label>
+                    <button *ngIf="attachmentFile" (click)="onRemoveUpload()" pButton type="button" icon="pi pi-times"
+                        class="ui-button-danger"></button>
+                </div>
+                <a href="javascript:;" (click)="appFileManager.openFile(attachmentFile)"
+                    class="mr-2">{{attachmentFile?.name}}</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 form-group ui-fluid">
+                <label for="description">
+                    توضیحات
+                </label>
+                <textarea id="description" formControlName="description" [rows]="3" pInputTextarea [placeholder]="">
+            </textarea>
+            </div>
+
+        </div>
+
+        <!-- <hr /> -->
+        <!-- <div class="row">
+            <div class="col-md-12">
+
+
+                <button pButton  type="submit" label="ذخیره" [disabled]="this.form.invalid"
+                    class="ui-button-raised ui-button-success col-md-2  mr-2"></button>
+
+                <button pButton type="button" label="بازگشت" class="ui-button-raised ui-button-secondary mr-2 col-md-2">
+                </button>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col">
+                <app-workflow-button-group></app-workflow-button-group>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<!-- <p-toast [style]="{marginTop: '50px'}" life="9000" position="top-left" key="tl"></p-toast> -->

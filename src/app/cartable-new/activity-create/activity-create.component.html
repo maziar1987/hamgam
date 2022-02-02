@@ -1,0 +1,96 @@
+<div class="animate-bottom">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <fieldset>
+            <legend class="my-2">
+                {{ 'activity.sendType.' + sendType.value | translate }}
+            </legend>
+            <div class="row" *ngIf="!isReturn">
+                <div class="col-md-12 form-group ui-fluid">
+                    <div class="ui-inputgroup">
+                        <p-multiSelect id="receiversItems" [options]="receiversItems" formControlName="receivers"
+                            class="w-100" defaultLabel="{{ 'activity.receivers' | translate }}"></p-multiSelect>
+                        <button *ngIf="!toggledCC" pButton type="button" icon="fa fa-copy" pTooltip="رونوشت"
+                            tooltipPosition="top" (click)="toggleCC()" class="ui-button-primary"></button>
+                        <button *ngIf="toggledCC" pButton type="button" icon="fa fa-times" pTooltip="بستن"
+                            tooltipPosition="top" (click)="toggleCC()" class="ui-button-danger"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="toggledCC">
+                <div class="col-md-12 form-group ui-fluid">
+                    <p-multiSelect [options]="receiverCCsItems" formControlName="receiverCCs"
+                        defaultLabel="{{ 'activity.receiverCCs' | translate }}"></p-multiSelect>
+                </div>
+            </div>
+            <div class="row" *ngIf="toggledCC">
+                <div class="col-md-12 form-group ui-fluid">
+                    <p-multiSelect [options]="receiverBCCsItems" formCopntrolName="receiverBCCs"
+                        defaultLabel="{{ 'activity.receiverBCCs' | translate }}"></p-multiSelect>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group ui-fluid">
+                    <p-dropdown [options]="classifications" formControlName="classification"
+                        placeholder="{{'activity.classification' | translate }}" optionLabel="title" [showClear]="true">
+                    </p-dropdown>
+                </div>
+                <div class="col-md-6 form-group ui-fluid">
+                    <p-dropdown [options]="priorities" formControlName="priority"
+                        placeholder="{{'activity.priority' | translate }}" optionLabel="title" [showClear]="true">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 form-group ui-fluid">
+                    <input type="text" pInputText formControlName="subject"
+                        placeholder="{{'activity.subject' | translate }}" />
+                </div>
+                <div class="col-md-6 form-group ui-fluid">
+                    <app-activity-default-text-dropdown (textSelected)="defaultTextSelected($event)">
+                    </app-activity-default-text-dropdown>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group ui-fluid">
+                    <p-editor formControlName="text" [style]="{'height':'180px'}"></p-editor>
+                </div>
+                <div class="col-md-6 form-group ui-fluid">
+                    <p-listbox [options]="attachmentsItems" formControlName="attachments" (onClick)="showFile($event)"
+                        [listStyle]="{'height':'159px'}">
+                        <p-header>
+                            <label pButton type="button" icon="pi pi-plus" class="ui-button-success float-right"
+                                pTooltip="{{ ('action.add' | translate) + ' ' + ('activity.attachments' | translate) }}"
+                                tooltipPosition="top">
+                                <input type="file" multiple (change)="onUpload($event)" class="file-upload-input">
+                            </label>
+                        </p-header>
+                        <ng-template let-attachment let-i="index" pTemplate="item">
+                            <div class="ui-helper-clearfix">
+                                <span class="fa fa-times ml-2"
+                                    (click)="onRemoveUpload(attachment);$event.stopPropagation()"></span>
+                                <span> {{ getFileName(attachment) }} </span>
+                            </div>
+                        </ng-template>
+                        <p-footer>
+                            {{ ('activity.attachments' | translate) }}: {{attachmentsLength}}
+                        </p-footer>
+                    </p-listbox>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <button pButton type="submit" label="{{'activity.sendType.' + sendType.value | translate}}"
+                        icon="fa fa-paper-plane" iconPos="right"
+                        class="ui-button-raised ui-button-success col-md-2"></button>
+                    <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+                        class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<app-loader [loading]="loading" [text]="'message.sending' | translate"></app-loader>
+

@@ -1,0 +1,88 @@
+<fieldset>
+    <legend class="my-2">{{person?.firstName+' '+person?.lastName}}</legend>
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="firstName">
+                {{'person.firstName' | translate}}
+            </label>
+            <input id="firstName" type="text" pInputText readonly [value]="person?.firstName">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="lastName">
+                {{'person.lastName' | translate}}
+            </label>
+            <input id="lastName" type="text" pInputText readonly [value]="person?.lastName">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="fatherName">
+                {{'person.fatherName' | translate}}
+            </label>
+            <input id="fatherName" type="text" pInputText readonly [value]="person?.fatherName">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="birthDate">
+                {{'person.birthDate' | translate}}
+            </label>
+            <input id="birthDate" type="text" pInputText readonly [value]="person?.birthDate | persianDate:'shortDate'">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="personnelCode">
+                {{'person.personnelCode' | translate}}
+            </label>
+            <input id="personnelCode" type="text" pInputText readonly [value]="person?.personnelCode">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="nationalCode">
+                {{'person.nationalCode' | translate}}
+            </label>
+            <input id="nationalCode" type="text" pInputText readonly [value]="person?.nationalCode">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="educationDegree">
+                {{'person.educationDegree' | translate}}
+            </label>
+            <input id="educationDegree" type="text" pInputText readonly [value]="person?.educationDegree?.title">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="studyField">
+                {{'person.studyField' | translate}}
+            </label>
+            <input id="studyField" type="text" pInputText readonly [value]="person?.studyField?.title">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="rank">
+                {{'person.rank' | translate}}
+            </label>
+            <input id="rank" type="text" pInputText readonly [value]="person?.rank?.title">
+        </div>
+        <div class="col-sm-6 form-group ui-fluid">
+            <label for="employmentDate">
+                {{'person.employmentDate' | translate}}
+            </label>
+            <input id="employmentDate" type="text" pInputText readonly
+                [value]="person?.employmentDate | persianDate:'shortDate'">
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <button pButton type="button" (click)="onEdit()" label="{{'action.edit' | translate}}" icon="pi pi-pencil"
+                iconPos="right" class="ui-button-raised ui-button-primary col-md-2"></button>
+            <button pButton type="button" (click)="onDelete()" label="{{'action.delete' | translate}}"
+                icon="pi pi-minus" iconPos="right" class="ui-button-raised ui-button-danger mr-2 col-md-1"></button>
+            <button pButton type="button" (click)="onBack()" label="{{'action.back' | translate}}"
+                class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+            </button>
+        </div>
+    </div>
+</fieldset>
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

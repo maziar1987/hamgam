@@ -1,0 +1,55 @@
+<ul class="navbar-nav mr-3" [ngClass]="{'pr-2': level>0}">
+
+    <ng-container *ngFor="let sidebarMenuItem of sidebarMenuItems">
+        <li *ngIf="sidebarMenuItem.visible" class="nav-item" [routerLinkActive]="['active']"
+            [ngClass]="{'open': sidebarMenuItem.active, 'pr-2': level>0, 'sidebar-dropdown': sidebarMenuItemTypes.dropdown}">
+
+            <span *ngIf="sidebarMenuItem.type === sidebarMenuItemTypes.header"
+                class="h5 d-inline pt-3 pb-1 px-4">{{sidebarMenuItem.lable | translate}}</span>
+
+            <a *ngIf="sidebarMenuItem.type !== sidebarMenuItemTypes.header && sidebarMenuItem.type !== sidebarMenuItemTypes.dropdown"
+                (click)='toggle(sidebarMenuItems, sidebarMenuItem)' class="nav-link pr-2"
+                [routerLink]="[sidebarMenuItem.link]">
+                <!-- [ngClass]="{'h5': level==0, 'h6': level>0}" -->
+                <i
+                    class="{{sidebarMenuItem.active && sidebarMenuItem.activeIcon ? sidebarMenuItem.activeIcon : sidebarMenuItem.icon}} ml-3  rounded"></i>
+                <span *ngIf="!sidebarMenuItem.active">{{sidebarMenuItem.lable | translate}}</span>
+                <strong *ngIf="sidebarMenuItem.active">{{sidebarMenuItem.lable | translate}}</strong>
+
+                <p-menu #popupmenu [popup]="true" [model]="sidebarMenuItem.menuItems" appendTo="body">
+                </p-menu>
+
+                <i *ngIf="sidebarMenuItem.menuItems" class="popup-menu-btn rounded  fa fa-ellipsis-h mr-3"
+                    (click)="togglePopupmenu(popupmenu, $event)"></i>
+            </a>
+
+            <a *ngIf="sidebarMenuItem.type !== sidebarMenuItemTypes.header && sidebarMenuItem.type === sidebarMenuItemTypes.dropdown"
+                (click)='toggle(sidebarMenuItems, sidebarMenuItem)' class="nav-link pr-2">
+                <!-- [ngClass]="{'h5': level==0, 'h6': level>0}" -->
+                <i
+                    class="{{sidebarMenuItem.active && sidebarMenuItem.activeIcon ? sidebarMenuItem.activeIcon : sidebarMenuItem.icon}} ml-3  rounded"></i>
+                <span *ngIf="!sidebarMenuItem.active">{{sidebarMenuItem.lable | translate}}</span>
+                <strong *ngIf="sidebarMenuItem.active">{{sidebarMenuItem.lable | translate}}</strong>
+                <i class="fa fa-angle-left float-left ml-3  rounded"
+                    [ngClass]="{'rotate-angle-left': sidebarMenuItem.active}"></i>
+
+                <p-menu #popupmenu [popup]="true" [model]="sidebarMenuItem.menuItems" appendTo="body">
+                </p-menu>
+
+                <i *ngIf="sidebarMenuItem.menuItems" class="popup-menu-btn rounded  fa fa-ellipsis-h mr-3"
+                    (click)="togglePopupmenu(popupmenu, $event)"></i>
+            </a>
+
+            <div *ngIf="sidebarMenuItem.type === sidebarMenuItemTypes.dropdown" class="overflow-hidden"
+                [@slide]="getState(sidebarMenuItem)">
+                <!-- <app-sidebar-item [sidebarMenuItems]="sidebarMenuItem.items" [parentItem]="sidebarMenuItem"
+            (deleteItem)="this.deleteItem.emit($event)" (createItem)="this.createItem.emit($event)" [level]='1'>
+        </app-sidebar-item> -->
+
+                <app-sidebar-item [sidebarMenuItems]="sidebarMenuItem.items" [parentItem]="sidebarMenuItem" [level]='1'>
+                </app-sidebar-item>
+            </div>
+
+        </li>
+    </ng-container>
+</ul>

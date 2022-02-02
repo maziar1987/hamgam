@@ -1,0 +1,62 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+    <p-dialog [(visible)]="display" (onHide)="onHide($event)" [style]="{width: '40vw'}" [transitionOptions]="'60ms'"
+        class="ui-fluid">
+        <p-header>
+            {{header}}
+        </p-header>
+        <div *ngIf="visibility.subject" class="form-group row">
+            <label for="subject" class="col-sm-3 col-form-label">
+                {{'activity.subject' | translate}}
+                <span class="text-danger mr-2">*</span>
+            </label>
+            <div class="col-sm-9">
+                <input id="subject" type="text" pInputText formControlName="subject" />
+            </div>
+        </div>
+        <div *ngIf="visibility.text" class="form-group row">
+            <label for="text" class="col-sm-3 col-form-label">
+                {{'activity.text' | translate}}
+            </label>
+            <div class="col-sm-9">
+                <textarea id="text" pInputTextarea formControlName="text" [rows]="3"></textarea>
+            </div>
+        </div>
+        <div *ngIf="visibility.classification" class="form-group row">
+            <label for="classificationId" class="col-sm-3 col-form-label">
+                {{'activity.classification' | translate}}
+            </label>
+            <div class="col-sm-9">
+                <app-basic-value-dropdown id="classificationId" [basicValueType]="getBasicValueType('classification')"
+                    formControlName="classificationId">
+                </app-basic-value-dropdown>
+            </div>
+        </div>
+        <div *ngIf="visibility.priority" class="form-group row">
+            <label for="priorityId" class="col-sm-3 col-form-label">
+                {{'activity.priority' | translate}}
+            </label>
+            <div class="col-sm-9">
+                <app-basic-value-dropdown id="priorityId" [basicValueType]="getBasicValueType('priority')"
+                    formControlName="priorityId">
+                </app-basic-value-dropdown>
+            </div>
+        </div>
+        <div *ngIf="visibility.deadline" class="form-group row mb-0">
+            <label for="deadline" class="col-sm-3 col-form-label">
+                {{'activity.deadline' | translate}}
+            </label>
+            <div class="col-sm-9">
+                <app-datepicker-popup-jalali id="deadline" formControlName="deadline" class="w-100">
+                </app-datepicker-popup-jalali>
+            </div>
+        </div>
+        <p-footer>
+            <button pButton type="submit" label="{{'action.send' | translate}}"
+                class="ui-button-raised ui-button-primary">
+            </button>
+            <button pButton type="button" (click)="onCancel()" label="{{'action.cancel' | translate}}"
+                class="ui-button-raised ui-button-secondary">
+            </button>
+        </p-footer>
+    </p-dialog>
+</form>

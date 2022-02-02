@@ -1,0 +1,6 @@
+<div class="float-left">
+    <button *ngFor="let btn of buttons" pButton type="button" (click)="btn.onClick({event: $event})"
+        [ngClass]="btn.cssClass" icon="{{btn.iconClass}}"
+        pTooltip="{{btn.tooltip ? btn.tooltip : (btn.tooltipLocalization | translate)}}"
+        tooltipPosition="top"></button>
+</div>

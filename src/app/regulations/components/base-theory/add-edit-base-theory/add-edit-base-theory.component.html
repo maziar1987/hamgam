@@ -1,0 +1,86 @@
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom">
+  <fieldset>
+    <legend>{{'regulations.baseTheory.baseTheory' | translate}}</legend>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label for="confirmationStatusRfpID">
+          {{'regulations.baseTheory.confirmationStatusRfpID' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="radio-button-row-class">
+          <div id="confirmationStatusRfpID" *ngFor="let basicValue of confirmationRfpValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="confirmationStatusRfpID" formControlName="confirmationStatusRfpID"
+                             [(ngModel)]="selectedConfirmationRfp"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmationDescriptionRfp">
+          {{'regulations.baseTheory.confirmationDescriptionRfp' | translate}}
+        </label>
+        <textarea formControlName="confirmationDescriptionRfp" id="confirmationDescriptionRfp" [rows]="1"
+                  pInputTextarea></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label for="confirmationStatusTeamID">
+          {{'regulations.baseTheory.confirmationStatusTeamID' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="radio-button-row-class">
+          <div id="confirmationStatusTeamID" *ngFor="let basicValue of confirmationTeamValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="confirmationStatusTeamID" formControlName="confirmationStatusTeamID"
+                             [(ngModel)]="selectedConfirmationTeam"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmationDescriptionTeam">
+          {{'regulations.baseTheory.confirmationDescriptionTeam' | translate}}
+        </label>
+        <textarea formControlName="confirmationDescriptionTeam" id="confirmationDescriptionTeam" [rows]="1"
+                  pInputTextarea></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label for="confirmationStatusProposalID">
+          {{'regulations.baseTheory.confirmationStatusProposalID' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div id="confirmationStatusProposalID" class="radio-button-row-class">
+          <div *ngFor="let basicValue of confirmationProposalValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="confirmationStatusProposalID" formControlName="confirmationStatusProposalID"
+                             [(ngModel)]="selectedConfirmationProposal"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmationDescriptionProposal">
+          {{'regulations.baseTheory.confirmationDescriptionProposal' | translate}}
+        </label>
+        <textarea formControlName="confirmationDescriptionProposal" id="confirmationDescriptionProposal"
+                  [rows]="1" pInputTextarea></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-workflow-button-group></app-workflow-button-group>
+      </div>
+    </div>
+  </fieldset>
+</form>

@@ -1,0 +1,41 @@
+<div class="login-wrapper">
+    <div class="login-content w-100 d-flex align-items-center justify-content-center">
+        <div class="login-container jumbotron p-5 m-0">
+
+            <img src="../../../assets/img/logo.png" class="rounded mx-auto d-block logo" alt="...">
+
+            <h5 class="my-4">{{'app.brand.brand' | translate}}</h5>
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <fieldset>
+                    <legend></legend>
+                    <div class="row">
+                        <div class="col form-group ui-fluid">
+                            <input id="username" autofocus type="text" pInputText formControlName="username"
+                                placeholder="{{'login.userName' | translate}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group ui-fluid">
+                            <input id="password" type="password" pInputText formControlName="password"
+                                placeholder="{{'login.password' | translate}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <p-checkbox name="rememberMe" binary="true" label="{{'login.rememberMe' | translate}}"
+                                formControlName="rememberMe" inputId="rememberMe"></p-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <button pButton type="submit" icon="pi pi-sign-in" iconPos="right"
+                                label="{{'action.signIn' | translate}}" [disabled]="this.form.invalid"
+                                class="float-left"></button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

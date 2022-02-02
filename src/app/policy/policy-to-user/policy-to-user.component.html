@@ -1,0 +1,189 @@
+<p-dialog [(visible)]="visible" (onHide)="hide()" class="overflow-hide" [maximizable]="false" [style]="{width: '60vw'}">
+    <p-header>
+      انتساب دسترسی <b style="color: blue;">{{selectPolicySet.name}}</b> به کاربرها
+    </p-header>
+    <div class="row">
+      <div class="col-sm-7 form-group ui-fluid">
+        <div class="col-md-12">
+          <h6>کاربران سیستم</h6>
+        </div>
+        <p-table #dataTable
+                 [value]="users"
+                 dataKey="id"
+                 selectionMode="checkbox"
+                 [(selection)]="selectedUser"
+                 [columns]="userCols"
+                 styleClass="ui-table-policy"
+                 [(rows)]="rows"
+                 [(first)]="first"                 
+                 [rowsPerPageOptions]="[10,25,50]"                 
+                 [paginator]="true"                 
+                 [globalFilterFields]="['firstName','lastName','login']"
+                 currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+          <ng-template pTemplate="caption">
+            <div class="ui-table-globalfilter-container">
+              <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                     (input)="dataTable.filterGlobal($event.target.value, 'contains')">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" style="width: 3em">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th scope="col" *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+  
+          <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-columns="columns">
+            <tr >
+              <td>
+                {{rowIndex + 1}}
+              </td>
+              <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              </td>
+              <ng-container *ngFor="let col of columns; let i = index">
+                <td [ngSwitch]="col.field">
+                              <span *ngSwitchCase="'isActive'">
+                                  <span *ngIf="rowData[col.field] == true" class="text-success ml-2">{{'action.active' |
+                                    translate}}</span>
+                                  <span *ngIf="rowData[col.field] == true" class="pi pi-check text-success"></span>
+                                  <span *ngIf="rowData[col.field] == false" class="text-danger ml-2">{{'action.inactive' |
+                                    translate}}</span>
+                                  <span *ngIf="rowData[col.field] == false" class="pi pi-times text-danger"></span>
+                              </span>
+                  <span *ngSwitchCase="'lastEditDate'">
+                                  {{rowData[col.field] | persianDate:'shortDate'}}
+                              </span>
+                  <span *ngSwitchDefault>
+                                  {{rowData[col.field]}}
+                              </span>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="col-sm-5 form-group">
+        <div class="col-md-12">
+          <h6>کاربران با دسترسی {{selectPolicySet.name}}</h6>
+        </div>
+        <p-table [value]="selectedUser" styleClass="ui-table-policy">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th style="width: 8em">نام</th>
+                  <th style="width: 8em">نام خانوادگی</th>
+                  <th style="width: 8em">نام کاربری</th>
+                  <th></th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-User>
+              <tr>
+                  <td>{{User.firstName}}</td>
+                  <td>{{User.lastName}}</td>
+                  <td>{{User.login}}</td>
+                  <td>
+                      <button pButton (click)="delete(User)" type="button" class="ui-button-negative float-left"
+                          icon="fa fa-trash" pTooltip="حذف" style="color: red; background-color: white; border: white;"
+                          tooltipPosition="top">
+                      </button>
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+        <!-- <p-table #dt
+                 [value]="policySets"
+                 [autoLayout]="true"
+                 dataKey="id"
+                 selectionMode="checkbox"
+                 [(selection)]="curUserPolicySets.policySets"
+                 [columns]="cols"
+                 (onRowSelect)="onUserRowSelect($event)"
+                 styleClass="ui-table-policy"
+                 [rowHover]="true"
+                 [rows]="10"
+                 [rowsPerPageOptions]="[10,25,50]"
+                 [loading]="loading"
+                 [paginator]="true"
+                 [showCurrentPageReport]="true"
+                 [filterDelay]="0"
+                 [globalFilterFields]="['name']"
+                 currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+          <ng-template pTemplate="caption">
+            <div class="ui-table-globalfilter-container">
+              <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                     (input)="dt.filterGlobal($event.target.value, 'contains')">
+            </div>
+          </ng-template>
+  
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" style="width: 3em">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th scope="col" *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+  
+          <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-columns="columns">
+            <tr>
+              <td>
+                {{rowIndex + 1}}
+              </td>
+              <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              </td>
+              <ng-container *ngFor="let col of columns; let i = index">
+                <td [ngSwitch]="col.field">
+                              <span *ngSwitchCase="'isActive'">
+                                  <span *ngIf="rowData[col.field] == true" class="text-success ml-2">{{'action.active' |
+                                    translate}}</span>
+                                  <span *ngIf="rowData[col.field] == true" class="pi pi-check text-success"></span>
+                                  <span *ngIf="rowData[col.field] == false" class="text-danger ml-2">{{'action.inactive' |
+                                    translate}}</span>
+                                  <span *ngIf="rowData[col.field] == false" class="pi pi-times text-danger"></span>
+                              </span>
+                  <span *ngSwitchCase="'lastEditDate'">
+                                  {{rowData[col.field] | persianDate:'shortDate'}}
+                              </span>
+                  <span *ngSwitchDefault>
+                                  {{rowData[col.field]}}
+                              </span>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table> -->
+      </div>
+    </div>
+    <p-footer>
+      <button (click)="submit()" pButton type="button"
+              label="{{'action.create' | translate}}"
+              icon="pi pi-plus"
+              iconPos="right"
+              class="ui-button-raised ui-button-success"></button>
+      <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+              class="ui-button-raised ui-button-secondary">
+      </button>
+    </p-footer>
+  </p-dialog>
+  

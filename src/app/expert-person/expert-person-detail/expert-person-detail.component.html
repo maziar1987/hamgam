@@ -1,0 +1,236 @@
+<div class="animate-bottom">
+    <form [formGroup]="form">
+        <fieldset>
+            <legend>{{firstName.value + ' ' + lastName.value}}</legend>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12 form-group ui-fluid">
+                            <label for="categoryId">
+                                {{'expertPerson.category' | translate}}
+                            </label>
+                            <input id="categoryId" type="text" pInputText [value]="category?.displayName" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <label for="personType">
+                                {{'expertPerson.personType' | translate}}
+                            </label>
+                            <div class="p-grid">
+                                <p-radioButton [disabled]="true" name="personType" value="{{personTypes.INTERNAL}}"
+                                    label="{{('expertPerson.personTypes.' + personTypes[personTypes.INTERNAL]) | translate}}"
+                                    formControlName="personType" inputId="personType1">
+                                </p-radioButton>
+                                <p-radioButton [disabled]="true" name="personType" value="{{personTypes.EXTERNAL}}"
+                                    label="{{('expertPerson.personTypes.' + personTypes[personTypes.EXTERNAL]) | translate}}"
+                                    formControlName="personType" inputId="personType2" styleClass="mr-2">
+                                </p-radioButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 form-group d-flex flex-column justify-content-center">
+                    <div class="person-image m-auto">
+                        <img [src]="personImageFileUrl" class="person-image img-fluid rounded-circle" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="personnelCode">
+                        {{'expertPerson.personnelCode' | translate}}
+                    </label>
+                    <input id="personnelCode" type="text" pInputText formControlName="personnelCode" readonly>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="nationalCode">
+                        {{'expertPerson.nationalCode' | translate}}
+                    </label>
+                    <input id="nationalCode" type="text" pInputText formControlName="nationalCode" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="firstName">
+                        {{'expertPerson.firstName' | translate}}
+                    </label>
+                    <input id="firstName" type="text" pInputText formControlName="firstName" readonly>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="lastName">
+                        {{'expertPerson.lastName' | translate}}
+                    </label>
+                    <input id="lastName" type="text" pInputText formControlName="lastName" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="fatherName">
+                        {{'expertPerson.fatherName' | translate}}
+                    </label>
+                    <input id="fatherName" type="text" pInputText formControlName="fatherName" readonly>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="birthDate">
+                        {{'expertPerson.birthDate' | translate}}
+                    </label>
+                    <app-datepicker-popup-jalali readonly id="birthDate" formControlName="birthDate" class="w-100">
+                    </app-datepicker-popup-jalali>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="educationDegreeId">
+                        {{'expertPerson.educationDegree' | translate}}
+                    </label>
+                    <input id="educationDegreeId" type="text" pInputText [value]="educationDegree?.title" readonly>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="studyFieldId">
+                        {{'expertPerson.studyField' | translate}}
+                    </label>
+                    <input id="studyFieldId" type="text" pInputText [value]="studyField?.title" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="relation">{{'expertPerson.relation' | translate}}
+                    </label>
+                    <div class="p-grid">
+                        <p-radioButton [disabled]="true" name="relation" value="{{relationTypes.military}}"
+                            label="{{('expertPerson.relationTypes.' + relationTypes[relationTypes.military]) | translate}}"
+                            formControlName="relation" inputId="relation1">
+                        </p-radioButton>
+                        <p-radioButton [disabled]="true" name="relation" value="{{relationTypes.civilian}}"
+                            label="{{('expertPerson.relationTypes.' + relationTypes[relationTypes.civilian]) | translate}}"
+                            formControlName="relation" inputId="relation2" styleClass="mr-2">
+                        </p-radioButton>
+                    </div>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="degreeId">
+                        {{'expertPerson.degree' | translate}}
+                    </label>
+                    <input id="degreeId" type="text" pInputText [value]="degree?.title" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="serviceStatus">
+                        {{'expertPerson.serviceStatus' | translate}}
+                    </label>
+                    <div class="p-grid">
+                        <p-radioButton [disabled]="true" name="serviceStatus" value="{{serviceStatuses.employed}}"
+                            label="{{('expertPerson.serviceStatuses.' + serviceStatuses[serviceStatuses.employed]) | translate}}"
+                            formControlName="serviceStatus" inputId="serviceStatus1">
+                        </p-radioButton>
+                        <p-radioButton [disabled]="true" name="serviceStatus" value="{{serviceStatuses.retired}}"
+                            label="{{('expertPerson.serviceStatuses.' + serviceStatuses[serviceStatuses.retired]) | translate}}"
+                            formControlName="serviceStatus" inputId="serviceStatus2" styleClass="mr-2">
+                        </p-radioButton>
+                    </div>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="serviceLocationId">
+                        {{'expertPerson.serviceLocation' | translate}}
+                    </label>
+                    <input id="serviceLocationId" type="text" pInputText [value]="serviceLocation?.displayName"
+                        readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="employmentDate">
+                        {{'expertPerson.employmentDate' | translate}}
+                    </label>
+                    <app-datepicker-popup-jalali readonly id="employmentDate" formControlName="employmentDate"
+                        class="w-100">
+                    </app-datepicker-popup-jalali>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="currentResponsibility">
+                        {{'expertPerson.currentResponsibility' | translate}}
+                    </label>
+                    <input id="currentResponsibility" type="text" pInputText formControlName="currentResponsibility"
+                        readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="threePreviousPosition">
+                        {{'expertPerson.threePreviousPosition' | translate}}
+                    </label>
+                    <textarea id="threePreviousPosition" [rows]="3" pInputTextarea
+                        formControlName="threePreviousPosition" readonly></textarea>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="scientificExperiencesRecords">
+                        {{'expertPerson.scientificExperiencesRecords' | translate}}
+                    </label>
+                    <textarea id="scientificExperiencesRecords" [rows]="3" pInputTextarea
+                        formControlName="scientificExperiencesRecords" readonly></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="accountNumber">
+                        {{'expertPerson.accountNumber' | translate}}
+                    </label>
+                    <input id="accountNumber" type="text" pInputText formControlName="accountNumber" readonly>
+                </div>
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="shabaNumber">
+                        {{'expertPerson.shabaNumber' | translate}}
+                    </label>
+                    <input id="shabaNumber" type="text" pInputText formControlName="shabaNumber" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>{{'expertPerson.educationImage' | translate}}</label>
+                    <a href="javascript:;"
+                        (click)="appFileManager.openFile(educationImageFile, expertPerson.educationImage)"
+                        class="mr-2">{{educationImageFileName}}</a>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>{{'expertPerson.attachment' | translate}}</label>
+                    <a href="javascript:;" (click)="appFileManager.openFile(attachmentFile, expertPerson.attachment)"
+                        class="mr-2">{{attachmentFileName}}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group ui-fluid">
+                    <label for="description">
+                        {{'expertPerson.description' | translate}}
+                    </label>
+                    <textarea id="description" [rows]="3" pInputTextarea formControlName="description"
+                        readonly></textarea>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <p-checkbox [disabled]="true" name="inactive" binary="true"
+                        label="{{'expertPerson.inactive' | translate}}" formControlName="inactive" inputId="inactive">
+                    </p-checkbox>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-dismissible text-center"
+                        [ngClass]="{'alert-success' : status?.value?.code == '4', 'alert-danger' : status?.value?.code == '5', 'alert-secondary' : (status?.value?.code != '4' && status?.value?.code != '5')}">
+                        <strong>وضعیت !</strong>
+                        {{ status?.value?.title}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <app-workflow-button-group></app-workflow-button-group>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>

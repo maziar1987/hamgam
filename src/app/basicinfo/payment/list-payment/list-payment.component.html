@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12 my-2">
+        <h5>روش های پرداخت</h5>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p-table #dt [value]="payments" [autoLayout]="true" dataKey="id" selectionMode="single"
+            [(selection)]="selectedPayment" [columns]="cols" styleClass="ui-table-policy" [rowHover]="true" [rows]="10"
+            (onRowSelect)="onRowSelect($event)" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            [showCurrentPageReport]="true" [filterDelay]="0" [globalFilterFields]="['methodName','description','stepsNumber']"
+            currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+            <ng-template pTemplate="caption">
+                <div class="ui-table-globalfilter-container">
+                    <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')">
+                    <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right"
+                        (click)="onCreate()" pTooltip="{{'action.add' | translate }}" tooltipPosition="top"></button>
+
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"></th>
+                    <th scope="col" *ngFor="let col of columns">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-columns="columns">
+                <tr>
+                    <td>
+                        {{rowIndex + 1}}
+                    </td>
+                    <td>
+                        <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+                        </p-menu>
+                        <button [disabled]="rowData?.id == 1" pButton icon="pi pi-bars" (click)="menu.toggle($event)"
+                            class="ui-button-secondary"></button>
+                    </td>
+                    <ng-container *ngFor="let col of columns; let i = index">
+                        <td [ngSwitch]="col.field">
+                            <span *ngSwitchCase="'status'">
+                                <span *ngIf="rowData[col.field] === true" class="text-success ml-2">{{'action.active' |
+                                    translate}}</span>
+                                <span *ngIf="rowData[col.field] === true" class="pi pi-check text-success"></span>
+                                <span *ngIf="rowData[col.field] === false" class="text-danger ml-2">{{'action.inactive'
+                                    |
+                                    translate}}</span>
+                                <span *ngIf="rowData[col.field] === false" class="pi pi-times text-danger"></span>
+                            </span>
+                            <span *ngSwitchCase="'lastEditDate'">
+                                {{rowData[col.field] | persianDate:'shortDate'}}
+                            </span>
+                            <span *ngSwitchCase="'steps'">
+                                <span *ngFor="let item of rowData[col.field]">{{item}}&nbsp;&nbsp;&nbsp;</span>
+                            </span>
+                            <span *ngSwitchDefault>
+                                {{rowData[col.field]}}
+                            </span>
+                        </td>
+                    </ng-container>
+ 
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

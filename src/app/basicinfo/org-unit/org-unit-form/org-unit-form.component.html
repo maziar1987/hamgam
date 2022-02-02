@@ -1,0 +1,97 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom">
+  <fieldset>
+    <legend>
+      {{('action.edit' | translate) + ' ' + ('orgUnit.orgUnit' |
+      translate) + ' (' + orgUnit?.displayName + ')'}}
+    </legend>
+    <br/>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('displayName') }">
+        <label for="displayName">
+          {{'orgUnit.displayName' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="displayName" type="text" pInputText formControlName="displayName" [placeholder]=""
+               [ngClass]="{ 'is-invalid' : isInvalid('displayName') }">
+        <div *ngIf="displayName?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('code') }">
+        <label for="code">
+          {{'orgUnit.code' | translate}}
+        </label>
+        <input id="code" type="text" pInputText formControlName="code" [placeholder]=""
+               [ngClass]="{ 'is-invalid' : isInvalid('code') }">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('viewOrder') }">
+        <label for="viewOrder">
+          {{'orgUnit.viewOrder' | translate}}
+        </label>
+        <input id="viewOrder" type="number" pInputText formControlName="viewOrder" [placeholder]=""
+               [ngClass]="{ 'is-invalid' : isInvalid('viewOrder') }">
+        <div *ngIf="viewOrder?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('status') }">
+        <label for="status">
+          {{'orgUnit.status' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <p-checkbox id="status" class="form-control" formControlName="activated" binary="true" label="{{'orgUnit.activated' | translate}}">
+        </p-checkbox>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-md-12">
+        <button pButton type="submit" label="{{'action.save' | translate}}" [disabled]="this.form.invalid"
+                class="ui-button-raised ui-button-success col-md-1 m-1"></button>
+        <button pButton type="button" label="{{'action.delete' | translate}}" (click)="onDelete()"
+                class="ui-button-raised ui-button-danger col-md-1 m-1"></button>
+      </div>
+    </div>
+  </fieldset>
+  <br/>
+  <fieldset>
+    <div class="row">
+      <div class="col-md-12">
+        <label> {{'orgUnit.subOrgUnit' | translate}}</label>
+        <p-table [value]="childOrgUnits" dataKey="id" selectionMode="single" [rows]="10" styleClass="ui-table-orgUnit"
+                 [loading]="loading" [paginator]="true" [showCurrentPageReport]="true" [rowHover]="true"
+                 currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+          <ng-template pTemplate="caption">
+            <div>
+              <button pButton type="button" icon="fa fa-plus"
+                      class="ui-button-success float-right" (click)="addOrgUnit()"
+                      pTooltip="{{'orgUnit.createPageTitle' | translate }}" tooltipPosition="top"></button>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{'orgUnit.displayName' | translate}}</th>
+              <th>{{'orgUnit.code' | translate}}</th>
+              <th>{{'orgUnit.viewOrder' | translate}}</th>
+              <th>{{'orgUnit.status' | translate}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>{{item.displayName}}</td>
+              <td>{{item.code}}</td>
+              <td>{{item.viewOrder}}</td>
+              <td>
+                {{item.activated ? ('orgUnit.active' | translate) : ('orgUnit.deActive' | translate) }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

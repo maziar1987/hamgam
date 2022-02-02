@@ -1,0 +1,44 @@
+<p-table #dt [value]="sessionMemberDuties" [autoLayout]="true" dataKey="id" [columns]="cols"
+    styleClass="ui-table-sessionMemberDuties" [rowHover]="true">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th scope="col">#</th>
+            <ng-container *ngFor="let col of columns">
+                <th scope="col">
+                    {{col.header}}
+                </th>
+            </ng-container>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr>
+            <td>
+                {{rowIndex + 1}}
+            </td>
+            <ng-container *ngFor="let col of columns; let i = index">
+                <td [ngSwitch]="col.field">
+                    <span *ngSwitchCase="'memberName'">
+                        {{getMemberName(rowData)}}
+                    </span>
+                    <span *ngSwitchCase="'memberPost'">
+                        {{getMemberPost(rowData)}}
+                    </span>
+                    <span *ngSwitchCase="'duty'">
+                        <input id="sessionTitle" type="text" [(ngModel)]="rowData[col.field]" pInputText
+                            class="col-md-12">
+                    </span>
+                    <span *ngSwitchDefault>
+                        {{rowData[col.field]}}
+                    </span>
+                </td>
+            </ng-container>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,0 +1,161 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend class="my-2">{{editMode ? ('action.edit' | translate) + ' ' + person?.firstName + ' ' + person?.lastName :
+            ('person.createPageTitle' | translate)}}</legend>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('firstName') }">
+                <label for="firstName">
+                    {{'person.firstName' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="firstName" type="text" pInputText formControlName="firstName" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('firstName') }">
+                <div *ngIf="firstName?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('lastName') }">
+                <label for="lastName">
+                    {{'person.lastName' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="lastName" type="text" pInputText formControlName="lastName" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('lastName') }">
+                <div *ngIf="lastName?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('fatherName') }">
+                <label for="fatherName">
+                    {{'person.fatherName' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="fatherName" type="text" pInputText formControlName="fatherName" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('fatherName') }">
+                <div *ngIf="fatherName?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('birthDate') }">
+                <label for="birthDate">
+                    {{'person.birthDate' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-datepicker-popup-jalali id="birthDate" formControlName="birthDate" class="w-100"
+                    [ngClass]="{ 'is-invalid' : isInvalid('birthDate') }">
+                </app-datepicker-popup-jalali>
+                <div *ngIf="birthDate?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('personnelCode') }">
+                <label for="personnelCode">
+                    {{'person.personnelCode' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="personnelCode" type="text" pInputText formControlName="personnelCode" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('personnelCode') }">
+                <div *ngIf="personnelCode?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('nationalCode') }">
+                <label for="nationalCode" class="form-control-label">
+                    {{'person.nationalCode' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="nationalCode" type="text" nationalCode pInputText formControlName="nationalCode"
+                    [placeholder]="" [ngClass]="{ 'is-invalid' : isInvalid('nationalCode') }">
+                <div *ngIf="nationalCode?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+                <div *ngIf="nationalCode?.errors?.nationalCode?.value" class="invalid-feedback">
+                    نامعتبر می باشد
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="educationDegreeId">
+                    {{'person.educationDegree' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-basic-value-dropdown [basicValueType]="getBasicValueType('educationDegree')"
+                    formControlName="educationDegreeId" [filter]="filter">
+                </app-basic-value-dropdown>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="studyFieldId">
+                    {{'person.studyField' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-basic-value-dropdown [basicValueType]="getBasicValueType('studyField')"
+                    formControlName="studyFieldId" [filter]="filter">
+                </app-basic-value-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="rankId">
+                    {{'person.rank' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-basic-value-dropdown [basicValueType]="getBasicValueType('rank')" formControlName="rankId"
+                    [filter]="filter">
+                </app-basic-value-dropdown>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label for="employmentDate">
+                    {{'person.employmentDate' | translate}}
+                </label>
+                <app-datepicker-popup-jalali id="employmentDate" formControlName="employmentDate" class="w-100">
+                </app-datepicker-popup-jalali>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="organizationId">
+                    {{'person.organization' | translate}}
+                </label>
+                <div class="ui-inputgroup">
+                    <input id="organizationId" type="text" readonly pInputText [placeholder]=""
+                        [value]="selectedOrganization?.displayName">
+                    <button (click)="showOrgUnitTreeDialog()" pButton type="button" icon="pi pi-search"
+                        class="ui-button-primary" pTooltip="{{'action.search' | translate}}"
+                        tooltipPosition="top"></button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <button *ngIf="!this.editMode" pButton type="submit" [disabled]="this.form.invalid"
+                    label="{{'action.create' | translate}}" icon="pi pi-plus" iconPos="right"
+                    class="ui-button-raised ui-button-success col-md-2"></button>
+                <button *ngIf="this.editMode" pButton type="submit" [disabled]="this.form.invalid"
+                    label="{{'action.saveChanges' | translate}}" icon="pi pi-check" iconPos="right"
+                    class="ui-button-raised ui-button-primary col-md-2"></button>
+                <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+                    class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<p-dialog header="{{('action.select' | translate) + ' ' + ('orgUnit.orgUnit' | translate)}}"
+    [(visible)]="displayOrgUnitTree" [style]="{width: '40vw'}">
+    <app-org-unit-tree (onNodeSelect)="nodeSelect($event)"></app-org-unit-tree>
+    <p-footer>
+        <button pButton type="button" (click)="selectOrgUnit()" label="{{'action.select' | translate}}"
+            icon="pi pi-check" iconPos="right" class="ui-button-raised ui-button-primary"></button>
+        <button pButton type="button" (click)="closeOrgUnitTreeDialog()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+        </button>
+    </p-footer>
+</p-dialog>
+

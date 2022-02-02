@@ -1,0 +1,27 @@
+:host::ng-deep {
+    .pi-caret-right:before {
+        content: "\e904";
+    }
+
+    .ui-tree {
+        width: 100%;
+        height: 60vh;
+        overflow-y: auto;
+    }
+
+    .ui-treenode-children {
+        padding: 0 1em 0 0;
+    }
+
+    .btn-option {
+        opacity: 0;
+    }
+    .noChildren {        
+        margin-right: 20px;
+    }
+    .ui-tree .ui-tree-container .ui-treenode .ui-treenode-content .ui-treenode-label:hover {
+        .btn-option {
+            opacity: 1;
+        }
+    }
+}

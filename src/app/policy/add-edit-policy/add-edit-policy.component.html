@@ -1,0 +1,116 @@
+<div class="row my-2">
+  <div class="col-md-12">
+    <h4 *ngIf="!params.id">{{'policy.add' | translate }}</h4>
+    <h4 *ngIf="params.id">{{'policy.edit' | translate }}</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="container mt-2 mb-2">
+      <p-treeTable [value]="policiesTreeTable" [(selection)]="selectedpoliciesTreeTable"
+        styleClass="ui-treetable-policy">
+        <ng-template pTemplate="caption">
+          <div class="ui-treetable-globalfilter-container">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th scope="col">{{'policy.name' | translate}}</th>
+            <th scope="col">{{'action.view' | translate}}</th>
+            <th scope="col">{{'action.edit' | translate}}</th>
+            <th scope="col">{{'action.delete' | translate}}</th>
+            <th scope="col">{{'action.creation' | translate}}</th>
+            <th scope="col">{{'action.submit' | translate}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+          <tr [ttSelectableRow]="rowNode">
+            <td>
+              <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+              {{rowData.persianName}}
+            </td>
+            <td *ngFor="let action of rowData.actions let index = index">
+              <p-checkbox [(ngModel)]="action.attributes.active" binary="true" inputId="binary"></p-checkbox>
+              <div *ngIf=action.attributes.rules.length class="pi pi-filter" style="font-size: 2rem"
+                (click)="showDialog(rowData,action)"></div>
+              <div *ngIf=!action.attributes.rules.length class="pi pi-filter" style="color: darkgrey; font-size: 2rem;"
+                (click)="showDialog(rowData,action)"></div>
+              <!-- <i class="pi pi-filter" style="font-size: 2rem"
+                (click)="showDialog(rowData)"></i> -->
+            </td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+    </div>
+  </div>
+</div>
+<p-footer class="mt-2 mb-2 clearfix">
+  <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+    class="ui-button-raised ui-button-secondary float-left mr-2">
+  </button>
+  <button *ngIf="!editMode" (click)="onSubmit()" pButton type="button" label="{{'action.create' | translate}}"
+    icon="pi pi-plus" iconPos="right" class="ui-button-raised ui-button-success float-left"></button>
+  <button *ngIf="editMode" (click)="onSubmit()" pButton type="button" label="{{'action.edit' | translate}}"
+    icon="pi pi-check" iconPos="right" class="ui-button-raised ui-button-primary float-left"></button>
+</p-footer>
+<app-policy-filter [(visible)]="displayFilter" [(selectedNode)]="selectedNode" [(action)]="action"
+  (createdQuery)="createdQuery($event)"></app-policy-filter>
+
+
+<p-dialog [(visible)]="display" [style]="{width: '80vw'}" [baseZIndex]="10000">
+  <p-header>
+    <span>
+      شرایط ویرایش {{moduleHeaderString}}
+    </span>
+  </p-header>
+  <p-table [ngClass]="{'d-none': rules.length <= 0 }" [value]="rules">
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col">{{'rules.feature' | translate}}</th>
+        <th scope="col">{{'rules.operator' | translate}}</th>
+        <th scope="col">{{'rules.value' | translate}}</th>
+        <th scope="col">{{'action.delete' | translate}}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-i="rowIndex" let-rowData let-columns="columns">
+      <tr>
+        <td>
+          <p-dropdown [options]="ActionFields" placeholder="{{'rules.select'| translate}}" [(ngModel)]="rowData.field"
+            optionLabel="persianName" (onChange)="getBasics($event.value?.valueClassId,rowData.valuesList)"></p-dropdown>
+        </td>
+        <td>
+          <p-dropdown [options]="getConditions(rowData)" placeholder="{{'rules.select'| translate}}"
+            [(ngModel)]="rowData.conditionModel" optionLabel="label">
+          </p-dropdown>
+        </td>
+        <td>
+          <input *ngIf="!rowData.field?.valueClassId" type="text" pInputText [(ngModel)]="rowData.valuesList">
+          <p-multiSelect *ngIf="rowData.field?.valueClassId" [options]="Basicvalues"
+            [(ngModel)]="rowData.valuesListItem" defaultLabel="{{'rules.select'| translate}}" optionLabel="title"></p-multiSelect>
+        </td>
+        <td class="text-center">
+          <button pButton type="button" (click)="deleteRule(rowData)" pTooltip="{{'action.delete' | translate}}"
+            tooltipPosition="top" icon="pi pi-minus" class="ui-button-raised ui-button-danger"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <br><br>
+  <br><br>
+  <p-footer>
+    <button pButton type="button" (click)="AddNewRule()" label="{{'action.add' | translate}}" icon="pi pi-plus"
+      iconPos="right" class="ui-button-raised ui-button-success float-right"></button>
+
+    <button pButton type="button" (click)="display=false" label="{{'action.cancel' | translate}}"
+      class="ui-button-raised ui-button-secondary float-left">
+    </button>
+    <button *ngIf="!editMode" (click)="addToRuls()" pButton type="button" label="{{'action.create' | translate}}"
+      icon="pi pi-plus" iconPos="right" class="ui-button-raised ui-button-success float-left"></button>
+    <button *ngIf="editMode" (click)="addToRuls()" pButton type="button" label="{{'action.edit' | translate}}"
+      icon="pi pi-check" iconPos="right" class="ui-button-raised ui-button-primary float-left"></button>
+  </p-footer>
+  <!-- <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="display=true" label="Yes" styleClass="p-button-text"></p-button>
+            <p-button icon="pi pi-times" (click)="display=true" label="No"></p-button>
+          </ng-template> -->
+</p-dialog>

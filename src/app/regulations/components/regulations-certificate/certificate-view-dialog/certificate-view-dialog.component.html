@@ -1,0 +1,111 @@
+<form [formGroup]="form" class="animate-bottom">
+  <fieldset>
+    <legend>{{('regulations.certificate.formTitle' | translate)}}</legend>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="title"> {{'regulations.certificate.title' | translate}}</label>
+        <input id="title" type="text" pInputText formControlName="title" [disabled]="true">
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="regulationTypeId">{{'regulations.certificate.regulationTypeId' | translate}}</label>
+        <app-basic-value-dropdown id="regulationTypeId" [basicValueType]="getBasicValueType('regulationType')"
+                                  formControlName="regulationTypeId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="false" [readonly]="true"
+                                  [placeholder]="'regulations.certificate.regulationTypeId' | translate">
+        </app-basic-value-dropdown>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="registerNo"> {{'regulations.certificate.registerNo' | translate}}</label>
+        <input id="registerNo" type="text" pInputText formControlName="registerNo" [readOnly]="true">
+      </div>
+      <div [ngClass]="{ 'has-danger' : isInvalid('code') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="code"> {{'regulations.certificate.code' | translate}}</label>
+        <input id="code" type="text" pInputText formControlName="code" [readOnly]="true">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confidentialityId"> {{'regulations.certificate.confidentialityId' | translate}}</label>
+        <app-basic-value-dropdown id="confidentialityId" [basicValueType]="getBasicValueType('confidentiality')"
+                                  formControlName="confidentialityId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="true" [readonly]="true"
+                                  [placeholder]="'regulations.certificate.confidentialityId' | translate">
+        </app-basic-value-dropdown>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="compilationStatusId"> {{'regulations.certificate.compilationStatusId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="compilationStatusId" *ngFor="let basicValue of compilationStatusValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="compilationStatusId" formControlName="compilationStatusId" [(ngModel)]="selectedCompilation" [disabled]="true"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="producerId"> {{'regulations.certificate.producerId' | translate}}</label>
+        <div class="ui-inputgroup">
+          <input id="producerId" type="text" readonly pInputText [placeholder]="" [readOnly]="true"
+                 [value]="selectedProducer?.displayName">
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmerId"> {{'regulations.certificate.confirmerId' | translate}}</label>
+        <app-basic-value-dropdown id="confirmerId" [basicValueType]="getBasicValueType('confirmer')"
+                                  formControlName="confirmerId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="true" [readonly]="true"
+                                  [placeholder]="'regulations.certificate.confirmerId' | translate">
+        </app-basic-value-dropdown>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="applicationLevelId"> {{'regulations.certificate.applicationLevelId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="applicationLevelId" *ngFor="let basicValue of applicationBasicLevelId">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="applicationLevelId" formControlName="applicationLevelId" [(ngModel)]="selectedLevel" [disabled]="true"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="applicationAreaId"> {{'regulations.certificate.applicationAreaId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="applicationAreaId" *ngFor="let basicValue of applicationBasicAreaId">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="applicationAreaId" formControlName="applicationAreaId" [(ngModel)]="selectedArea" [disabled]="true"
+                             [value]="basicValue.id" ></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="status"> {{'regulations.certificate.status' | translate}}</label>
+        <input id="status" style="width: 20%; margin-right: 15px; margin-left: 15px" type="text" pInputText [value]="lastStatus" readonly>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button pButton type="button" (click)="onCancel()" label="{{'action.cancel' | translate}}"
+                class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</form>

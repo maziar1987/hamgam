@@ -1,0 +1,121 @@
+<app-spinner-border [loading]="loading"></app-spinner-border>
+
+<div class="animate-bottom" *ngIf="!loading">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <fieldset>
+            <legend class="my-2">{{editMode ? ('action.edit' | translate) + ' ' + targetSpecification?.targetTitle :
+                ('targetSpecification.createPageTitle' | translate)}}</legend>
+
+            <div class="row">
+                <div class="col-sm-12 form-group ui-fluid">
+                    <label for="targetSpecificationMembers">
+                        {{'targetSpecification.targetSpecificationMembers' | translate}}
+                        <span class="text-danger mr-2">*</span>
+                    </label>
+                    <p-table #dt [value]="members" [autoLayout]="true" dataKey="id" selectionMode="single"
+                        [(selection)]="selectedMember" styleClass="ui-table-member" [rowHover]="true" [rows]="10"
+                        [rowsPerPageOptions]="[10,25,50]" [columns]="cols" [loading]="loading" [paginator]="true"
+                        [showCurrentPageReport]="true" [filterDelay]="0" (onFilter)="utils.filterTree($event)"
+                        [globalFilterFields]="['memberName', 'memberPost']"
+                        currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+
+                        <ng-template pTemplate="caption">
+                            <div class="ui-table-globalfilter-container">
+                                <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                                    (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+                                <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right"
+                                    (click)="onAddTeamMember()"
+                                    pTooltip="{{('action.add' | translate) + ' ' + ('targetSpecificationMember.teamMember' | translate)}}"
+                                    tooltipPosition="top"></button>
+
+                                <button pButton type="button" icon="fa fa-plus"
+                                    class="ui-button-success float-right mr-2" (click)="onAddExternalMember()"
+                                    pTooltip="{{('action.add' | translate) + ' ' + ('targetSpecificationMember.memberType.FOREIGNMEMBER' | translate)}}"
+                                    tooltipPosition="top"></button>
+                            </div>
+                        </ng-template>
+
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th scope="row"></th>
+                                <ng-container *ngFor="let col of columns">
+                                    <th scope="col">
+                                        {{col.header}}
+                                    </th>
+                                </ng-container>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData">
+                                <td>
+                                    <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+                                    </p-menu>
+                                    <button pButton icon="pi pi-bars" type="button" (click)="menu.toggle($event)"
+                                        class="ui-button-secondary"></button>
+                                </td>
+                                <ng-container *ngFor="let col of columns; let i = index">
+                                    <td [ngSwitch]="col.field">
+                                        <span *ngSwitchCase="'memberName'">
+                                            {{getMemberName(rowData)}}
+                                        </span>
+                                        <span *ngSwitchDefault>
+                                            {{rowData[col.field]}}
+                                        </span>
+                                    </td>
+                                </ng-container>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('targetTitle') }">
+                    <label for="targetTitle">
+                        {{'targetSpecification.targetTitle' | translate}}
+                        <span class="text-danger mr-2">*</span>
+                    </label>
+                    <textarea id="targetTitle" type="text" pInputTextarea formControlName="targetTitle"
+                        [ngClass]="{ 'is-invalid' : isInvalid('targetTitle') }" [rows]="3">
+                    </textarea>
+                    <div *ngIf="targetTitle?.errors?.required" class="invalid-feedback">
+                        {{'message.required' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group ui-fluid">
+                    <label for="activityTypes">
+                        {{'targetSpecification.activityTypes' | translate}}
+                        <span class="text-danger mr-2">*</span>
+                    </label>
+                    <p-multiSelect [options]="activityTypeItems" formControlName="activityTypes" optionLabel="title"
+                        defaultLabel="{{('action.choose' | translate) + ' ' + ('targetSpecification.activityTypes' | translate)}}"
+                        [filter]="true" class="w-100"></p-multiSelect>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <app-workflow-button-group></app-workflow-button-group>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+
+<app-team-member-modal #teamMemberModal (add)="addTeamMember($event)">
+</app-team-member-modal>
+
+<app-external-member-modal #externalMemberModal (add)="addExternalMember($event)">
+</app-external-member-modal>

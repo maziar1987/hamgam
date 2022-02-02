@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-12">
+        <h5>پرداخت های مالی</h5>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 form-group ui-fluid">
+        <label for="title"> {{'regulations.rfp.regulationTitle' | translate}}</label>
+        <input id="title" type="text" pInputText [value]="certificateTitle" [attr.disabled]="'disabled'">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 form-group ui-fluid">
+        <label for="">نوع پرداخت</label>
+        <span class="text-danger mr-2">*</span>
+        <select class="form-control" [attr.disabled]="'disabled'">
+            <option>
+                {{methodName}}
+            </option>
+        </select>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6 ">
+        <label for="">پرداختی ها</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <p-table [value]="paymentTables" rowGroupMode="rowspan" sortMode="single" styleClass="ui-table-baseTheory">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>مرحله</th>
+                    <th>درصد</th>
+                    <th style="width: 118px;">نام و نام خانوادگی</th>
+                    <th style="width: 85px;">سمت</th>
+                    <th>مبلغ-ریال</th>
+                    <th style="width: 95px;">تاریخ پرداخت</th>
+                    <th style="width: 50px;">فایل</th>
+                    <th>توضیحات</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-paymentT let-rowIndex="rowIndex">
+                <tr>
+                    <td *ngIf="rowIndex%3==0" [attr.rowspan]="3">
+                        <span>مرحله {{paymentT.stepNumber}}</span>
+                    </td>
+                    <td *ngIf="rowIndex%3==0" [attr.rowspan]="3">
+                        <span>{{paymentT.stepPercent}}</span>
+                    </td>
+                    <td>
+                        {{paymentT.fullName}}
+                    </td>
+                    <td>
+                        <span>{{paymentT.responsibilityName}}</span>
+                    </td>
+                    <td>
+                        {{paymentT.amount}}
+                    </td>
+                    <td>
+                        {{paymentT.paymentDate | persianDate:'shortDate'}}
+                    </td>
+                    <td>
+                        <button *ngIf="paymentT.id > 0" pButton icon="pi pi-download" (click)="downloadAttach(paymentT)"
+                            class="ui-button-raised ml-1"></button>
+                    </td>
+                    <td>
+                        {{paymentT.description}}
+                    </td>
+                    <td>
+                        <button *ngIf="paymentT.id > 0" pButton (click)="deletePayment(paymentT)" type="button"
+                            class="ui-button-danger float-left" icon="pi pi-minus" tooltipPosition="top">
+                        </button>
+                        <button pButton (click)="editPayment(paymentT)" type="button"
+                            class="ui-button-primary float-right" icon="pi pi-user-edit" tooltipPosition="top">
+                        </button>
+
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <app-workflow-button-group></app-workflow-button-group>
+    </div>
+</div>
+<app-spinner-border [loading]="loading"></app-spinner-border>
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

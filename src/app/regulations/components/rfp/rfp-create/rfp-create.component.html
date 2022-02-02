@@ -1,0 +1,210 @@
+<div class="row">
+  <div class="col-md-12">
+    <h5>{{'regulations.rfp.title' | translate}}</h5>
+    <hr/>
+  </div>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <div class="row">
+      <div class="col-md-6 form-group ui-fluid">
+        <label for="title"> {{'regulations.rfp.regulationTitle' | translate}}</label>
+        <input id="title" type="text" pInputText [value]="certificate?.title"
+               [attr.disabled]="'disabled'">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="preamble">
+          {{'regulations.rfp.preamble' | translate}}
+        </label><span class="text-danger mr-2">*</span>
+        <textarea id="preamble" [rows]="5" formControlName="preamble" pInputTextarea>
+            </textarea>
+        <div *ngIf="form.get('preamble').hasError('required') && form.get('preamble').touched"
+             class='alert alert-danger'>وارد کردن مقدمه الزامی میباشد
+        </div>
+        <div *ngIf="preamble.errors?.minlength && form.get('preamble').touched" class='alert alert-danger'>مقدمه باید
+          بیشتر از ۵ حرف باشد
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="mainObjective">
+          {{'regulations.rfp.mainObjective' | translate}}
+        </label><span class="text-danger mr-2">*</span>
+        <textarea id="mainObjective" [rows]="1" formControlName="mainObjective" pInputTextarea>
+            </textarea>
+        <div *ngIf="form.get('mainObjective').hasError('required') && form.get('mainObjective').touched"
+             class='alert alert-danger'>وارد کردن هدف اصلی الزامی میباشد
+        </div>
+        <div *ngIf="mainObjective.errors?.minlength && form.get('mainObjective').touched" class='alert alert-danger'>هدف
+          اصلی باید بیشتر از ۵ حرف باشد
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="mainQuestion">
+          {{'regulations.rfp.mainQuestion' | translate}}
+        </label><span class="text-danger mr-2">*</span>
+        <textarea id="mainQuestion" [rows]="1" formControlName="mainQuestion" pInputTextarea>
+            </textarea>
+        <div *ngIf="form.get('mainQuestion').hasError('required') && form.get('mainQuestion').touched"
+             class='alert alert-danger'>وارد کردن سوال اصلی الزامی میباشد
+        </div>
+        <div *ngIf="mainQuestion.errors?.minlength && form.get('mainQuestion').touched" class='alert alert-danger'>سوال
+          اصلی باید بیشتر از ۵ حرف باشد
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="secondaryObjectives">
+          {{'regulations.rfp.secondaryObjectives' | translate}}
+        </label>
+        <textarea id="secondaryObjectives" [rows]="3" formControlName="secondaryObjectives" pInputTextarea>
+            </textarea>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="secondaryQuestions">
+          {{'regulations.rfp.secondaryQuestions' | translate}}
+        </label>
+        <textarea id="secondaryQuestions" [rows]="3" formControlName="secondaryQuestions" pInputTextarea>
+            </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="mission">
+          {{'regulations.rfp.mission' | translate}}
+        </label>
+        <textarea id="mission" [rows]="3" formControlName="mission" pInputTextarea>
+            </textarea>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="commands">
+          {{'regulations.rfp.commands' | translate}}
+        </label>
+        <textarea id="commands" [rows]="3" formControlName="commands" pInputTextarea>
+            </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="domain">
+          {{'regulations.rfp.domain' | translate}}
+        </label>
+        <textarea id="domain" [rows]="3" formControlName="domain" pInputTextarea>
+            </textarea>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="dependencies">
+          {{'regulations.rfp.dependencies' | translate}}
+        </label>
+        <textarea id="dependencies" [rows]="3" formControlName="dependencies" pInputTextarea>
+            </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="resources">
+          {{'regulations.rfp.resources' | translate}}
+        </label>
+        <textarea id="resources" [rows]="3" formControlName="resources" pInputTextarea>
+            </textarea>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="opportunities">
+          {{'regulations.rfp.opportunities' | translate}}
+        </label>
+        <textarea id="opportunities" [rows]="3" formControlName="opportunities" pInputTextarea>
+            </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="considerations">
+          {{'regulations.rfp.considerations' | translate}}
+        </label>
+        <textarea id="considerations" [rows]="3" formControlName="considerations" pInputTextarea>
+            </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="regulationExecutor">
+          {{'regulations.rfp.regulationExecutor' | translate}}
+        </label>
+        <textarea id="regulationExecutor" [rows]="1" formControlName="regulationExecutor" pInputTextarea>
+            </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="stakeholdersInternal">
+          {{'regulations.rfp.stakeholdersInternal' | translate}}
+        </label>
+        <textarea id="stakeholdersInternal" [rows]="3" formControlName="stakeholdersInternal" pInputTextarea>
+            </textarea>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="stakeholdersExternal">
+          {{'regulations.rfp.stakeholdersExternal' | translate}}
+        </label>
+        <textarea id="stakeholdersExternal" [rows]="3" formControlName="stakeholdersExternal" pInputTextarea>
+            </textarea>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-md-12">
+        <label for="rfpAttachments">
+          {{'regulations.rfp.attachmentFiles' | translate}}
+        </label>
+        <div class="row" id="rfpAttachments">
+          <div class="col-sm-6 form-group">
+            <div class="ui-inputgroup d-inline">
+              <button pButton type="button" label="" style="display: none;"></button>
+              <button pButton type="button" label="افزودن" (click)="showModal()"
+                      class="ui-button-rounded"></button>
+              <a href="javascript:;" (click)="appFileManager.openFile(file)" class="mr-2"
+                 style="display: none;">{{file?.name}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin: auto;" class="row ">
+      <p-table [value]="attachments">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 5%;text-align: center;">ردیف</th>
+            <th style="width: 20%;text-align: center;">نام سند</th>
+            <th style="width: 30%;text-align: center;">توضیحات</th>
+            <th style="width: 15%;text-align: center;">عملیات</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-attach let-i="rowIndex">
+          <tr>
+            <td style="text-align: center;">{{i + 1}}</td>
+            <td>{{attach.title}}</td>
+            <td>{{attach.description}}</td>
+            <td style="text-align: center;">
+              <a style="font-size: 25px;" href="javascript:;"
+                 (click)="downloadAttachment(attach)" class="mr-2">
+                <i class="pi pi-download"></i>
+              </a>
+              <a style="color: red;font-size: 25px;" href="javascript:;" (click)="DeleteAttach(attach)"
+                 class="mr-2">
+                <i class="pi pi-times"></i>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-workflow-button-group></app-workflow-button-group>
+      </div>
+    </div>
+  </fieldset>
+</form>

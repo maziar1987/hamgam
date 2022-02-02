@@ -1,0 +1,13 @@
+:host ::ng-deep .ui-paginator {
+    border: 0 none;
+    padding: 1em;
+    direction: ltr;
+
+    .ui-dropdown {
+        width: auto;
+    }
+
+    .ui-paginator-current {
+        float: left;
+    }
+}

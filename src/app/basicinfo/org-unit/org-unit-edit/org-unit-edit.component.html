@@ -1,0 +1,54 @@
+<p-header>
+  {{editMode ? ('action.edit' | translate) + ' ' + orgUnit?.displayName : ('orgUnit.createPageTitle' |
+  translate)}}
+</p-header>
+<form [formGroup]="form">
+  <fieldset>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('displayName') }">
+        <label for="displayName">
+          {{'orgUnit.displayName' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="displayName" type="text" pInputText formControlName="displayName" [placeholder]=""
+               [ngClass]="{ 'is-invalid' : isInvalid('displayName') }">
+        <div *ngIf="displayName?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('code') }">
+        <label for="code">
+          {{'orgUnit.code' | translate}}
+        </label>
+        <input id="code" type="text" pInputText formControlName="code" [placeholder]=""
+               [ngClass]="{ 'is-invalid' : isInvalid('code') }">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('viewOrder') }">
+        <label for="viewOrder">
+          {{'orgUnit.viewOrder' | translate}}
+        </label>
+        <input id="viewOrder" type="number" pInputText formControlName="viewOrder" [placeholder]=""
+               [ngClass]="{ 'is-invalid' : isInvalid('viewOrder') }">
+      </div>
+      <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('status') }">
+        <label for="status">
+          {{'orgUnit.status' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <p-checkbox id="status" class="form-control" formControlName="activated" binary="true" label="{{'orgUnit.activated' | translate}}">
+        </p-checkbox>
+      </div>
+    </div>
+  </fieldset>
+</form>
+<p-footer>
+  <button (click)="onSubmit()" pButton type="button" [disabled]="this.form.invalid"
+          label="{{'action.create' | translate}}" icon="pi pi-plus" iconPos="right"
+          class="ui-button-raised ui-button-success col-md-1"></button>
+  <button pButton type="button" (click)="onBack()" label="{{'action.back' | translate}}"
+          class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+  </button>
+</p-footer>
+

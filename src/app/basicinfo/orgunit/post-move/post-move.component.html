@@ -1,0 +1,19 @@
+<div class="row" style="height:20rem;direction: rtl;text-align: right;">
+    <div class="col-md-12 form-group ui-fluid">
+        <!-- <label>{{ 'Cartable::Receivers' | translate }}</label> -->
+        <p-multiSelect [options]="posts" [(ngModel)]="postsSelected" optionLabel="name"
+            defaultLabel="پست ها"></p-multiSelect>
+    </div>
+    <div class="col-md-12 form-group ui-fluid">
+        <!-- <label>کپی کردن</label> -->
+        
+        <p-checkbox name="copy" binary="true" label="کپی کردن"
+        [(ngModel)]="copy" inputId="copy"></p-checkbox>
+    </div>
+        <div class="col-md-12  form-group ui-fluid">
+            <!-- <button pButton [disabled]="!postsSelected||postsSelected==''" (click)="onSubmit()" -->
+            <button pButton (click)="onSubmit()"
+                label="ذخیره" icon="pi pi-plus" iconPos="right"
+                class="ui-button-raised ui-button-success col-md-2"></button>
+        </div>
+</div>

@@ -1,0 +1,83 @@
+<app-spinner-border [loading]="loading"></app-spinner-border>
+
+<div class="animate-bottom" [ngClass]="{'d-none': loading}">
+    <fieldset>
+        <legend class="my-2">{{ (activity?.sender?.user?.firstName + ' ' + activity?.sender?.user?.lastName)}}</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="card-title">{{activity?.subject}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p #activityText></p>
+                <!-- {{activity.text}} -->
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <span class="fa fa-users text-primary ml-2" pTooltip="{{'activity.receivers' | translate}}"
+                    tooltipPosition="top"></span>
+                <span>{{activityService.getReceiversFullName(activity, false)}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span class="fa fa-paper-plane ml-2 text-success"
+                    pTooltip="{{'activity.sendType.sendType' | translate }}" tooltipPosition="top"></span>
+                <span>{{'activity.sendType.' + activity?.sendType.toString() | translate}}
+                    <span *ngIf="sendTypeCC">({{sendTypeCC}})</span>
+                </span>
+            </div>
+            <div class="col-md-3 border-right">
+                <span class="fa fa-user-secret text-danger" pTooltip="{{'activity.classification' | translate }}"
+                    tooltipPosition="top"></span>
+                <span class="mr-2">{{activity?.classification?.title || 'action.unknown' | translate}}</span>
+            </div>
+            <div class="col-md-3 border-right">
+                <span class="fa fa-list-alt text-info" pTooltip="{{'activity.priority' | translate}}"
+                    tooltipPosition="top"></span>
+                <span class="mr-2">{{activity?.priority?.title || 'action.unknown' | translate}}</span>
+            </div>
+            <div class="col-md-3 border-right">
+                <span class="fa fa-calendar-alt text-orange" pTooltip="{{'activity.creationTime' | translate}}"
+                    tooltipPosition="top"></span>
+                <span class="mr-2">{{(activity?.creationTime | persianDate:'shortDate')}} </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="activity?.attachmentsCount > 0">
+            <div class="col-md-12">
+                <hr />
+                <button pButton type="button" *ngFor="let attachment of activity?.attachments"
+                    (click)="showAttachment(attachment)" label="{{getGttachmentName(attachment)}}"
+                    class="ui-button-secondary col-md-2 ml-2 mb-2" icon="{{getAttachmentFileIcon(attachment)}}"
+                    iconPos="right"></button>
+            </div>
+        </div>
+        <div class="row" *ngIf="attachmentsUrls?.length > 0">
+            <div class="col-md-12">
+                <app-image-viewer [images]="attachmentsUrls" [idContainer]="'idOnHTML'" [loadOnInit]="true">
+                </app-image-viewer>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12 form-group" #mydiv>
+                <p-splitButton *ngIf="!isArchive" label="{{'action.archive' | translate }}" icon="fa fa-archive"
+                    iconPos="right" (onClick)="onArchive()" [model]="menuItems"
+                    styleClass="ui-button-raised ui-button-primary float-right" [appendTo]="body"></p-splitButton>
+
+                <p-splitButton *ngIf="isTrash || isArchive" label="{{'action.restore' | translate }}"
+                    icon="fa fa-trash-restore" iconPos="right" (onClick)="onRestore()" [model]="menuItems"
+                    styleClass="ui-button-raised ui-button-primary float-right" [appendTo]="body"></p-splitButton>
+
+                <button *ngIf="!isTrash" pButton type="button" label="{{'action.delete' | translate }}"
+                    icon="fa fa-trash" iconPos="right" (click)="onDelete()"
+                    class="ui-button-raised ui-button-danger col-md-1 mr-2 float-right"></button>
+                <button pButton type="button" label="{{'action.back' | translate}}" (click)="back()"
+                    class="ui-button-raised ui-button-secondary col-md-1 mr-2 float-right"></button>
+            </div>
+        </div>
+    </fieldset>
+</div>

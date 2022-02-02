@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+    <h5>{{'contract.contract'|translate}} </h5>
+    <hr />
+  </div>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom">
+  <fieldset>
+    <div class="row">
+      <div class="col-md-6 form-group ui-fluid" [ngClass]="{'has-danger' : hasError('worksheetPrice')}">
+        <label for="worksheetPrice">{{'contract.worksheetPrice' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <p-inputNumber  mode="currency" id="worksheetPrice" formControlName="worksheetPrice"
+                        currency="IRR"></p-inputNumber>
+        <div *ngIf="worksheetPrice?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group ui-fluid" [ngClass]="{'has-danger' : hasError('consumableItemsPercentage')}">
+        <label for="consumableItemsPercentage">{{'contract.consumableItemsPercentage' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <p-inputNumber  inputId="percent" prefix="%" formControlName="consumableItemsPercentage" id="consumableItemsPercentage">
+        </p-inputNumber>
+        <div *ngIf="consumableItemsPercentage?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group ui-fluid" [ngClass]="{'has-danger' : hasError('supervisorPercentage')}">
+        <label for="supervisorPercentage">{{'contract.supervisorPercentage' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <p-inputNumber  inputId="percent" prefix="%" formControlName="supervisorPercentage" id="supervisorPercentage">
+        </p-inputNumber>
+        <div *ngIf="supervisorPercentage?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group ui-fluid" [ngClass]="{'has-danger' : hasError('masterPercentage')}">
+        <label for="masterPercentage">{{'contract.masterPercentage' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <p-inputNumber  inputId="percent" prefix="%" formControlName="masterPercentage" id="masterPercentage">
+        </p-inputNumber>
+        <div *ngIf="masterPercentage?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button pButton type="submit" label="{{'action.save' | translate}}" [disabled]="this.form.invalid"
+                class="ui-button-raised ui-button-success col-md-2"></button>
+        <button pButton type="button" (click)="onBack()" label="{{'action.back' | translate}}"
+                class="ui-button-raised ui-button-secondary mr-2 col-md-2"></button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+

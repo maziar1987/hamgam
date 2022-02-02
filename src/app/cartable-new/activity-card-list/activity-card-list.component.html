@@ -1,0 +1,132 @@
+<div class="card bg-secondary-primeng border-0 box-shadow">
+
+    <div class="row py-2 px-3">
+        <div class="col mb-2">
+            <input type="text" class="col-md-2 float-left" pInputText placeholder="{{'action.search' | translate}}"
+                (keyup)="onSearch($event)">
+
+            <button pButton type="button" icon="fa fa-plus" pTooltip="{{'action.new' | translate }}"
+                tooltipPosition="top" (click)="onCreate()" class="ui-button-success float-right"></button>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="activities?.length <= 0">
+        <div class="col text-center py-2">
+            <span>{{'message.noData' | translate }}
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngFor="let activity of activities" class="card mx-3 mb-2"
+                [ngClass]="{'font-weight-bold': unseen(activity)}">
+                <div class="card-body">
+                    <div class="row border-bottom mb-2">
+                        <div class="col-md-6">
+                            <button pButton type="button" icon="fa fa-eye" pTooltip="{{'action.view' | translate }}"
+                                tooltipPosition="top" (click)="onView(activity)"
+                                class="ui-button-primary float-right mb-1"></button>
+                        </div>
+                        <div class="col-md-6">
+                            <p-menu #menu [popup]="true" [model]="getMenuItems(activity)" appendTo="body"></p-menu>
+                            <button pButton icon="fa fa-bars" (click)="menu.toggle($event)"
+                                class="ui-button-secondary float-left mb-1"></button>
+                        </div>
+                    </div>
+
+                    <div class="row" (click)="onView(activity)">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="assets/img/user1.jpg" class="float-right ml-3"
+                                        style="height: 60px;border-radius: 36px;">
+                                    <h6 class="pt-4">
+                                        {{activity.sender.user?.firstName + " " + activity.sender.user?.lastName}}
+                                    </h6>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col">
+                                    <h5>{{activity.subject}}</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p>{{activityService.getLimitedText(activity)}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p>{{activityService.getActivityObjectInfo(activity)}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="fa fa-code-branch ml-2 text-primary"
+                                pTooltip="{{'activity.workflowName.workflowName' | translate}}"
+                                tooltipPosition="top"></span>
+                            <span>{{'activity.workflowName.' + activity.workflowName | translate}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="fa fa-code-branch ml-2 text-primary"
+                                pTooltip="{{'activity.workflowStep.workflowStep' | translate}}"
+                                tooltipPosition="top"></span>
+                            <span> {{'activity.workflowStep.' + activity.workflowStep | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="fa fa-paper-plane ml-2 text-success"
+                                pTooltip="{{'activity.sendType.sendType' | translate }}" tooltipPosition="top"></span>
+                            <span>{{'activity.sendType.' + activity.sendType.toString() | translate}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="fa fa-fingerprint ml-2 text-purple" pTooltip="{{'activity.startActivityId' | translate }}"
+                                tooltipPosition="top"></span>
+                            <span>{{activity.startActivityId}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="fa fa-user-secret text-danger ml-2"
+                                pTooltip="{{'activity.classification' | translate }}" tooltipPosition="top"></span>
+                            <span>{{activity.classification?.title || 'action.unknown' |
+                                translate}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="fa fa-users text-primary ml-2" pTooltip="{{'activity.receivers' | translate}}"
+                                tooltipPosition="top"></span>
+                            <span>{{activityService.getReceiversFullName(activity, true)}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="fa fa-list-alt text-info" pTooltip="{{'activity.priority' | translate }}"
+                                tooltipPosition="top"></span>
+                            <span class="mr-2">{{activity.priority?.title || 'action.unknown' | translate}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fa fa-calendar-alt text-orange"
+                                pTooltip="{{'activity.creationTime' | translate}}" tooltipPosition="top"></span>
+                            <span class="mr-2">
+                                {{activity.creationTime | persianDate:'shortDateTime'}}
+                            </span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="float-left">
+                                <span class="fa fa-paperclip text-cyan"></span>
+                                <span class="mr-2">{{activity.attachmentsCount}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-sm-4">
+      <app-org-unit-tree [buttonDisplay]="treeButtonDisplay" (onNodeSelect)="nodeSelect($event)">
+        (onDelete)="deleteOrgUnit($event)" [minLengthLabel]="true">
+      </app-org-unit-tree>
+    </div>
+    <div class="col-sm-8 dir-rtl overflow-auto">
+      <app-org-unit-form [orgUnitTreeNode]="selectedTreeNode" (deletedNode)="removeSelectedNode($event)" (addNode)="addNode($event)"></app-org-unit-form>
+    </div>
+</div>

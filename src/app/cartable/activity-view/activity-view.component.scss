@@ -1,0 +1,149 @@
+.activity-text {
+    background-color: inherit !important;
+}
+.person-info {
+    color: #666666;
+    padding: 0 30px 10px 0;
+    margin-top: 10px;
+}
+.human-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin-top: -65px;
+}
+.person-info .name {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.person-info .name h2 {
+    font-weight: 300;
+    margin-bottom: 0;
+    // font-size: 24px;
+}
+.tag.family {
+    background-color: #90b900;
+}
+.tag.label {
+    padding: 0.2em 0.5em;
+    border-radius: 2px;
+    line-height: 1.1;
+}
+.mail-tag.tag.label {
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 65px;
+}
+.contact-info.phone-email .ion-iphone {
+    font-size: 32px;
+    width: 27px;
+    display: inline-block;
+}
+.phone-email i {
+    color: #666;
+}
+.contact-info.phone-email .ion-email {
+    font-size: 24px;
+    width: 27px;
+}
+.contact-info.position-address .position {
+    font-size: 20px;
+    font-weight: 300;
+}
+.contact-info.position-address .address {
+    font-size: 16px;
+    font-weight: 300;
+}
+.message-details {
+    margin: 5px 0;
+    padding: 5px 30px 5px 0;
+}
+.message-details .subject {
+    font-size: 20px;
+    margin-left: 10px;
+    font-weight: 300;
+}
+.message-details .date {
+    white-space: nowrap;
+    font-size: 15px;
+}
+.line {
+    height: 1px;
+    background-color: #cbcbcb;
+    opacity: 0.3;
+}
+.line-top {
+    margin-top: 5px;
+    height: 1px;
+    background-color: #cbcbcb;
+    opacity: 0.3;
+}
+.message-body {
+    margin: 20px 0;
+    padding-right: 30px;
+    font-weight: 300;
+    line-height: 18px;
+}
+.attachment {
+    margin: 5px 0;
+    padding-right: 30px;
+}
+.attachment .file-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+.attachment .file-name {
+    font-size: 14px;
+    margin-left: 3px;
+    position: relative;
+    top: -3px;
+    font-weight: 300;
+}
+.attachment .box-file-name {
+    background-color: #e0e5ec;
+    box-shadow: 3px 3px 9px rgba(163, 177, 198, 0.6), -3px -3px 9px rgba(255, 255, 255, 0.5);
+    // display: flex;
+    // flex-direction: column;
+    // padding: 60px 30px;
+    border-radius: 30px;
+    position: relative;
+    background: transparent;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    // width: 300px;
+    // height: auto;
+    // margin: auto;
+    -webkit-transition: color .2s ease;
+    transition: color .2s ease;
+    cursor: pointer;
+}
+
+.attachment .box-file-name:hover  {
+    // box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48), inset -3px -3px 7px #FFFFFF;
+    background:#f4f4f4;/* linear-gradient(318.32deg, rgba(185, 198, 218, 0.1) 0%, rgba(189, 202, 224, 0.1) 55%, rgba(195, 206, 223, 0.25) 100%);*/
+}
+.attachment{
+    text-align: right;
+    direction: rtl;
+}
+.answer-container {
+    margin-top: 10px;
+}
+.answer-container .btn {
+    margin-top: 3px;
+    //background-color: #63bbb2;
+    border: none;
+    color: #fff;
+    width: 100px;
+    -webkit-transition: none;
+    transition: none;
+}
+.btn-with-icon i {
+    margin-right: 10px;
+}
+// .ion-reply:before {
+//     content: "\f21e";
+// }
+.selecteditem{
+    box-shadow: 0 0 0 0.2em #8dcdff;
+}

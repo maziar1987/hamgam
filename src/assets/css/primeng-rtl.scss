@@ -1,0 +1,376 @@
+::ng-deep {
+    /********primeng*********/
+    body .ui-widget {
+        font-family: hit, iranyekan, BYekan, iransans, "Open Sans", "Helvetica Neue", sans-serif !important;
+    }
+
+    .ui-breadcrumb .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-button-icon-left {
+        right: 0.5em; /**/
+        left: 3.5em; /**/
+    }
+
+    .ui-contextmenu .ui-menuitem-icon {
+        margin-left: 0.25em; /*1*/
+    }
+
+    .ui-dialog .ui-dialog-titlebar-icons {
+        float: left; /**/
+    }
+
+    .ui-dropdown .ui-dropdown-clear-icon {
+        left: 2em; /**/
+    }
+
+    .ui-inputgroup p-inputmask:not(:first-child) .ui-inputtext {
+        border-top-right-radius: 0; /**/
+        border-bottom-right-radius: 0; /**/
+        border-right: 0 none; /**/
+    }
+
+    .ui-inputgroup p-inputmask:not(:last-child) .ui-inputtext {
+        border-top-left-radius: 0; /**/
+        border-bottom-left-radius: 0; /**/
+        border-left: 0 none; /**/
+    }
+
+    .ui-inputgroup .ui-inputgroup-addon + .ui-inputgroup-addon {
+        border-right: 0 none; /**/
+    }
+
+    .ui-inputgroup .ui-inputtext {
+        padding-right: 0.5em; /**/
+    }
+
+    .ui-inputgroup .ui-inputtext:not(:first-child) {
+        border-top-right-radius: 0; /**/
+        border-bottom-right-radius: 0; /**/
+        border-right-width: 0px; /**/
+    }
+
+    .ui-inputgroup .ui-inputtext:not(:last-child) {
+        border-top-right-radius: 0px; /**/
+        border-bottom-right-radius: 0px; /**/
+        border-right-width: 1px; /**/
+        border-top-left-radius: 0; /**/
+        border-bottom-left-radius: 0; /**/
+        border-left-width: 0px; /**/
+    }
+
+    .ui-inputgroup .ui-button {
+        margin-left: 0; /**/
+    }
+
+    .ui-inputgroup > p-button:not(:first-child) > .ui-button {
+        border-top-right-radius: 0; /**/
+        border-bottom-right-radius: 0; /**/
+    }
+
+    .ui-inputgroup .ui-chkbox,
+    .ui-inputgroup .ui-radiobutton {
+        margin-left: 0; /**/
+    }
+
+    .ui-inputgroup .ui-float-label:last-child .ui-inputtext {
+        border-top-left-radius: 3px; /**/
+        border-bottom-left-radius: 3px; /**/
+        border-left-width: 1px; /**/
+    }
+
+    .ui-inputgroup .ui-float-label:not(:first-child) .ui-inputtext {
+        border-top-right-radius: 0; /**/
+        border-bottom-right-radius: 0; /**/
+        border-right-width: 0px; /**/
+    }
+
+    .ui-megamenu .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-menubar .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-menubar .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-menu .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-multiselect-panel .ui-multiselect-item {
+        text-align: right; /**/
+    }
+
+    .ui-multiselect-header {
+        text-align: right; /**/
+    }
+    .ui-multiselect-header .ui-multiselect-close {
+        left: 0.375em; /**/
+    }
+    .ui-organizationchart .ui-organizationchart-table > tr > td {
+        min-width: 100px; /**/
+    }
+
+    .ui-organizationchart .ui-organizationchart-node-content {
+        /* padding: .5em .75em; */ /**/
+        display: inline-block;
+        position: relative;
+    }
+
+    .ui-panelmenu .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-slidemenu .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-tabmenu .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-tieredmenu .ui-menuitem-icon {
+        margin-left: 0.25em; /**/
+    }
+
+    .ui-toast .ui-toast-close-icon {
+        left: 0.25em; /**/
+    }
+
+    .ui-toast .ui-toast-icon {
+        right: 0.5em; /**/
+    }
+
+    .ui-toast .ui-toast-message-text-content {
+        margin-right: 2.5em; /**/
+    }
+
+    .ui-multiselect-header .ui-multiselect-close {
+        right: auto;
+    }
+
+    .pi-step-backward:before {
+        content: "\e917" !important;
+    }
+    .ui-paginator {
+        direction: rtl !important;
+    }
+    .ui-inputwrapper-filled {
+        // float: right;
+    }
+    .pi-step-forward:before {
+        content: "\e916" !important;
+    }
+
+    .pi-caret-left:before {
+        content: "\e905" !important;
+    }
+
+    .pi-caret-right:before {
+        content: "\e904" !important;
+    }
+    .ui-paginator-pages {
+        direction: rtl;
+    }
+
+    /********primeng*********/
+
+    /********primeng them nova light*********/
+    body .ui-widget {
+        font-size: 12px;
+    }
+    body .ui-link {
+        font-size: 12px;
+    }
+    body
+        .ui-autocomplete.ui-autocomplete-multiple
+        .ui-autocomplete-multiple-container
+        .ui-autocomplete-input-token
+        input {
+        font-size: 12px;
+    }
+    body .ui-autocomplete.ui-autocomplete-multiple .ui-autocomplete-multiple-container .ui-autocomplete-token {
+        font-size: 12px;
+    }
+    body .ui-datepicker table {
+        font-size: 12px;
+    }
+    body .ui-chips > ul.ui-inputtext .ui-chips-input-token input {
+        font-size: 12px;
+    }
+    body .ui-chips > ul.ui-inputtext .ui-chips-token {
+        font-size: 12px;
+    }
+    body .ui-inputtext {
+        font-size: 12px;
+    }
+    body .ui-button {
+        font-size: 12px;
+    }
+    body .fc .fc-toolbar .fc-button {
+        font-size: 12px;
+    }
+    body .ui-table .ui-editable-column input {
+        font-size: 12px;
+    }
+    body .ui-treetable .ui-editable-column input {
+        font-size: 12px;
+    }
+    body .ui-panel .ui-panel-titlebar .ui-panel-titlebar-icon {
+        font-size: 12px;
+    }
+    body .ui-panelmenu .ui-panelmenu-header > a {
+        font-weight: 500;
+        font-size: 12px;
+    }
+    body .ui-terminal .ui-terminal-input {
+        font-size: 12px;
+        height: 14px;
+    }
+    body .ui-chkbox-label {
+        margin: 0 0.5em 0 0; /**/
+    }
+    body .ui-dropdown .ui-dropdown-label {
+        padding-left: 2em; /**/
+    }
+
+    body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-container .ui-inputtext {
+        padding-left: 2em; /**/
+    }
+
+    body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-container .ui-multiselect-filter-icon {
+        left: 0.5em; /**/
+        right: auto; /**/
+    }
+    body .ui-multiselect-panel .ui-multiselect-header .ui-chkbox {
+        margin-left: 0.5em; /**/
+    }
+    body .ui-multiselect-panel .ui-multiselect-items .ui-multiselect-item .ui-chkbox {
+        margin: 0 0 0 0.5em; /**/
+    }
+    body .ui-inputgroup .ui-button:first-child {
+        -moz-border-radius-topleft: 0px; /**/
+        -webkit-border-top-left-radius: 0px; /**/
+        border-top-left-radius: 0px; /**/
+        -moz-border-radius-bottomleft: 0px; /**/
+        -webkit-border-bottom-left-radius: 0px; /**/
+        border-bottom-left-radius: 0px; /**/
+
+        -moz-border-radius-topright: 3px; /**/
+        -webkit-border-top-right-radius: 3px; /**/
+        border-top-right-radius: 3px; /**/
+        -moz-border-radius-bottomright: 3px; /**/
+        -webkit-border-bottom-right-radius: 3px; /**/
+        border-bottom-right-radius: 3px; /**/
+    }
+    body .ui-inputgroup .ui-button:last-child {
+        -moz-border-radius-topright: 0px; /**/
+        -webkit-border-top-right-radius: 0px; /**/
+        border-top-right-radius: 0px; /**/
+        -moz-border-radius-bottomright: 0px; /**/
+        -webkit-border-bottom-right-radius: 0px; /**/
+        border-bottom-right-radius: 0px; /**/
+        -moz-border-radius-topleft: 3px; /**/
+        -webkit-border-top-left-radius: 3px; /**/
+        border-top-left-radius: 3px; /**/
+        -moz-border-radius-bottomleft: 3px; /**/
+        -webkit-border-bottom-left-radius: 3px; /**/
+        border-bottom-left-radius: 3px; /**/
+    }
+    body .ui-selectbutton .ui-button:last-child {
+        /**/
+        -moz-border-radius-topleft: 3px;
+        -webkit-border-top-left-radius: 3px;
+        border-top-left-radius: 3px;
+        -moz-border-radius-bottomleft: 3px;
+        -webkit-border-bottom-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+    body .ui-selectbutton .ui-button:first-child {
+        /**/
+        -moz-border-radius-topright: 3px;
+        -webkit-border-top-right-radius: 3px;
+        border-top-right-radius: 3px;
+        -moz-border-radius-bottomright: 3px;
+        -webkit-border-bottom-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+    body .ui-button.ui-button-text-icon-left .ui-button-text {
+        padding: 0.429em 2em 0.429em 1em; /**/
+    }
+    body .ui-panel .ui-panel-content {
+        padding: 0; /**/ /*0.571em 1em;*/
+    }
+    body .ui-organizationchart .ui-organizationchart-node-content {
+        border: 1px solid #c8c8c8;
+        background-color: #ffffff;
+        color: #333333;
+        /* padding: 0.571em 1em; */ /**/
+    }
+    body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+        margin-right: 0.5em; /**/
+    }
+    body .ui-dialog .ui-dialog-footer {
+        text-align: left; /**/
+    }
+    body .ui-menu .ui-menuitem-link .ui-menuitem-icon,
+    body .ui-menubar .ui-menuitem-link .ui-menuitem-icon,
+    body .ui-tieredmenu .ui-menuitem-link .ui-menuitem-icon,
+    body .ui-contextmenu .ui-menuitem-link .ui-menuitem-icon,
+    body .ui-megamenu .ui-menuitem-link .ui-menuitem-icon,
+    body .ui-slidemenu .ui-menuitem-link .ui-menuitem-icon {
+        margin-left: 0.5em; /**/
+        margin-right: 0; /**/
+        float: right;
+    }
+
+    .pi-chevron-right {
+        transform: rotate(180deg);
+    }
+
+    body .ui-radiobutton-label {
+        margin: 0 0.5em 0 0;
+    }
+
+    .ui-inputgroup .ui-multiselect,
+    .ui-inputgroup .ui-dropdown {
+        width: 100%;
+        box-sizing: border-box;
+        border-left: 0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .ui-inputgroup .ui-button,
+    .ui-inputgroup .ui-button {
+        font-size: 13px;
+    }
+
+    .ui-editor-container .ui-editor-toolbar {
+        text-align: left;
+    }
+
+    .ui-panelmenu-icon {
+        float: left;
+    }
+
+    .ui-panelmenu .ui-menuitem-icon {
+        width: 25px;
+    }
+    .ui-dialog .ui-dialog-content {
+        overflow-x: hidden;
+    }
+    .ui-tabview .ui-tabview-nav li {
+        float: right;
+    }
+
+    .ui-dropdown-panel .ui-dropdown-item {
+        text-align: right;
+    }
+    /********primeng them nova light*********/
+}

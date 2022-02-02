@@ -1,0 +1,39 @@
+<p-dialog [(visible)]="display" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <p-header>
+        {{orgUnit?.displayName}}
+    </p-header>
+    <fieldset>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="displayName">
+                    {{'orgUnit.displayName' | translate}}
+                </label>
+                <input id="displayName" type="text" pInputText readonly [value]="orgUnit?.displayName">
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="code">
+                    {{'orgUnit.code' | translate}}
+                </label>
+                <input id="code" type="text" pInputText readonly [value]="orgUnit?.code">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p-checkbox [(ngModel)]="orgUnit.activated" binary="true" disabled="disabled"
+                    label="{{'orgUnit.activated' | translate}}">
+                </p-checkbox>
+            </div>
+        </div>
+    </fieldset>
+    <p-footer>
+        <button pButton type="button" (click)="onEdit()" label="{{'action.edit' | translate}}" icon="pi pi-pencil"
+            iconPos="right" class="ui-button-raised ui-button-primary col-md-3"></button>
+        <!-- <button pButton type="button" (click)="onDelete()" label="{{'action.delete' | translate}}" icon="pi pi-minus"
+            iconPos="right" class="ui-button-raised ui-button-danger mr-2 col-md-2"></button> -->
+        <button pButton type="button" (click)="onBack()" label="{{'action.back' | translate}}"
+            class="ui-button-raised ui-button-secondary mr-2 col-md-2">
+        </button>
+    </p-footer>
+</p-dialog>
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

@@ -1,0 +1,24 @@
+<p-dialog header=" {{selectedNode.element.type}} بر روی اکشن {{selectedNode.element.name}} شرایط  "
+          [(visible)]="visible"
+          (onHide)="hide()"
+          *ngIf="selectedNode"
+          [modal]="true"
+          [style]="{width: '50vw',marginTop:'50px'}"
+          [position]="'top'"
+          [maximizable]="true"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false">
+  <query-builder [(ngModel)]='query'
+                 [allowRuleset]="true"
+                 [config]='config'>
+  </query-builder>
+  <p-footer>
+    <button (click)="submit(query)" pButton type="button"
+            label="{{'action.implement' | translate}}" icon="pi pi-filter" iconPos="right"
+            class="ui-button-raised ui-button-success"></button>
+    <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+    </button>
+  </p-footer>
+</p-dialog>

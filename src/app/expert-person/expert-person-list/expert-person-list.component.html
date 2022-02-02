@@ -1,0 +1,87 @@
+<div class="animate-bottom">
+  <div class="row">
+    <div class="col-md-12  my-3">
+      <h4>{{'expertPerson.expertPerson' | translate }}</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p-table #dt [value]="expertPeople" [autoLayout]="true" dataKey="id" selectionMode="single"
+        [(selection)]="selectedExpertPeople" [columns]="cols" styleClass="ui-table-expertPeople" [rowHover]="true"
+        [rows]="10" [columns]="cols" [loading]="loading" [filterDelay]="0" (onFilter)="utils.filterTree($event)"
+        [globalFilterFields]="['nationalCode', 'firstName', 'lastName', 'status']">
+
+        <ng-template pTemplate="caption">
+          <div class="ui-table-globalfilter-container">
+
+            <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right" (click)="onCreate()"
+              pTooltip="{{'action.add' | translate }}" tooltipPosition="top"></button>
+
+            <div class="ui-inputgroup justify-content-end">
+              <button pButton type="button" icon="pi pi-refresh" class="ui-button-primary" (click)="onRefresh()"
+                pTooltip="{{'action.refresh' | translate }}" tooltipPosition="top"></button>
+              <input type="text" pInputText placeholder="{{'action.search' | translate}}" [(ngModel)]="searchValue"
+                (keyup.enter)="onSearch()">
+              <button pButton type="button" icon="fa fa-search" class="ui-button-primary" (click)="onSearch()"
+                pTooltip="{{'action.search' | translate }}" tooltipPosition="top"></button>
+            </div>
+
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th scope="col"></th>
+            <ng-container *ngFor="let col of columns">
+              <th scope="col">
+                {{col.header}}
+              </th>
+            </ng-container>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [ngClass]="{'text-warning' : rowData.inactive}">
+            <td>
+              <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+              </p-menu>
+              <button pButton icon="pi pi-bars" (click)="menu.toggle($event)" class="ui-button-secondary"></button>
+            </td>
+            <ng-container *ngFor="let col of columns; let i = index">
+              <td [ngSwitch]="col.field">
+                <span *ngSwitchCase="'status'">
+                  <span class="ml-2"
+                    [ngClass]="{'text-success': rowData[col.field]?.code == '4', 'text-danger': rowData[col.field]?.code == '5', 'text-info': rowData[col.field]?.code != '4' && rowData[col.field]?.code != '5'}">{{rowData[col.field]?.title}}</span>
+
+                  <span *ngIf="rowData[col.field]?.code == '4'" class="pi pi-check text-success"></span>
+                  <span *ngIf="rowData[col.field]?.code == '5'" class="pi pi-times text-danger"></span>
+                  <span *ngIf="rowData[col.field]?.code != '4' && rowData[col.field]?.code != '5'"
+                    class="fa fa-user-clock text-info"></span>
+                </span>
+                <span *ngSwitchDefault>
+                  {{rowData[col.field]}}
+                </span>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+      <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+        (onPageChange)="onPageChange($event)" dropdownAppendTo="body" [showCurrentPageReport]="true"
+        currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}"></p-paginator>
+    </div>
+  </div>
+
+</div>
+
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

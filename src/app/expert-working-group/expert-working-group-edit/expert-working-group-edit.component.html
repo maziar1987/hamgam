@@ -1,0 +1,126 @@
+<form [formGroup]="form" class="animate-bottom">
+    <fieldset>
+        <legend>{{('action.edit' | translate) + ' ' + (expertWorkingGroup?.title)}}</legend>
+
+        <div class="row">
+            <div class="col form-group ui-fluid">
+                <label for="categoryId">
+                    {{'expertWorkingGroup.title' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="ui-inputgroup">
+                    <input id="categoryId" type="text" readonly pInputText formControlName="title">
+                    <button (click)="showOrgUnitTreeDialog()" pButton type="button" icon="pi pi-search"
+                        class="ui-button-primary" pTooltip="{{'action.search' | translate}}"
+                        tooltipPosition="top"></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group ui-fluid">
+                <label for="title">
+                    {{'expertWorkingGroup.members' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+
+                <p-table #dt [value]="_expertAppointments" [autoLayout]="true" dataKey="id" selectionMode="single"
+                    [(selection)]="selectedExpertApprovement" [columns]="cols" styleClass="ui-table-expertApprovement"
+                    [rowHover]="true" [rows]="10" [columns]="cols" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+                    [paginator]="true" [showCurrentPageReport]="true" [filterDelay]="0"
+                    [globalFilterFields]="['nationalCode', 'firstName', 'lastName', 'status']"
+                    currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+
+                    <ng-template pTemplate="caption">
+                        <div class="ui-table-globalfilter-container">
+                            <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+                            <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right"
+                                (click)="onAddNewExpertApprovement()"
+                                pTooltip="{{('action.add' | translate) + ' ' + ('expertWorkingGroup.members' | translate)}}"
+                                tooltipPosition="top"></button>
+                        </div>
+                    </ng-template>
+
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <ng-container *ngFor="let col of columns">
+                                <th scope="col">
+                                    {{col.header}}
+                                </th>
+                            </ng-container>
+                            <th scope="col"></th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+                        <tr [ngClass]="{'text-warning' : !rowData.isActive}">
+                            <ng-container *ngFor="let col of columns; let i = index">
+                                <td [ngSwitch]="col.field">
+                                    <span *ngSwitchCase="'firstName'">
+                                        {{rowData['expertPerson']?.firstName}}
+                                    </span>
+                                    <span *ngSwitchCase="'lastName'">
+                                        {{rowData['expertPerson']?.lastName}}
+                                    </span>
+                                    <span *ngSwitchCase="'responsibility'">
+                                        {{rowData[col.field]?.title}}
+                                    </span>
+                                    <span *ngSwitchCase="'startDate'">
+                                        {{rowData[col.field] | persianDate:'shortDate'}}
+                                    </span>
+                                    <span *ngSwitchCase="'endDate'">
+                                        {{rowData[col.field] | persianDate:'shortDate'}}
+                                    </span>
+                                    <span *ngSwitchDefault>
+                                        {{rowData[col.field]}}
+                                    </span>
+                                </td>
+                            </ng-container>
+                            <td>
+                                <button pButton icon="pi pi-pencil" (click)="onEdit(rowIndex, rowData)"
+                                    class="ui-button-primary ml-1"></button>
+                                <button pButton icon="pi pi-times" (click)="onDelete(rowIndex, rowData)"
+                                    class="ui-button-danger ml-1"></button>
+                                <button pButton icon="pi pi-info" pTooltip="مشخصات فرد"
+                                    (click)="onPersonInfo(rowIndex, rowData)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <app-workflow-button-group></app-workflow-button-group>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<p-dialog header="{{('action.select' | translate) + ' ' + ('orgUnit.orgUnit' | translate)}}"
+    [(visible)]="displayOrgUnitTree" [style]="{width: '40vw'}">
+    <app-org-unit-tree (onNodeSelect)="nodeSelect($event)"></app-org-unit-tree>
+    <p-footer>
+        <button pButton type="button" (click)="selectOrgUnit()" label="{{'action.select' | translate}}"
+            icon="pi pi-check" iconPos="right" class="ui-button-raised ui-button-primary"></button>
+        <button pButton type="button" (click)="closeOrgUnitTreeDialog()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+        </button>
+    </p-footer>
+</p-dialog>
+
+<app-expert-approvement-add #addExpertApprovement (add)="addNewExpertApprovement($event)"
+    (edit)="editExpertApprovement($event)"></app-expert-approvement-add>
+
+<p-toast [style]="{marginTop: '50px'}" life="9000" position="top-left" key="tl"></p-toast>

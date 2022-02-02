@@ -1,0 +1,143 @@
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+:host ::ng-deep .ui-treetable-activity-history {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+    .ui-treetable-caption {
+        border: 0 none;
+        text-align: left;
+    }
+
+    .ui-treetable-globalfilter-container {
+        input {
+            width: 200px;
+        }
+    }
+
+    .ui-paginator {
+        border: 0 none;
+        padding: 1em;
+        direction: ltr;
+
+        .ui-dropdown {
+            width: auto;
+        }
+
+        .ui-paginator-current {
+            float: left;
+        }
+    }
+
+    .ui-treetable-thead > tr > th {
+        border: 0 none;
+        text-align: right;
+
+        // &:first-child {
+        //     width: 4.5em;
+        //     text-align: center;
+        // }
+
+        // &:last-child {
+        //     width: 8em;
+        //     text-align: center;
+        // }
+    }
+
+    .ui-treetable-tbody > tr > td {
+        border: 0 none;
+        cursor: pointer;
+        text-align: right;
+
+        // &:first-child {
+        //     width: 4.5em;
+        //     text-align: center;
+        // }
+
+        &:last-child {
+            width: 8em;
+            text-align: center;
+        }
+    }
+}
+
+/* Responsive */
+@media screen and (max-width: 64em) {
+    :host ::ng-deep .ui-treetable {
+        &.ui-treetable-activity-history {
+            .ui-treetable-thead > tr > th,
+            .ui-treetable-tfoot > tr > td {
+                display: none !important;
+            }
+
+            .ui-treetable-tbody > tr > td {
+                text-align: right;
+                display: block;
+                border: 0 none !important;
+                width: 100% !important;
+                float: right;
+                clear: right;
+                border: 0 none;
+
+                .ui-column-title {
+                    padding: 0.4em;
+                    min-width: 30%;
+                    display: inline-block;
+                    margin: -0.4em -0.4em -0.4em 1em;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+.company.ui-organizationchart .ui-organizationchart-node-content.ui-person {
+    padding: 0;
+    border: 0 none;
+}
+
+.node-header,.node-content ,.node-header-rec{
+    padding: .5em .7em;
+}
+
+.node-header {
+    background-color: #007ad9;
+    color: #ffffff;
+}
+.node-header-rec{
+    background-color: #34A835;
+    color: #ffffff;
+}
+.node-content {
+    text-align: center;
+    border: 1px solid #d1c0d1;
+}
+
+.node-content img {
+    border-radius: 50%;
+}
+
+.ReceiverCC-cfo {
+    background-color: #7247bc;
+    color: #ffffff;
+}
+
+.ReceiverCC-coo {
+    background-color: #a534b6;
+    color: #ffffff;
+}
+
+.ReceiverCC-cto {
+    background-color: #e9286f;
+    color: #ffffff;
+}
+
+.ui-person .ui-node-toggler {
+    color: #495ebb !important;
+}
+
+.ReceiverCC-cto .ui-node-toggler {
+    color: #8a0a39 !important;
+}

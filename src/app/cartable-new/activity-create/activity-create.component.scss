@@ -1,0 +1,9 @@
+.file-upload-input {
+    display: none;
+}
+
+:host ::ng-deep {
+    .fa-times:hover {
+        color: #dc3545 !important;
+    }
+}

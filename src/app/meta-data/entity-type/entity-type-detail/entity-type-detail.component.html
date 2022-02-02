@@ -1,0 +1,69 @@
+<form [formGroup]="form">
+    <fieldset>
+      <!-- <legend class="my-2">{{editMode ? ('action.edit' | translate) + ' ' + entityType?.persianName :
+              ('person.createPageTitle' | translate)}}</legend> -->
+      <div class="row">
+        <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('name') }">
+          <label for="name">
+            {{'entityType.name' | translate}}
+
+          </label>
+          <input id="name" type="text" pInputText formControlName="name" [placeholder]=""
+            [ngClass]="{ 'is-invalid' : isInvalid('name') }">
+
+        </div>
+        <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('persianName') }">
+          <label for="persianName">
+            {{'entityType.persianName' | translate}}
+
+          </label>
+          <input id="persianName" type="text" pInputText formControlName="persianName" [placeholder]=""
+            [ngClass]="{ 'is-invalid' : isInvalid('persianName') }">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('fields') }">
+          <div class="ui-table-globalfilter-container">
+            <!-- <button pButton type="button" icon="fa fa-plus" class="ui-button-success  float-right"
+              (click)="onCreatefields()"
+              pTooltip="{{('action.add' | translate) + ' ' + ('entityType.fields' | translate)}}"
+              tooltipPosition="top"></button> -->
+  
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p-table #dt [value]="entityType?.fields" [columns]="cols">
+  
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th scope="col" *ngFor="let col of columns">
+                  {{col.header}}
+                </th>
+              </tr>
+            </ng-template>
+  
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr [pSelectableRow]="rowData">
+                  <td *ngFor="let col of columns; let i = index">
+                      {{rowData[col.field]}}
+                  </td>
+              </tr>
+          </ng-template>
+  
+          </p-table>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  
+  
+  
+  
+  <p-toast [style]="{marginTop: '50px'}" life="9000" position="top-left" key="tl"></p-toast>
+  <!-- <app-entity-field-modal (Addfield)='Getfield($event)' [(display)]='fieldsDialog' headerDisplay="{{persianName.value}}">
+  </app-entity-field-modal> -->
+  
+  <!-- <app-accept #accept_modal (accept)="delete($event)"></app-accept> -->
+  

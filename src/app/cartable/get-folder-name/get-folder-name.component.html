@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" dir="rtl">
+
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <!-- <label for="folderName">نام پوشه</label> -->
+            <input formControlName="folderName" type="text" class="form-control" placeholder="نام پوشه را وارد کنید">
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <button pButton type="submit" label="ایجاد" icon="pi pi-plus" iconPos="right" [disabled]="this.form.invalid"
+                class="ui-button-raised ui-button-success ml-2">
+            </button>
+            <button pButton label="انصراف" icon="pi pi-close" iconPos="right" (click)="onCancel()"
+                class="ui-button-raised ui-button-secondary">
+            </button>
+        </div>
+    </div>
+
+</form>

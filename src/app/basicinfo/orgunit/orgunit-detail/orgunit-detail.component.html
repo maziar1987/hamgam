@@ -1,0 +1,47 @@
+
+<div class="row" *ngIf="orgUnit.parentId">
+  <div class="col-md-12 mt-2">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <h4>{{orgUnit.displayName}}</h4>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="code" class="col-md-3 col-form-label">کد:</label>
+      <div class="col-md-9">
+        <p>{{orgUnit.code}}</p>
+      </div>
+    </div>
+    <!-- <div class="form-group row">
+      <label for="paperAccess" class="col-md-3 col-form-label">اجازه صدور نامه:</label>
+      <div class="col-md-9">
+        <p-checkbox [(ngModel)]="orgUnit.paperAccess" inputId="paperAccess" binary="true" disabled></p-checkbox>
+      </div>
+    </div> -->
+    <!-- <div class="form-group row">
+      <label for="classification" class="col-md-3 col-form-label ">طبقه بندی:</label>
+      <div class="col-md-9">
+        <input id="classification" type="text" readonly="readonly" [(ngModel)]="orgUnit.classification"
+          class="form-control-plaintext" />
+      </div>
+    </div> -->
+    <!-- <div class="form-group row">
+      <label for="name" class="col-md-3 col-form-label ">کاربران:</label>
+      <div class="col-md-9">
+        <p>
+          <span *ngFor="let item of orgUnit.users">{{item.name+" "+ item.surname}},</span>
+        </p>
+        
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="name" class="col-md-3 col-form-label ">نقش ها:</label>
+      <div class="col-md-9">
+        <p>
+          <span *ngFor="let item of orgUnit.roles">{{item.name}},</span>
+        </p>
+        
+      </div>
+    </div> -->
+  </div>
+</div>

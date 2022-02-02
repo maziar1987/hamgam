@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4>{{post.name}}</h4>
+    </div>
+</div>
+
+<hr />
+
+<div class="row" style="direction: rtl;">
+    <label class="col-md-3">وضعیت</label>
+    <div class="col-md-9">
+        {{'orgChart.' +post.postStatuse| translate}}
+    </div>
+    <label class="col-md-3">چیدمان</label>
+    <div class="col-md-9">
+        {{'orgChart.' +post.postLayout| translate}}
+    </div>
+    <label class="col-md-3">نوع</label>
+    <div class="col-md-9">
+        {{'orgChart.' +post.postType| translate}}
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="name" class="col-md-12 col-form-label mb-2">کاربران</label>
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr class="table-dark">
+                            <td>نام</td>
+                            <td>نام خانوادگی</td>
+                            <td>تاریخ شروع</td>
+                            <td>تاریخ پایان</td>
+                            <td>شماره نامه</td>
+                            <td>تاریخ نامه</td>
+                        </tr>
+                    </thead>
+                    <tbody class="table-hover">
+                        <tr *ngFor="let item of post.appointments">
+                            <td>
+                                {{item.person.firstName}}
+                            </td>
+                            <td>
+                                {{item.person.lastName}}
+                            </td>
+                            <td>
+                                {{item.startDate|persianDate}}
+                            </td>
+                            <td>
+                                {{item.endDate|persianDate}}
+                            </td>
+                            <td>
+                                {{item.paperNumber}}
+                            </td>
+                            <td>
+                                {{item.paperDate|persianDate}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

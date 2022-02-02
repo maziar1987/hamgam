@@ -1,0 +1,156 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom"
+      *ngIf="!(formContainerService.loading$ | async)">
+  <fieldset>
+    <legend>{{('notify-program.notify-program' | translate)}}</legend>
+    <div class="row">
+      <div *ngIf="visible('orgUnitId')" [ngClass]="{ 'has-danger' : isInvalid('orgUnitId') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="orgUnitId"> {{'notify-program.orgUnit' | translate}}<span class="text-danger mr-2">*</span></label>
+        <div class="ui-inputgroup">
+          <input id="orgUnitId" type="text" readonly pInputText [placeholder]=""
+                 [value]="selectedOrgUnit?.displayName">
+          <button (click)="showOrgUnitTreeDialog()" pButton type="button" icon="pi pi-search"
+                  class="ui-button-primary" pTooltip="{{'action.search' | translate}}"
+                  tooltipPosition="top"></button>
+          <div *ngIf="orgUnitId?.errors?.required" class="invalid-feedback">
+            {{'message.required' | translate}}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="visible('programYear')" [ngClass]="{ 'has-danger' : isInvalid('programYear') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="programYear"> {{'notify-program.programYear' | translate}}<span class="text-danger mr-2">*</span></label>
+        <input id="programYear" type="number" pInputText formControlName="programYear"
+               [placeholder]="placeholder('programYear')" [ngClass]="cssClass('programYear')">
+      </div>
+      <div *ngIf="programYear?.errors?.required" class="invalid-feedback">
+        {{'message.required' | translate}}
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="visible('letterNo')" [ngClass]="{ 'has-danger' : isInvalid('letterNo') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="letterNo"> {{'notify-program.letterNo' | translate}}<span class="text-danger mr-2">*</span></label>
+        <input id="letterNo" type="text" pInputText formControlName="letterNo"
+               [placeholder]="placeholder('programYear')" [ngClass]="cssClass('letterNo')">
+      </div>
+      <div *ngIf="letterNo?.errors?.required" class="invalid-feedback">
+        {{'message.required' | translate}}
+      </div>
+      <div class="col-sm-6 form-group">
+        <div class="d-inline" [ngClass]="{'ui-inputgroup': attachmentFile}">
+          <label pButton type="button" icon="pi pi-plus" iconPos="right" class="ui-button-primary"
+                 label="{{'notify-program.attachment' | translate}}">
+            <span class="text-danger mr-2">*</span>
+            <input type="file" single (change)="onUpload($event)"  class="d-none">
+          </label>
+          <button *ngIf="attachmentFile" (click)="onRemoveUpload()" pButton type="button"
+                  icon="pi pi-times" class="ui-button-danger"></button>
+        </div>
+        <a href="javascript:;"
+           (click)="appFileManager.openFile(attachmentFile)"
+           download="{{attachmentFile?.fileName}}"
+           class="mr-2">{{attachmentFileName}}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="programYear"> {{'notify-program.certificates' | translate}}</label>
+        <p-table [value]="certificateViews">
+          <ng-template pTemplate="caption">
+            <div class="ui-table-globalfilter-container">
+              <button pButton type="button" icon="fa fa-plus" [disabled]="this.form.invalid"
+                      class="ui-button-success float-right" (click)="addCertificate()"
+                      pTooltip="{{'notify-program.add' | translate }}" tooltipPosition="top"></button>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 5%"></th>
+              <th style="width: 20%">{{'notify-program.certificate.title' | translate}}</th>
+              <th style="width: 10%">{{'notify-program.certificate.status' | translate}}</th>
+              <th style="width: 20%">{{'notify-program.certificate.type' | translate}}</th>
+              <th>{{'notify-program.certificate.code' | translate}}</th>
+              <th>{{'notify-program.certificate.registerNo' | translate}}</th>
+              <th>{{'notify-program.certificate.description' | translate}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>
+                <p-menu #menu [popup]="true" [model]="getMenuItems(item)" appendTo="body">
+                </p-menu>
+                <button pButton type="button" icon="pi pi-bars" (click)="menu.toggle($event)"
+                        class="ui-button-secondary"></button>
+              </td>
+              <td>{{item.title}}</td>
+              <td>{{item.status}}</td>
+              <td>{{item.type}}</td>
+              <td pEditableColumn>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input type="text" [(ngModel)]="item.code"
+                           [ngModelOptions]="{standalone: true}">
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{item.code}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td pEditableColumn>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input type="text" [(ngModel)]="item.registerNo"
+                           [ngModelOptions]="{standalone: true}">
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{item.registerNo}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input type="text" [(ngModel)]="item.description"
+                         [ngModelOptions]="{standalone: true}">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item.description}}
+                </ng-template>
+              </p-cellEditor>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <br />
+        <button  pButton type="submit" [disabled]="this.form.invalid" style="width: auto;" *ngIf="!editMode"
+                label="{{'action.save' | translate}}"
+                class="ui-button-raised ui-button-success col-md-2"></button>
+        <button  pButton type="submit" [disabled]="this.form.invalid" style="width: auto;" *ngIf="editMode"
+                label="{{'action.saveChanges' | translate}}" icon="pi pi-check" iconPos="right"
+                class="ui-button-raised ui-button-primary col-md-2"></button>
+        <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+                class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+<p-dialog header="{{('action.select' | translate) + ' ' + ('orgUnit.orgUnit' | translate)}}"
+          [(visible)]="displayOrgUnitTree" [style]="{width: '40vw'}">
+  <app-org-unit-tree (onNodeSelect)="nodeSelect($event)"></app-org-unit-tree>
+  <p-footer>
+    <button pButton type="button" (click)="selectOrgUnit()" label="{{'action.select' | translate}}"
+            icon="pi pi-check" iconPos="right" class="ui-button-raised ui-button-primary"></button>
+    <button pButton type="button" (click)="closeOrgUnitTreeDialog()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+    </button>
+  </p-footer>
+</p-dialog>
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

@@ -1,0 +1,308 @@
+<form [formGroup]="form" class="animate-bottom">
+    <fieldset>
+        <legend>{{'expertPerson.createPageTitle' | translate}}</legend>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 form-group ui-fluid">
+                        <label for="categoryId">
+                            {{'expertPerson.category' | translate}}
+                        </label>
+                        <input id="categoryId" type="text" pInputText [value]="category?.displayName" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <label for="personType">
+                            {{'expertPerson.personType' | translate}}
+                        </label>
+                        <div class="row">
+                            <div class="col">
+                                <p-radioButton name="personType" value="{{personTypes.INTERNAL}}"
+                                    label="{{('expertPerson.personTypes.' + personTypes[personTypes.INTERNAL]) | translate}}"
+                                    formControlName="personType" inputId="personType1">
+                                </p-radioButton>
+                                <p-radioButton name="personType" value="{{personTypes.EXTERNAL}}"
+                                    label="{{('expertPerson.personTypes.' + personTypes[personTypes.EXTERNAL]) | translate}}"
+                                    formControlName="personType" inputId="personType2" styleClass="mr-2">
+                                </p-radioButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group d-flex flex-column justify-content-center">
+                <div class="person-image m-auto">
+                    <img src="{{personImageFileUrl}}" class="person-image img-fluid rounded" alt="">
+                </div>
+                <div class="mx-auto">
+                    <div class="mt-2" [ngClass]="{'ui-inputgroup': personImageFile}">
+                        <label pButton type="button" icon="fa fa-camera" class="ui-button-primary"
+                            label="{{'' | translate}}">
+                            <input type="file" single (change)="onUpload($event, 'personImage')" class="d-none">
+                        </label>
+                        <button *ngIf="personImageFile" (click)="onRemoveUpload('personImage')" pButton type="button"
+                            icon="pi pi-times" class="ui-button-danger"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('personnelCode') }">
+                <label for="personnelCode">
+                    {{'expertPerson.personnelCode' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="ui-inputgroup">
+                    <input id="personnelCode" type="text" (keyup.enter)="searchByPersonnelCode()" pInputText
+                        formControlName="personnelCode" [readonly]=" externalPersonType"
+                        [ngClass]="{ 'is-invalid' : isInvalid('personnelCode') }">
+                    <button (click)="search('personnelCode')" pButton type="button" icon="pi pi-search"
+                        class="ui-button-primary" pTooltip="{{'action.search' | translate}}" tooltipPosition="top"
+                        [disabled]="externalPersonType"></button>
+                </div>
+                <div *ngIf="personnelCode?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('nationalCode') }">
+                <label for="nationalCode">
+                    {{'expertPerson.nationalCode' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="ui-inputgroup">
+                    <input id="nationalCode" type="text" nationalCode (keyup.enter)="search('nationalCode')" pInputText
+                        formControlName="nationalCode" [readonly]="internalPersonType"
+                        [ngClass]="{ 'is-invalid' : isInvalid('nationalCode') }">
+                    <button (click)="search('nationalCode')" pButton type="button" icon="pi pi-search"
+                        class="ui-button-primary" pTooltip="{{'action.view' | translate}}" tooltipPosition="top"
+                        [disabled]="internalPersonType || nationalCode?.errors"></button>
+                </div>
+                <input class="d-none">
+                <div *ngIf="nationalCode?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+                <div *ngIf="nationalCode?.errors?.nationalCode?.value" class="text-danger">
+                    نامعتبر می باشد
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="firstName">
+                    {{'expertPerson.firstName' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="firstName" type="text" pInputText formControlName="firstName" readonly>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="lastName">
+                    {{'expertPerson.lastName' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="lastName" type="text" pInputText formControlName="lastName" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="fatherName">
+                    {{'expertPerson.fatherName' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="fatherName" type="text" pInputText formControlName="fatherName" readonly>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="birthDate">
+                    {{'expertPerson.birthDate' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-datepicker-popup-jalali id="birthDate" formControlName="birthDate" class="w-100" readonly>
+                </app-datepicker-popup-jalali>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="educationDegreeId">
+                    {{'expertPerson.educationDegree' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-basic-value-dropdown [basicValueType]="getBasicValueType('educationDegree')"
+                    formControlName="educationDegreeId" [readonly]=" internalPersonType">
+                </app-basic-value-dropdown>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="studyFieldId">
+                    {{'expertPerson.studyField' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-basic-value-dropdown [basicValueType]="getBasicValueType('studyField')"
+                    formControlName="studyFieldId" [readonly]=" internalPersonType">
+                </app-basic-value-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="relation">{{'expertPerson.relation' | translate}}
+                </label>
+                <div class="row">
+                    <div class="col">
+                        <p-radioButton name="relation" value="{{relationTypes.military}}"
+                            label="{{('expertPerson.relationTypes.' + relationTypes[relationTypes.military]) | translate}}"
+                            formControlName="relation" inputId="relation1">
+                        </p-radioButton>
+                        <p-radioButton name="relation" value="{{relationTypes.civilian}}"
+                            label="{{('expertPerson.relationTypes.' + relationTypes[relationTypes.civilian]) | translate}}"
+                            formControlName="relation" inputId="relation2" styleClass="mr-2">
+                        </p-radioButton>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" *ngIf="internalPersonType">
+                <label for="degreeId">
+                    {{'expertPerson.degree' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-basic-value-dropdown [basicValueType]="getBasicValueType('rank')" formControlName="degreeId"
+                    [readonly]=" internalPersonType">
+                </app-basic-value-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="serviceStatus">
+                    {{'expertPerson.serviceStatus' | translate}}
+                </label>
+                <div class="row">
+                    <div class="col">
+                        <p-radioButton name="serviceStatus" value="{{serviceStatuses.employed}}"
+                            label="{{('expertPerson.serviceStatuses.' + serviceStatuses[serviceStatuses.employed]) | translate}}"
+                            formControlName="serviceStatus" inputId="serviceStatus1">
+                        </p-radioButton>
+                        <p-radioButton name="serviceStatus" value="{{serviceStatuses.retired}}"
+                            label="{{('expertPerson.serviceStatuses.' + serviceStatuses[serviceStatuses.retired]) | translate}}"
+                            formControlName="serviceStatus" inputId="serviceStatus2" styleClass="mr-2">
+                        </p-radioButton>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" *ngIf="internalPersonType ">
+                <label for="serviceLocationId">
+                    {{'expertPerson.serviceLocation' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="ui-inputgroup">
+                    <input id="serviceLocationId" type="text" pInputText [value]="serviceLocation?.displayName"
+                        readonly>
+                    <button (click)="searchServiceLocation()" pButton type="button" icon="pi pi-search"
+                        class="ui-button-secondary" pTooltip="{{'action.search' | translate}}" tooltipPosition="top"
+                        disabled=""></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="employmentDate">
+                    {{'expertPerson.employmentDate' | translate}}
+                </label>
+                <app-datepicker-popup-jalali id="employmentDate" formControlName="employmentDate" class="w-100"
+                    [readonly]="internalPersonType">
+                </app-datepicker-popup-jalali>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="currentResponsibility">
+                    {{'expertPerson.currentResponsibility' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="currentResponsibility" type="text" pInputText formControlName="currentResponsibility">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="threePreviousPosition">
+                    {{'expertPerson.threePreviousPosition' | translate}}
+                </label>
+                <textarea id="threePreviousPosition" [rows]="3" pInputTextarea
+                    formControlName="threePreviousPosition"></textarea>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="scientificExperiencesRecords">
+                    {{'expertPerson.scientificExperiencesRecords' | translate}}
+                </label>
+                <textarea id="scientificExperiencesRecords" [rows]="3" pInputTextarea
+                    formControlName="scientificExperiencesRecords"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="accountNumber">
+                    {{'expertPerson.accountNumber' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="accountNumber" type="text" pInputText formControlName="accountNumber" placeholder="بانک سپه">
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('shabaNumber') }">
+                <label for="shabaNumber">
+                    {{'expertPerson.shabaNumber' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="shabaNumber" type="text" shabaNumber maxlength="26" pInputText formControlName="shabaNumber"
+                    placeholder="بانک سپه" [ngClass]="{ 'is-invalid' : isInvalid('shabaNumber') }">
+                <small id="shabaNumberHelp" class="form-text text-muted">{{'message.shabaNumberHelp' |
+                    translate}}</small>
+                <div *ngIf="shabaNumber?.errors?.shabaNumber" class="invalid-feedback">
+                    نامعتبر می باشد. تعداد کاراکتر باقیمانده ' {{shabaNumber?.errors?.shabaNumber?.remainingLength}}
+                    '
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <div class="d-inline" [ngClass]="{'ui-inputgroup': educationImageFile}">
+                    <label pButton type="button" icon="pi pi-plus" iconPos="right" class="ui-button-primary"
+                        label="{{'expertPerson.educationImage' | translate}}">
+                        <input formControlName="educationImage" type="file" single
+                            (change)="onUpload($event, 'educationImage')" class="d-none">
+                    </label>
+                    <button *ngIf="educationImageFile" (click)="onRemoveUpload('educationImage')" pButton type="button"
+                        icon="pi pi-times" class="ui-button-danger"></button>
+                </div>
+                <span class="text-danger mr-2">*</span>
+                <a href="javascript:;" (click)="appFileManager.openFile(educationImageFile)"
+                    class="mr-2">{{educationImageFile?.name}}</a>
+                <!-- <a [href]="appFileManager.getObjectURL(educationImageFile)"
+                        download="{{educationImageFile?.name}}"
+                        class="mr-2">{{educationImageFile?.name}}</a> -->
+            </div>
+            <div class="col-sm-6 form-group">
+                <div class="d-inline" [ngClass]="{'ui-inputgroup': attachmentFile}">
+                    <label pButton type="button" icon="pi pi-plus" iconPos="right" class="ui-button-primary"
+                        label="{{'expertPerson.attachment' | translate}}">
+                        <input type="file" single (change)="onUpload($event, 'attachment')" class="d-none">
+                    </label>
+                    <button *ngIf="attachmentFile" (click)="onRemoveUpload('attachment')" pButton type="button"
+                        icon="pi pi-times" class="ui-button-danger"></button>
+                </div>
+                <a href="javascript:;" (click)="appFileManager.openFile(attachmentFile)"
+                    class="mr-2">{{attachmentFile?.name}}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid">
+                <label for="description">
+                    {{'expertPerson.description' | translate}}
+                </label>
+                <textarea id="description" [rows]="3" pInputTextarea formControlName="description"></textarea>
+            </div>
+            <div class="col-sm-6 form-group">
+                <p-checkbox name="inactive" binary="true" label="{{'expertPerson.inactive' | translate}}"
+                    formControlName="inactive" inputId="inactive"></p-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-workflow-button-group></app-workflow-button-group>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<app-person-search (select)="selectPerson($event)" [(visible)]="displayPersonSearch"></app-person-search>

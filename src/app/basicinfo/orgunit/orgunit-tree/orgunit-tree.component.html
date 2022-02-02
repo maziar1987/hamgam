@@ -1,0 +1,6 @@
+<p-tree [value]="treeNodes" (onNodeExpand)="nodeExpand($event)" (onNodeSelect)="nodeSelect($event)"
+  selectionMode="single" [(selection)]="selectedNode" (dblclick)="dblclickfunction()"></p-tree>
+  <!-- <p-tree [value]="treeNodes" (onNodeExpand)="nodeExpand($event)" (onNodeSelect)="nodeSelect($event)"
+  selectionMode="single" [(selection)]="selectedNode" [contextMenu]="cm" [menuItems]="items"></p-tree> -->
+<!-- <p-contextMenu #cm [model]="items" appendTo="body"></p-contextMenu> -->
+<!-- <app-accept #accept_modal (accept)="deleteNode(this.selectedNode)"></app-accept> -->

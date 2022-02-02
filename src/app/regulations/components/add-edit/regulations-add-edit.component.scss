@@ -1,0 +1,22 @@
+::ng-deep .card {
+  // position: relative;
+  // display: flex;
+  // flex-direction: column;
+  // min-width: 0;
+  // word-wrap: break-word;
+  // background-clip: border-box;
+  // border: unset !important;
+  // border-radius: 1.25rem;
+  // background: #ffffff;
+  // padding: 20px;
+  // box-sizing: border-box;
+  // box-shadow: 0px 10px 40px rgb(41 50 65 / 6%);
+  // -moz-border-radius: 24px;
+  // -webkit-border-radius: 24px;
+  // margin-bottom: 2rem;
+}
+::ng-deep .ui-tree {
+  border: unset !important;
+  padding: unset !important;
+  width: 14em;
+}

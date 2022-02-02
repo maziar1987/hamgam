@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-md-12">
+        <h5>{{'basicinfo.createTitle'|translate}} {{parentBasicInfo.title}}</h5>
+        <hr />
+    </div>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <div *ngIf="hasError('value')">
+                    <div *ngIf="isRequired('value')">
+                        Value is required.
+                    </div>
+                </div> -->
+                <!-- <app-datepicker-popup-jalali></app-datepicker-popup-jalali>
+                <app-datepicker-popup-jalali *ngIf="isRtl" id="date" formControlName="date"
+                (dateSelect)="onDateSelect()"></app-datepicker-popup-jalali> -->
+                <!-- <app-datepicker-basic-jalali></app-datepicker-basic-jalali>
+
+                <app-timepicker-basic></app-timepicker-basic> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group ui-fluid" [ngClass]="{'has-danger' : hasError('title')}">
+                <label for="title">{{'basicinfo.title' | translate}}</label>
+                <input id="input" type="text" pInputText formControlName="title" class="ui-fluid"
+                    placeholder="مقدار را وارد نمایید" class="form-control">
+                <div *ngIf="title.errors?.childValueDuplicated" class="invalid-feedback">
+                    مقدار تکراری می باشد
+                </div>
+                <div *ngIf="title.errors?.required" class="invalid-feedback">
+                    اجباری است
+                </div>
+            </div>
+
+            <!-- <div class="col-md-6 form-group">
+                <label for="title">{{'basicinfo.readonly' | translate}}</label>
+                <p-checkbox name="readonly" binary="true" class="form-control"
+                    formControlName="readonly" inputId="readonly"></p-checkbox>
+            </div> -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label for="">{{'basicinfo.sort' | translate}}</label>
+                <select class="form-control" formControlName="sortType">
+                    <option *ngFor="let basic of basicSort|keys" [value]="basic.key">
+                        {{ 'basicinfo.' + basic.value | translate}}</option>
+                </select>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="title">{{'basicinfo.status' | translate}}</label>
+                <p-checkbox name="status" binary="true" class="form-control"
+                    formControlName="status" inputId="status"></p-checkbox>
+            </div>
+            <!-- <div class="col-md-6 form-group ui-fluid">
+                <label for="">{{'basicinfo.status' | translate}}</label>
+                <select class="form-control" formControlName="status">
+                    <option *ngFor="let basic of basicStatus|keys" [ngValue]="basic.key">
+                        {{ 'basicinfo.' + basic.value | translate}}</option>
+                </select>
+            </div> -->
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid" [ngClass]="{'has-danger' : hasError('code')}">
+                <label for="code">{{'basicinfo.code' | translate}}</label>
+                <input id="code" type="text" pInputText formControlName="code" class="ui-fluid"
+                    placeholder="مقدار را وارد نمایید" class="form-control">
+                <div *ngIf="code.errors?.childValueDuplicated" class="invalid-feedback">
+                    مقدار تکراری می باشد
+                </div>
+                <div *ngIf="code.errors?.required" class="invalid-feedback">
+                    اجباری است
+                </div>
+            </div>
+            <div class="col-md-6 form-group ui-fluid" [ngClass]="{'has-danger' : hasError('viewOrder')}">
+                <label for="viewOrder">{{'basicinfo.viewOrder' | translate}}</label>
+                <input id="input" type="number" pInputText formControlName="viewOrder" class="ui-fluid"
+                    placeholder="مقدار را وارد نمایید" class="form-control">
+                <div *ngIf="viewOrder.errors?.childValueDuplicated" class="invalid-feedback">
+                    مقدار تکراری می باشد
+                </div>
+                <div *ngIf="viewOrder.errors?.required" class="invalid-feedback">
+                    اجباری است
+                </div>
+            </div>
+
+        </div>
+
+
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+
+                <button pButton type="submit" [disabled]="this.form.invalid"
+                    label="{{'action.create' | translate}}" icon="pi pi-plus" iconPos="right"
+                    class="ui-button-raised ui-button-success col-md-2"></button>
+
+
+                <button pButton type="button" [disabled]="this.form.invalid" (click)="saveAndClose()"
+                    label="{{('action.create' | translate)+ ' & '+('action.exit' | translate)}}" icon="pi pi-plus" iconPos="right"
+                    class="ui-button-raised ui-button-success col-md-2 mr-2"></button>
+                <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+                    class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

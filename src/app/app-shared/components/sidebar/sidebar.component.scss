@@ -1,0 +1,81 @@
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(10deg);
+  }
+
+  30% {
+    transform: rotate(0deg);
+  }
+
+  40% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  60% {
+    transform: rotate(5deg);
+  }
+
+  70% {
+    transform: rotate(0deg);
+  }
+
+  80% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes sonar {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.sidebar {
+  height: 100%;
+  width: 240px;
+  position: absolute;
+  right: 0px; /**/
+  // top: 3.5rem;
+  z-index: 999;
+  transition: right 0.3s ease; /**/
+  overflow: auto;
+
+  .sidebar-content {
+    // max-height: calc(100% - 30px);
+    // height: calc(100% - 30px);
+    overflow-y: auto;
+    position: relative;
+
+    ::ng-deep .pi-caret-right:before {
+      content: "\e904" !important;
+    }
+
+    .sidebar-profile {
+      // padding: 0.5rem !important;
+      // box-shadow: 0 2px 5px 0 rgb(0 0 0 / 15%);
+      // background-color: #007bff08;
+
+      .user-pic {
+        width: 70px;
+      }
+    }
+  }
+}

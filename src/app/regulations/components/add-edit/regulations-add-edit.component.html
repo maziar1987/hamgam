@@ -1,0 +1,36 @@
+<div class="animate-bottom">
+  <div class="row my-2">
+    <div class="col-md-12">
+      <h6>{{'regulations.title' | translate }}{{' '}} {{this.certificateTitle}}</h6>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <p-tree [value]="regulationsMenu" selectionMode="single" (onNodeSelect)="selectNode($event)"></p-tree>
+    </div>
+    <div class="card col-md-9 ml-1 mr-5 py-2" [ngSwitch]="urlTypeParam">
+      <app-regulations-certificate *ngSwitchCase="'certificate'"></app-regulations-certificate>
+      <app-regulations-certificate-dynamic-form *ngSwitchCase="'certificate-dynamic'">
+      </app-regulations-certificate-dynamic-form>
+      <app-rfp *ngSwitchCase="'rfp'"></app-rfp>
+      <app-specialized-team-create *ngSwitchCase="'specialized-team'"></app-specialized-team-create>
+      <app-proposal-create *ngSwitchCase="'proposal'"></app-proposal-create>
+      <app-naja-experts-session-list *ngSwitchCase="'naja-experts-session-list'"></app-naja-experts-session-list>
+      <app-certificate-status-list *ngSwitchCase="'status-list'"></app-certificate-status-list>
+      <app-naja-experts-session *ngSwitchCase="'naja-experts-session'"></app-naja-experts-session>
+      <app-base-theory-list *ngSwitchCase="'base-theory-list'"></app-base-theory-list>
+      <app-add-edit-base-theory *ngSwitchCase="'base-theory'"></app-add-edit-base-theory>
+      <app-target-specification-list *ngSwitchCase="'target-specification'"></app-target-specification-list>
+      <app-target-specification-edit *ngSwitchCase="'target-specification-edit'"></app-target-specification-edit>
+      <app-session-planning-list *ngSwitchCase="'session-planning'"></app-session-planning-list>
+      <app-session-planning-edit *ngSwitchCase="'session-planning-edit'"></app-session-planning-edit>
+      <add-supervision *ngSwitchCase="'add-supervision'"></add-supervision>
+      <app-compilation-contract-create *ngSwitchCase="'compilation-contract'"></app-compilation-contract-create>
+      <app-supervision-contract-create *ngSwitchCase="'supervision-contract'"></app-supervision-contract-create>
+      <app-payment *ngSwitchCase="'payment'"></app-payment>
+      <app-payment-edit *ngSwitchCase="'payment-edit'"></app-payment-edit>
+      <app-workshop-certificate *ngSwitchCase="'workshop-certificate'"></app-workshop-certificate>
+      <app-workshop-certificate-edit *ngSwitchCase="'workshop-edit'"></app-workshop-certificate-edit>
+    </div>
+  </div>
+</div>

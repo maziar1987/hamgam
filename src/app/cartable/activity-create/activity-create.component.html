@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4>{{ 'cartable.sendType.' + sendType.toString() | translate }}</h4>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12 form-group ui-fluid">
+                <div class="ui-inputgroup">
+                    <p-multiSelect [options]="users" [(ngModel)]="selectedUsers" optionLabel="fullname" class="w-100"
+                        defaultLabel="{{ 'cartable.receivers' | translate }}"></p-multiSelect>
+                    <button *ngIf="!toggledCC" pButton type="button" icon="fa fa-copy" pTooltip="رونوشت"
+                        tooltipPosition="top" (click)="toggleCC()" class="ui-button-primary"></button>
+                    <button *ngIf="toggledCC" pButton type="button" icon="fa fa-times" pTooltip="بستن"
+                        tooltipPosition="top" (click)="toggleCC()" class="ui-button-danger"></button>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="toggledCC">
+            <div class="col-md-12 form-group ui-fluid">
+                <p-multiSelect [options]="usersCC" [(ngModel)]="selectedUsersCC" optionLabel="fullname"
+                    defaultLabel="{{ 'cartable.receiversCC' | translate }}"></p-multiSelect>
+            </div>
+        </div>
+        <div class="row" *ngIf="toggledCC">
+            <div class="col-md-12 form-group ui-fluid">
+                <p-multiSelect [options]="usersBCC" [(ngModel)]="selectedUsersBCC" optionLabel="fullname"
+                    defaultLabel="{{ 'cartable.receiversBCC' | translate }}"></p-multiSelect>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-6 form-group ui-fluid">
+                <input type="text" pInputText [(ngModel)]="subject" placeholder="{{'cartable.subject' | translate }}" />
+            </div>
+            <div class="col-md-6 form-group ui-fluid">
+                <app-datepicker-popup-jalali id="date" [(ngModel)]="dateTime" plase="مهلت انجام" style="width: 100%;"
+                    class="float-right"></app-datepicker-popup-jalali>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <p-dropdown [options]="classifications" [(ngModel)]="selectedClassification" placeholder="اولویت"
+                    optionLabel="title" [showClear]="true"></p-dropdown>
+            </div>
+            <div class="col-md-6 form-group ui-fluid">
+                <p-dropdown [options]="priorities" [(ngModel)]="selectedPriority" placeholder="طبقه بندی"
+                    optionLabel="title" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group ui-fluid">
+                <app-activity-default-text-dropdown (text)="textSelect($event)">
+                </app-activity-default-text-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col form-group ui-fluid">
+                <p-listbox [options]="attachments" [(ngModel)]="selectedAttachment" [listStyle]="{'height':'146px'}">
+                    <p-header>
+                        <label pButton type="button" icon="pi pi-plus" class="ui-button-success float-right"
+                            pTooltip="{{'cartable.attacheFile' | translate }}" tooltipPosition="top">
+                            <input type="file" multiple (change)="onUpload($event)" class="file-upload-input">
+                        </label>
+                        <label class="p-footer-lable float-left">
+                            {{ 'cartable.attachmentFiles' | translate }}&nbsp;{{attachments.length||'0'}}
+                        </label>
+                    </p-header>
+                    <ng-template let-file pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                            <span class="fa fa-close" (click)="onRemove(file)"></span>
+                            <span class="file-name">{{getFileName(file)}}
+                                - <a (click)="showFile(file)">مشاهده</a>
+                            </span>
+                        </div>
+                    </ng-template>
+                </p-listbox>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 form-group ui-fluid">
+        <p-editor [(ngModel)]="text" [style]="{'height':'180px'}"></p-editor>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <button pButton label="{{ 'cartable.button:Send' | translate }}" icon="fa fa-paper-plane" iconPos="right"
+            (click)="sendButton()" class="ui-button-raised ui-button-success col-md-2"></button>
+        <button pButton type="button" label="{{'cartable.cancel' | translate}}" (click)="clickBack()"
+            class="ui-button-raised ui-button-secondary col-md-1 mr-2"></button>
+    </div>
+</div>
+
+<div *ngIf="loading" class="loadercontainer">
+    <img src="assets/img/loader.gif" class="centerimg">
+    <p class="centerp">درحال ارسال.لطفا صبر کنید</p>
+</div>

@@ -1,0 +1,67 @@
+<p-dialog [(visible)]="display" [style]="{width: '50vw'}" [baseZIndex]="10000" (onShow)="onShow()" (onHide)="onHide()">
+  <p-header>
+    {{headerDisplay}}
+  </p-header>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="name">
+          {{'entityType.name' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="name" type="text" pInputText formControlName="name" [placeholder]="">
+
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="persianName">
+          {{'entityType.persianName' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="persianName" type="text" pInputText formControlName="persianName" [placeholder]="">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="type">
+          {{'field.type' | translate}}
+          <span class="text-danger mr-2">
+            *
+          </span>
+          <p-dropdown [options]="types" formControlName="selectedType"></p-dropdown>
+        </label>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="required">
+          {{'field.required' | translate}}
+          <span class="text-danger mr-2">*
+            <p-checkbox inputId="required" formControlName="checkedRequired" binary="true"></p-checkbox>
+          </span>
+        </label>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="mainValue">
+          {{'field.mainValue' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="mainValue" type="text" pInputText formControlName="mainValue" [placeholder]="">
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="defaultValue">
+          {{'field.defaultValue' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input id="defaultValue" type="text" pInputText formControlName="defaultValue" [placeholder]="">
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <button pButton type="button" (click)="submit()" label="{{'action.edit' | translate}}" icon="pi pi-pencil"
+      iconPos="right" class="ui-button-raised ui-button-primary col-md-3"></button>
+    <button pButton type="button" (click)="onBack()" label="{{'action.back' | translate}}"
+      class="ui-button-raised ui-button-secondary mr-2 col-md-2">
+    </button>
+  </p-footer>
+</p-dialog>

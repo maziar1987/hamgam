@@ -1,0 +1,159 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animate-bottom">
+  <fieldset>
+    <legend>{{('action.create' | translate) + ' ' + ('regulations.certificate.formTitle' | translate)}}</legend>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row" >
+          <div class="col-sm-12 form-group ui-fluid">
+            <label for="unitId">{{'expertPerson.category' | translate}}</label>
+            <input id="unitId" type="text" pInputText [value]="currentUser?.orgUnit?.displayName" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div [ngClass]="{ 'has-danger' : isInvalid('title') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="title"> {{'regulations.certificate.title' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <input id="title" type="text" pInputText formControlName="title">
+        <div *ngIf="title?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div [ngClass]="{ 'has-danger' : isInvalid('regulationTypeId') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="regulationTypeId">{{'regulations.certificate.regulationTypeId' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <app-basic-value-dropdown id="regulationTypeId" [basicValueType]="getBasicValueType('regulationType')"
+                                  formControlName="regulationTypeId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="false"
+                                  [placeholder]="'regulations.certificate.regulationTypeId' | translate">
+        </app-basic-value-dropdown>
+        <div *ngIf="regulationTypeId?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div [ngClass]="{ 'has-danger' : isInvalid('registerNo') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="registerNo"> {{'regulations.certificate.registerNo' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <input id="registerNo" type="text" pInputText formControlName="registerNo">
+        <div *ngIf="registerNo?.errors?.required" class="invalid-feedback">
+          {{'message.required' | translate}}
+        </div>
+      </div>
+      <div [ngClass]="{ 'has-danger' : isInvalid('code') }"
+           class="col-sm-6 form-group ui-fluid">
+        <label for="code"> {{'regulations.certificate.code' | translate}}
+          <span class="text-danger mr-2">*</span></label>
+        <input id="code" type="text" pInputText formControlName="code">
+      </div>
+      <div *ngIf="code?.errors?.required" class="invalid-feedback">
+        {{'message.required' | translate}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confidentialityId"> {{'regulations.certificate.confidentialityId' | translate}}</label>
+        <app-basic-value-dropdown id="confidentialityId" [basicValueType]="getBasicValueType('confidentiality')"
+                                  formControlName="confidentialityId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="true"
+                                  [placeholder]="'regulations.certificate.confidentialityId' | translate">
+        </app-basic-value-dropdown>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="compilationStatusId"> {{'regulations.certificate.compilationStatusId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="compilationStatusId" *ngFor="let basicValue of compilationStatusValue">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="compilationStatusId" formControlName="compilationStatusId" [(ngModel)]="selectedCompilation"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="producerId"> {{'regulations.certificate.producerId' | translate}}</label>
+        <div class="ui-inputgroup">
+          <input id="producerId" type="text" readonly pInputText [placeholder]=""
+                 [value]="selectedProducer?.displayName">
+          <button (click)="showOrgUnitTreeDialog()" pButton type="button" icon="pi pi-search"
+                  class="ui-button-primary" pTooltip="{{'action.search' | translate}}"
+                  tooltipPosition="top"></button>
+        </div>
+      </div>
+      <div class="col-sm-6 form-group ui-fluid">
+        <label for="confirmerId"> {{'regulations.certificate.confirmerId' | translate}}</label>
+        <app-basic-value-dropdown id="confirmerId" [basicValueType]="getBasicValueType('confirmer')"
+                                  formControlName="confirmerId" (selectedItem)="selectBasicValueType($event)"
+                                  [showClear]="true"
+                                  [placeholder]="'regulations.certificate.confirmerId' | translate">
+        </app-basic-value-dropdown>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="applicationLevelId"> {{'regulations.certificate.applicationLevelId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="applicationLevelId" *ngFor="let basicValue of applicationBasicLevelId">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="applicationLevelId" formControlName="applicationLevelId" [(ngModel)]="selectedLevel"
+                             [value]="basicValue.id"></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="applicationAreaId"> {{'regulations.certificate.applicationAreaId' | translate}}</label>
+        <div class="radio-button-row-class">
+          <div id="applicationAreaId" *ngFor="let basicValue of applicationBasicAreaId">
+            <div class="form-group radio-button-class">
+              <p-radioButton name="applicationAreaId" formControlName="applicationAreaId" [(ngModel)]="selectedArea"
+                             [value]="basicValue.id" ></p-radioButton>
+              <label class="radio-label-class" [for]="basicValue.id">{{basicValue.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-sm-12 form-group ui-fluid">
+        <label for="status"> {{'regulations.certificate.status' | translate}}
+          <span class="text-danger mr-2" *ngIf="visibleStar">*</span></label>
+        <input id="status" style="width: 20%; margin-right: 15px; margin-left: 15px" type="text" pInputText [value]="lastStatus" readonly>
+        <button pButton type="button" (click)="onStatusList()" *ngIf="editMode"
+                label="{{'action.details' | translate}}"
+                class="ui-button-raised ui-button-success col-md-2"></button>
+        <button pButton type="button" (click)="onAddStatus()" *ngIf="!editMode"
+                label="{{'action.add' | translate}}"
+                class="ui-button-raised ui-button-success col-md-2"></button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-workflow-button-group></app-workflow-button-group>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+<p-dialog header="{{('action.select' | translate) + ' ' + ('orgUnit.orgUnit' | translate)}}"
+          [(visible)]="displayOrgUnitTree" [style]="{width: '40vw'}">
+  <app-org-unit-tree (onNodeSelect)="nodeSelect($event)" [activeMode]="true"></app-org-unit-tree>
+  <p-footer>
+    <button pButton type="button" (click)="selectOrgUnit()" label="{{'action.select' | translate}}"
+            icon="pi pi-check" iconPos="right" class="ui-button-raised ui-button-primary"></button>
+    <button pButton type="button" (click)="closeOrgUnitTreeDialog()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+    </button>
+  </p-footer>
+</p-dialog>

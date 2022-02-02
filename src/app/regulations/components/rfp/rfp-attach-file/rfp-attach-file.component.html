@@ -1,0 +1,37 @@
+<div style="direction: rtl;">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6 form-group ui-fluid">
+                <label >نام سند</label><span class="text-danger mr-2">*</span>
+                <input  type="text" formControlName="title" pInputText>
+            </div>
+            <div class="col-md-6 form-group ui-fluid">
+                <label>توضیحات</label><span class="text-danger mr-2">*</span>
+                <input  type="text" formControlName="description" pInputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <div class="ui-inputgroup d-inline">
+                    <label pButton type="button" icon="pi pi-plus" class="ui-button-primary">
+                        <input type="file" single (change)="onUpload($event)" class="d-none">
+                    </label>
+                    <button *ngIf="attach" (click)="onRemoveUpload()" pButton type="button" icon="pi pi-times"
+                        class="ui-button-danger"></button>
+                </div>
+                <span class="text-danger mr-2">*</span>
+                <a href="javascript:;" (click)="appFileManager.openFile(attach)" class="mr-2">{{attach?.name}}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <button pButton  label="افزودن" type="submit" [disabled]="this.form.invalid" icon="pi pi-plus" iconPos="right"
+                    class="ui-button-raised ui-button-success "></button>
+
+                <button pButton type="button" (click)="onBack()" label="بستن" class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

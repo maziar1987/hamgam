@@ -1,0 +1,10 @@
+<div dir="rtl">
+    <p-tree [value]="folders" selectionMode="single" [(selection)]="selectedFolder" class="w-100"></p-tree>
+
+    <hr />
+
+    <button type="button" pButton icon="pi pi-check" [disabled]="!validation()" (click)="ok()" label="تایید"
+        class="ui-button-success ml-2"></button>
+    <button type="button" pButton icon="pi pi-times" (click)="cancel()" label="انصراف"
+        class="ui-button-secondary"></button>
+</div>

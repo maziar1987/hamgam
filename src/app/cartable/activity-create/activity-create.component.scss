@@ -1,0 +1,55 @@
+.file-upload-input {
+    display: none;
+}
+
+.p-footer-lable {
+    margin-top: 0.4rem;
+    margin-bottom: 0px;
+    font-size: 18px;
+}
+.file-name::before {
+    padding-right: 5px;
+}
+.file-name {
+    font-size: 14px;
+    margin-left: 3px;
+    margin-right: 7px;
+    position: relative;
+    top: -3px;
+    font-weight: 300;
+}
+.file-name a {
+    color: #209e91;
+    -webkit-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+.loadercontainer {
+    position: relative;
+    background-color: white;
+    opacity: 0.9;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    z-index: 20000;
+    right: 0;
+}
+.centerimg {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.centerp {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

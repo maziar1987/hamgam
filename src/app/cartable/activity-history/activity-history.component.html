@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="float-right">{{ 'cartable.title.history' | translate }}</h4>
+        <!-- <button pButton type="button" icon="fa fa-list" pTooltip="نمایش لیستی" tooltipPosition="top"
+            class="float-left mr-1" [class]="listActivt?'ui-button-info':'ui-button-secondary'"
+            (click)="showList()"></button>
+        <button pButton type="button" icon="fa fa-sign" pTooltip="نمایش چارتی" tooltipPosition="top" class="float-left"
+            [class]="!listActivt?'ui-button-info':'ui-button-secondary'" (click)="showChart()"></button> -->
+    </div>
+</div>
+<hr />
+
+<!-- <div class="row" *ngIf="listActivt">
+    <div class="col-md-12">
+        <p-treeTable #dt [value]="treeNodes" selectionMode="single" dataKey="id" [autoLayout]="true"
+            styleClass="ui-treetable-activity-history" [rowHover]="true" [rows]="10" [columns]="cols"
+            [rowsPerPageOptions]="[10,25,50]" [showCurrentPageReport]="true" [filterDelay]="0"
+            [globalFilterFields]="['value']">
+
+            <ng-template pTemplate="caption">
+                <div class="ui-treetable-globalfilter-container">
+                    <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+
+                <tr>
+                    <th *ngFor="let col of columns">
+                        {{ 'cartable.' + col.header | translate }}
+                    </th>
+                    <th></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                <tr [ttRow]="rowNode">
+                    <td>
+                        <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                        {{rowData.id}}
+                    </td>
+                    <td>{{rowData.sender.senderUser?.name+" "+rowData.sender.senderUser?.surname}} </td>
+                    <td>{{'cartable.sendType.' + rowData.sendType | translate}}</td>
+                    <td>
+                        <span *ngFor="let receiver of rowData.receivers; index as i">
+                            <span *ngIf="i>0">,</span>
+                            {{receiver.receiverUser?.name+" "+receiver.receiverUser?.surname}}
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngFor="let receivercc of rowData.receiversCC; index as i">
+                            <span *ngIf="i>0">,</span>
+                            {{receivercc.receiverUser?.name+" "+receivercc.receiverUser?.surname}}
+                        </span>
+                    </td>
+                    <td>{{rowData.createTime | time}}</td>
+                    <td style="max-width: 10px;">{{fitText(rowData.text)}}</td>
+                    <td>
+                        <button pButton type="button" icon="fa fa-search"
+                            pTooltip="{{'cartable.view' | translate }}" tooltipPosition="top"
+                            (click)="view(rowData.id)" class="ui-button-primary"></button>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8" style="text-align:center">{{'cartable.message.emptyTableInfo' | translate }}
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-treeTable>
+    </div>
+</div> -->
+
+<div>
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <button pButton type="button" label="{{'cartable.back' | translate}}" (click)="clickBack()"
+                class="ui-button-raised ui-button-secondary col-md-1 "></button>
+                <p class="mt-2">ارجاع: <span class="text-primary fa fa-square"></span> رونوشت: <span class="text-success fa fa-square"></span> رونوشت مخفی: <span class="text-warning fa fa-square"></span></p>
+    
+        </div>
+        </div>
+</div>
+<div class="row" *ngIf="!listActivt">
+    <p-organizationChart [value]="treeNodesChart" style="direction: ltr;overflow-x: scroll;width: 100%;" selectionMode="single" (onNodeSelect)="onNodeSelect($event)">
+        <ng-template let-node pTemplate="activity" >
+            <div  pTooltip="{{node.data.createTime | time}}" tooltipPosition="top">
+                <div class="bg-secondary text-white py-2 px-2 ui-corner-top">
+                    {{node.data.sender.senderUser?.name+" "+node.data.sender.senderUser?.surname}}
+                </div>
+                <div class="node-content">
+                    <div>{{'cartable.sendType.' + node.data.sendType | translate}}: <strong> {{node.label}}</strong></div>                
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template let-node pTemplate="Receiver">
+            <div  pTooltip="{{node.data.createTime?(node.data.createTime| time):'' }}" tooltipPosition="top">
+                <div class="ui-corner-top bg-primary text-white  py-2 px-2">
+                    {{node.label}}              
+                </div>
+                <div class="node-content" *ngIf="node.data.sendType">
+                    <div>{{'cartable.sendType.' + node.data.sendType | translate}}: <strong> {{node.data.subject}}</strong></div>                
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-node pTemplate="ReceiverCC">
+            <div  pTooltip="{{node.data.createTime?(node.data.createTime| time):'' }}" tooltipPosition="top">
+                <div class=" bg-success text-white  py-2 px-2 ui-corner-top">
+                    {{node.label}}              
+                </div>
+                <div class="node-content" *ngIf="node.data.sendType">               
+                    <div>{{'cartable.sendType.' + node.data.sendType | translate}}: <strong> {{node.data.subject}}</strong></div>
+                </div>
+            </div>           
+        </ng-template>
+        
+        <ng-template let-node pTemplate="ReceiverBCC">
+            <div  pTooltip="{{node.data.createTime?(node.data.createTime| time):'' }}" tooltipPosition="top">
+                <div class=" bg-warning text-white  py-2 px-2 ui-corner-top">
+                    {{node.label}}              
+                </div>
+                <div class="node-content" *ngIf="node.data.sendType">               
+                    <div>{{'cartable.sendType.' + node.data.sendType | translate}}: <strong> {{node.data.subject}}</strong></div>
+                </div>
+            </div>           
+        </ng-template>
+    </p-organizationChart>
+</div>

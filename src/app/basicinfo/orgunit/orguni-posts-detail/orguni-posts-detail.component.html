@@ -1,0 +1,49 @@
+
+<div class="row" *ngIf="posts">
+    <div class="col-md-12"*ngIf="posts.length>0">
+        <p-table #dt [value]="posts" dataKey="id" [autoLayout]="true"
+            styleClass="ui-table-activity" [rowHover]="true" [rows]="10" [columns]="cols"
+            [rowsPerPageOptions]="[10,25,50]" [paginator]="true" [showCurrentPageReport]="true"
+            [filterDelay]="0" [globalFilterFields]="['id', 'name']">
+
+            <ng-template pTemplate="caption">
+                <div class="ui-table-globalfilter-container">
+
+                    <input type="text" pInputText placeholder="{{'Cartable::Search' | translate}}"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+                    
+
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns">
+                        {{  col.header  }}
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td>{{rowData.name}}</td>
+                    <td>{{"orgChart."+rowData.postStatuse.toLowerCase()|translate}}</td>
+                    <td>{{"orgChart."+rowData.postType.toLowerCase()|translate}}</td>
+
+                    <td *ngIf="rowData.appointments.length>0">{{rowData.appointments[rowData.appointments.length-1].person.firstName}}</td>
+                    <td *ngIf="rowData.appointments.length>0">{{rowData.appointments[rowData.appointments.length-1].person.lastName}}</td>
+                    <td *ngIf="rowData.appointments.length>0">{{rowData.appointments[rowData.appointments.length-1].startDate|persianDate}}</td>
+                    <td *ngIf="rowData.appointments.length>0">{{rowData.appointments[rowData.appointments.length-1].endDate|persianDate}}</td>
+                    <td *ngIf="rowData.appointments.length>0">{{rowData.appointments[rowData.appointments.length-1].paperNumber}}</td>
+                    <td *ngIf="rowData.appointments.length>0">{{rowData.appointments[rowData.appointments.length-1].paperDate|persianDate}}</td>
+                    
+                </tr>
+            </ng-template>
+
+
+        </p-table>
+    </div>
+
+
+</div>

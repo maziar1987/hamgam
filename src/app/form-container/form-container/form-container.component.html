@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row animate-bottom" *ngIf="!(formContainerService.loading$ | async)">
+            <div class="col-md-12">
+                <app-form-container-toolbar [buttons]="toolbarButtons"></app-form-container-toolbar>
+            </div>
+        </div>
+        <!-- <hr class="animate-bottom" *ngIf="!(formContainerService.loading$ | async)" /> -->
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <router-outlet>
+                    <div *ngIf="formContainerService.loading$ | async">
+                        <app-loader></app-loader>
+                    </div>
+                </router-outlet>
+            </div>
+        </div>
+        <hr class="animate-bottom" *ngIf="!(formContainerService.loading$ | async)" />
+        <div class="row animate-bottom" *ngIf="!(formContainerService.loading$ | async)">
+            <div class="col-md-12">
+                <app-form-container-button-group [buttons]="buttonGroup"></app-form-container-button-group>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <app-activity-create-modal [(display)]="createActivityDisplay" [action]="createActivityAction"
+    (submit)="createActivitySubmit($event)"></app-activity-create-modal> -->

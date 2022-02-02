@@ -1,0 +1,122 @@
+:host ::ng-deep .ui-treetable-activity-history {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+    .ui-treetable-caption {
+        border: 0 none;
+        text-align: left;
+    }
+
+    .ui-treetable-globalfilter-container {
+        input {
+            width: 200px;
+        }
+    }
+
+    .ui-paginator {
+        border: 0 none;
+        padding: 1em;
+        direction: ltr;
+
+        .ui-dropdown {
+            width: auto;
+        }
+
+        .ui-paginator-current {
+            float: left;
+        }
+    }
+
+    .ui-treetable-thead > tr > th {
+        border: 0 none;
+        text-align: right;
+
+        // &:first-child {
+        //     width: 3em;
+        //     text-align: center;
+        // }
+
+        // &:nth-child(2) {
+        //     width: 4.5em;
+        //     text-align: center;
+        // }
+
+        // &:nth-child(5) {
+        //     max-width: 15%;
+        // }
+
+        // &:nth-child(6) {
+        //     max-width: 30%;
+        // }
+
+        &:last-child {
+            width: 5em;
+            text-align: center;
+        }
+    }
+
+    .ui-treetable-tbody > tr > td {
+        border: 0 none;
+        // cursor: pointer;
+        text-align: right;
+
+        // &:first-child {
+        //     width: 3em;
+        //     text-align: center;
+        // }
+
+        // &:nth-child(2) {
+        //     width: 4.5em;
+        //     text-align: center;
+        // }
+
+        // &:nth-child(5) {
+        //     max-width: 15%;
+        // }
+
+        // &:nth-child(6) {
+        //     max-width: 30%;
+        // }
+
+        &:last-child {
+            width: 5em;
+            text-align: center;
+        }
+    }
+}
+
+/* Responsive */
+@media screen and (max-width: 64em) {
+    :host ::ng-deep .ui-treetable {
+        &.ui-treetable-activity-history {
+            .ui-treetable-thead > tr > th,
+            .ui-treetable-tfoot > tr > td {
+                display: none !important;
+            }
+
+            .ui-treetable-tbody > tr > td {
+                text-align: right;
+                display: block;
+                border: 0 none !important;
+                width: 100% !important;
+                float: right;
+                clear: right;
+                border: 0 none;
+
+                .ui-column-title {
+                    padding: 0.4em;
+                    min-width: 30%;
+                    display: inline-block;
+                    margin: -0.4em -0.4em -0.4em 1em;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+:host::ng-deep {
+    // .ui-treetable-toggler {
+    //     margin-left: 0px!important;
+    //     margin-right: 16px;
+    // }
+}

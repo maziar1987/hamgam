@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p-dialog
+        header="{{ editMode ? (('action.edit' | translate) + ' ' + member?.memberName) : (('action.add' | translate) + ' ' + ('targetSpecificationMember.memberType.FOREIGNMEMBER' | translate))}}"
+        [(visible)]="display" [style]="{width: '40vw'}">
+
+
+        <div class="row">
+            <div class="col-sm-12 form-group ui-fluid">
+                <label for="memberName">
+                    {{'targetSpecificationMember.memberName' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="memberName" type="text" pInputText formControlName="memberName">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 form-group ui-fluid">
+                <label for="memberPost">
+                    {{'targetSpecificationMember.memberPost' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="memberPost" type="text" pInputText formControlName="memberPost">
+            </div>
+        </div>
+
+        <p-footer>
+            <button *ngIf="!editMode" pButton type="submit" label="{{'action.add' | translate}}" icon="pi pi-plus"
+                iconPos="right" class="ui-button-raised ui-button-success" [disabled]="this.form.invalid"></button>
+            <button *ngIf="editMode" pButton type="submit" label="{{'action.edit' | translate}}" icon="pi pi-plus"
+                iconPos="right" class="ui-button-raised ui-button-success" [disabled]="this.form.invalid"></button>
+            <button pButton type="button" (click)="cancel()" label="{{'action.cancel' | translate}}"
+                class="ui-button-raised ui-button-secondary">
+            </button>
+        </p-footer>
+
+    </p-dialog>
+</form>

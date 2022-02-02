@@ -1,0 +1,9 @@
+<div class="row" style="margin-top: 10px">
+    <div class="col">
+        <ng-container *ngFor="let btn of buttons">
+            <button *ngIf="!btn.invisible" pButton type="button" (click)="btn.onClick({srcElementEvent: $event})"
+                label="{{btn.label}}" icon="{{btn.iconClass}}" iconPos="right" [ngClass]="btn.cssClass"
+                [disabled]="btn.disabled"></button>
+        </ng-container>
+    </div>
+</div>

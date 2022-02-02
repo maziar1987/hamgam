@@ -1,0 +1,83 @@
+<app-spinner-border [loading]="loading"></app-spinner-border>
+
+<div class="animate-bottom" *ngIf="!loading">
+    <div class="row">
+        <div class="col my-2">
+            <h4 class="float-right">{{'cartable.title.history' | translate}}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <p-treeTable #tt [value]="activityHistoriesNodes" [columns]="cols" selectionMode="single"
+                [(selection)]="selectedActivityHistoriesNode" dataKey="id" [autoLayout]="true"
+                styleClass="ui-treetable-activity-history" [loading]="loading">
+                <ng-template pTemplate="caption">
+                    <div style="text-align: left">
+                        <button pButton type="button" icon="fa fa-undo" pTooltip="{{'action.back' | translate }}"
+                            tooltipPosition="top" (click)="back()" class="ui-button-primary float-right"></button>
+
+                        <input type="text" pInputText size="50" placeholder="{{'action.search' | translate}}"
+                            (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                        <i class="pi pi-search mr-2" style="margin:4px 4px 0 0"></i>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th scope="col"></th>
+                        <!-- <th scope="col">#</th> -->
+                        <th scope="col" *ngFor="let col of columns" [ngSwitch]="col.header">
+                            <span *ngSwitchCase="'sendType'">
+                                {{ 'activity.sendType.' + col.header | translate }}
+                            </span>
+                            <span *ngSwitchCase="'workflowName'">
+                                {{ 'activity.workflowName.' + col.header | translate }}
+                            </span>
+                            <span *ngSwitchCase="'workflowStep'">
+                                {{ 'activity.workflowStep.' + col.header | translate }}
+                            </span>
+                            <span *ngSwitchDefault>
+                                {{ 'activity.' + col.header | translate }}
+                            </span>
+                        </th>
+                        <th scope="col"></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                    <tr [ttSelectableRow]="rowNode">
+                        <td>
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                        </td>
+                        <!-- <td>
+                <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body"></p-menu>
+                <button pButton icon="fa fa-bars" (click)="menu.toggle($event)" class="ui-button-secondary"></button>
+            </td> -->
+                        <td>{{rowData.startActivityId}}</td>
+                        <td>{{activityService.getSenderFullName(rowData)}}</td>
+                        <td>{{rowData.subject}}</td>
+                        <!-- <td>{{activityService.getLimitedText(rowData)}}</td> -->
+                        <!-- <td>{{activityService.getActivityObjectInfo(rowData)}}</td> -->
+                        <td>{{'activity.workflowName.' + rowData.workflowName | translate}}</td>
+                        <td>{{'activity.workflowStep.' + rowData.workflowStep | translate}}</td>
+                        <td>{{activityService.getReceiversFullName(rowData, true)}}</td>
+                        <td>{{rowData.creationTime | persianDate:'shortDate'}}</td>
+                        <!-- <td>{{'activity.sendType.' + rowData.sendType.toString() | translate}}</td> -->
+                        <td>
+                            <button pButton type="button" icon="fa fa-eye" pTooltip="{{'action.view' | translate }}"
+                                tooltipPosition="top" (click)="onView(rowData)" class="ui-button-primary"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-treeTable>
+        </div>
+    </div>
+</div>

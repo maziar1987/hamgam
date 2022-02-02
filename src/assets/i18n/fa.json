@@ -1,0 +1,846 @@
+{
+  "app": {
+    "owner": "فناوری اطلاعات همگام",
+    "brand": {
+      "brand": "سامانه مانا",
+      "part1": "مدیریت آیین نامه های ناجا"
+    }
+  },
+  "navMenu": {
+    "home": "خانه",
+    "about": "درباره",
+    "login": "ورود",
+    "logout": "خروج"
+  },
+  "sidebar": {
+    "dashboard": "داشبورد",
+    "cartable": {
+      "cartable": "کارپوشه",
+      "inbox": "وارد شده",
+      "unread": "خوانده نشده",
+      "drafts": "پیش نویس",
+      "sent": "ارسال شده",
+      "archive": "بایگانی",
+      "trash": "حذف شده"
+    },
+    "basicInfo": {
+      "basicInfo": "اطلاعات پایه",
+      "basicValue": "مقادیر پایه",
+      "orgUnit": "واحد سازمانی",
+      "yegan": "اطلاعات یگان",
+      "people": "افراد"
+    },
+    "experts": "افراد خبره",
+    "workingGroups": "کارگروه خبرگی",
+    "orgUnit": "ساختار سازمانی",
+    "calendar": "تقویم",
+    "reports": "گزارشها",
+    "regulations": {
+      "regulations": "آیین نامه ها",
+      "regulationsCertificate": "شناسنامه",
+      "rfp": "کاربرگ انتظارات",
+      "specializedTeam": "تیم تخصصی",
+      "proposal": "پیشنهادیه",
+      "contract": "قرارداد",
+      "compilationContract": "قرارداد تدوین",
+      "supervisionContract": "قرارداد نظارت"
+    },
+    "system-management": {
+      "system-management": "مدیریت سامانه",
+      "menu-management": "مدیریت منوها",
+      "policy": "مدیریت کنترل دسترسی",
+      "user-management": "مدیریت کاربران"
+    }
+  },
+  "action": {
+    "exit": "خروج",
+    "submit": "تایید",
+    "saveChanges": "ذخیره تغییرات",
+    "save": "ذخیره",
+    "view": "مشاهده",
+    "create": "ثبت",
+    "creation": "ایجاد",
+    "update": "بروزرسانی",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "restore": "بازیابی",
+    "archive": "بایگانی",
+    "ok": "بله",
+    "cancel": "انصراف",
+    "back": "بازگشت",
+    "close": "بستن",
+    "register": "ثبت نام",
+    "signIn": "ورود",
+    "signUp": "ثبت نام",
+    "yes": "بله",
+    "no": "خیر",
+    "search": "جستجو",
+    "add": "افزودن",
+    "new": "جدید",
+    "assign": "انتساب",
+    "choose": "انتخاب",
+    "select": "انتخاب",
+    "collapseAll": "بستن همه",
+    "expandAll": "بازکردن همه",
+    "reload": "بارگیری مجدد",
+    "chooseFile": "انتخاب فایل",
+    "upload": "بارگذاری",
+    "added": "افزوده شد",
+    "edited": "ویرایش شد",
+    "first": "ابتدا",
+    "accept": "تایید",
+    "unaccept": "عدم تایید",
+    "refresh": "بازیابی",
+    "addBasicInfo": "افزودن اطلاعات پایه",
+    "addDeafultTemplate": "افزودن الگو",
+    "editDeafultTemplate": "ویرایش الگو",
+    "done": "انجام شد",
+    "setting": "تنظیمات",
+    "cut": "بریدن",
+    "copy": "کپی",
+    "paste": "چسباندن",
+    "send": "ارسال",
+    "and": "و",
+    "confirm": "تایید",
+    "unConfirm": "عدم تایید",
+    "activated": "فعال شده",
+    "unActivated": "غیر فعال",
+    "unknown": "نامشخص",
+    "notChecked": "درحال بررسی",
+    "active": "فعال",
+    "inactive": "غیرفعال",
+    "startProcess": "شروع فرآیند",
+    "implement": "اعمال",
+    "details": "جزئیات",
+    "next": "بعدی",
+    "previous": "قبلی",
+    "saveAndSend": "ثبت و ارسال",
+    "updateAndSend": "ویرایش و ارسال",
+    "history": "تاریخچه",
+    "return": "عودت"
+  },
+  "message": {
+    "delete": {
+      "delete": "حذف {{value}} انجام شود",
+      "deleted": "حذف شود",
+      "unsuccessful": {
+        "unsuccessful": "رخداد خطا",
+        "deleteMessage": "خطا هنگام حذف."
+      },
+      "successful": {
+        "successful": "عملیات موفق",
+        "successMessage": "حذف با موفقیت انجام شد."
+      }
+    },
+    "save": {
+      "unsuccessful": {
+        "unsuccessful": "رخداد خطا",
+        "errorMessage": "خطا هنگام ثبت."
+      },
+      "successful": {
+        "successful": "عملیات موفق",
+        "successMessage": "ثبت با موفقیت انجام شد."
+      }
+    },
+    "update": {
+      "unsuccessful": {
+        "unsuccessful": "رخداد خطا",
+        "errorMessage": "خطا هنگام ویرایش"
+      },
+      "successful": {
+        "successful": "عملیات موفق",
+        "successMessage": "تغییرات ذخیره گردید."
+      }
+    },
+    "validate": {
+      "valid": "فیلد های ستاره دار باید دارای مقدار باشند.",
+      "required": "اجباری"
+    },
+    "restore": {
+      "successful": "بازیابی {{value}} انجام شد"
+    },
+    "archive": {
+      "successful": "بایگانی {{value}} انجام شد"
+    },
+    "noData": "اطلاعاتی وجود ندارد.",
+    "required": "اجباری",
+    "duplicated": "تکراری",
+    "search": "جستجوی",
+    "shabaNumberHelp": "تعداد کاراکتر برای کد شبا برابر با 26 و با IR شروع شود.",
+    "success": "ثبت با موفقیت انجام شد",
+    "failed": "ثبت انجام نشد.",
+    "valueNotValid": "مقدار نا معتبر است",
+    "noResultsFound": "نتیجه ای پیدا نشد",
+    "itemsSelected": "{0} مورد انتخاب شده",
+    "choose": "انتخاب نمایید",
+    "passwordMismatch": "رمز عبور و تکرار رمز عبور یکسان نمی باشد",
+    "sending": "در حال ارسال ...",
+    "waiting": "منتظر بمانید ..."
+  },
+  "validation": {
+    "UniqueNationalCode": "تکراری می‌باشد",
+    "NotNull": "اجباری می‌باشد"
+  },
+  "basicinfo": {
+    "value": "مقدار",
+    "viewCode": "کد نمایشی",
+    "sortOrder": "مرتب سازی",
+    "isActive": "فعال",
+    "defaultValueCode": "مقدار پیش فرض",
+    "listTitle": "اطلاعات پایه",
+    "readonly": "فقط خواندنی",
+    "createTitle": "تعریف اطلاعات پایه - ",
+    "title": "عنوان",
+    "status": "وضعیت",
+    "sort": "نوع مرتب سازی",
+    "viewOrder": "ترتیب نمایش",
+    "code": "کد",
+    "ACTIVE": "فعال",
+    "INACTIVE": "غیرفعال",
+    "DELETED": "حذف شده",
+    "NONE": "هیچ کدام",
+    "ALPHABET": "حروف الفبا",
+    "VIEWORDER": "ترتیب نمایش",
+    "CODE": "کد",
+    "detailTitle": "جزییات"
+  },
+  "login": {
+    "login": "ورود",
+    "userName": "نام کاربری",
+    "password": "رمز عبور",
+    "rememberMe": "مرا به خاطر بسپار"
+  },
+  "activity": {
+    "id": "شناسه",
+    "activity": "فعالیت",
+    "sendType": {
+      "sendType": "نحوه ارسال",
+      "COMPOSE": "ارسال",
+      "FORWARD": "ارجاع",
+      "REPLY": "پاسخ",
+      "SENDBACK": "عودت"
+    },
+    "activityType": "نوع فعالیت",
+    "subject": "موضوع",
+    "processName": "نام فرآیند",
+    "processStep": "مرحله ی فرآیند",
+    "text": "پیام",
+    "priority": "اولویت",
+    "classification": "طبقه بندی",
+    "creationTime": "زمان ارسال",
+    "deadline": "مهلت انجام",
+    "chainIndex": "",
+    "prevActivityId": "فعالیت قبلی",
+    "sender": "ارسال کننده",
+    "receivers": "گیرندگان",
+    "receiverCCs": "رونوشت",
+    "receiverBCCs": "رونوشت مخفی",
+    "activityObj": "",
+    "activityObjectInfo": "جزییات",
+    "attachments": "پیوست ها",
+    "attachmentsCount": "تعداد پیوست ها",
+    "startActivityId": "شناسه درخواست",
+    "workflowName": {
+      "workflowName": "نام فرآیند",
+      "ExpertPerson": "فرد خبره",
+      "Certificate": "آیین نامه"
+    },
+    "workflowStep": {
+      "workflowStep": "مرحله فرآیند",
+      "create": "ثبت",
+      "edit": "ویرایش",
+      "check": "بررسی"
+    },
+    "errorMessage": {
+      "text": "متن را وارد نمایید",
+      "subject": "موضوع را وارد نمایید",
+      "receivers": "گیرندگان را انتخاب نمایید",
+      "priority": "اولویت را انتخاب نمایید",
+      "classification": "طبقه بندی را انتخاب نمایید"
+    }
+  },
+  "defaultText": {
+    "defaultText": "متن پیش فرض",
+    "text": "متن"
+  },
+  "cartable": {
+    "activity": "فعالیت",
+    "referenceHistory": "تاریخچه ارجاعات",
+    "archive": "بایگانی",
+    "attacheFile": "الصاق فایل",
+    "attachmentFiles": "فایلهای الصاقی",
+    "back": "بازگشت",
+    "button:Send": "ارسال",
+    "cancel": "انصراف",
+    "compose": "جدید",
+    "date": "تاریخ",
+    "delete": "حذف",
+    "error": {
+      "download": "خطا در دانلود فایل.",
+      "send": "خطا در ارسال.",
+      "upload": "خطا در بارگزاری فایل."
+    },
+    "file": "فایل",
+    "folders": {
+      "archive": "بایگانی",
+      "inbox": "وارده",
+      "outbox": "صادره",
+      "trash": "حذف شده",
+      "personal": "شخصی"
+    },
+    "forward": "ارجاع",
+    "id": "شناسه",
+    "move": "انتقال",
+    "message": {
+      "activitySent": "ارسال شد.",
+      "emptyTableInfo": "اطلاعاتی برای نمایش وجود ندارد.",
+      "noTextEntered": "متن وارد نشده است.",
+      "noUserSelected": "هیچ کاربری انتخاب نشده است."
+    },
+    "pagerInfo": "مشاهده {{value1}} تا {{value2}} از {{value3}}",
+    "receiver": "گیرنده",
+    "receivers": "گیرندگان",
+    "receiversBCC": "رونوشت مخفی",
+    "receiversCC": "رونوشت",
+    "remove": "حذف",
+    "reply": "پاسخ",
+    "return": "عودت",
+    "requiredReceivers": "گیرنده ای انتخاب نشده است.",
+    "requiredText": "موضوع یا متن وارد نشده است.",
+    "restore": "بازیابی",
+    "search": "جستجو",
+    "sendBack": "عودت",
+    "sender": "فرستنده",
+    "sendMessage": {
+      "0": "ارسال شد.",
+      "1": "ارجاع داده شد.",
+      "2": "پاسخ داده شد.",
+      "3": "عودت داده شد."
+    },
+    "sendType": {
+      "sendType": "نحوه ارسال",
+      "0": "ارسال",
+      "1": "ارجاع",
+      "2": "پاسخ",
+      "3": "عودت",
+      "4": "ارسال موجودیت"
+    },
+    "trash": {
+      "title": "حذف شده"
+    },
+    "subject": "موضوع",
+    "text": "متن",
+    "title": {
+      "title": "کارپوشه",
+      "history": "درخت ارجاعات"
+    },
+    "view": "نمایش"
+  },
+  "error": {
+    "req": "اجباری",
+    "Method argument not valid": "ورود نادرست داده‌ها"
+  },
+  "expertPerson": {
+    "expertPerson": "افراد خبره",
+    "category": "رده",
+    "personType": "نوع فرد",
+    "personnelCode": "کد پرسنلی",
+    "nationalCode": "کد ملی",
+    "firstName": "نام",
+    "lastName": "نام خانوادگی",
+    "fatherName": "نام پدر",
+    "birthDate": "تاریخ تولد",
+    "educationDegree": "مدرک تحصیلی",
+    "studyField": "رشته تحصیلی",
+    "relation": "وابستگی",
+    "serviceStatus": "وضعیت خدمت",
+    "serviceLocation": "محل خدمت",
+    "degree": "درجه / رتبه",
+    "employmentDate": "تاریخ استخدام",
+    "currentResponsibility": "مسئولیت فعلی",
+    "threePreviousPosition": "سه سمت و مسئولیت قبلی",
+    "scientificExperiencesRecords": "تجارب و سوابق علمی",
+    "accountNumber": "شماره حساب",
+    "shabaNumber": "شماره شبا",
+    "personImage": "تصویر پرسنلی",
+    "educationImage": "تصویر مدرک تحصیلی",
+    "attachment": "پیوست",
+    "description": "توضیحات",
+    "inactive": "غیرفعال",
+    "status": "وضعیت",
+    "relationTypes": {
+      "military": "نظامی",
+      "civilian": "غیرنظامی"
+    },
+    "serviceStatuses": {
+      "employed": "شاغل",
+      "retired": "بازنشسته"
+    },
+    "personTypes": {
+      "INTERNAL": "درون سازمانی",
+      "EXTERNAL": "برون سازمانی"
+    },
+    "createPageTitle": "ثبت فرد خبره جدید",
+    "addExpertPerson": "افزودن فرد خبره",
+    "selectCategory": "لطفا یک رده را انتخاب نمایید",
+    "selectEducationDegree": "لطفا یک مدرک تحصیلی را انتخاب نمایید",
+    "selectStudyField": "لطفا یک رشته تحصیلی را انتخاب نمایید",
+    "selectServiceLocation": "لطفا یک محل خدمت را انتخاب نمایید",
+    "selectDegree": "لطفا یک درجه / رتبه را انتخاب نمایید"
+  },
+  "expertWorkingGroup": {
+    "expertWorkingGroup": "کارگروه خبرگی",
+    "title": "عنوان",
+    "category": "رده",
+    "members": "اعضا",
+    "member": "عضو",
+    "memberCount": "تعداد اعضا فعال",
+    "lastEditDate": "تاریخ آخرین تغییر",
+    "activeMember": "اعضای فعال"
+  },
+  "expertApprovement": {
+    "expertPerson": "فرد خبره",
+    "responsibility": "مسئولیت",
+    "startDate": "تاریخ شروع",
+    "endDate": "تاریخ پایان",
+    "status": "وضعیت",
+    "selectResponsibility": "مسئولیت را انتخاب نمایید"
+  },
+  "rules": {
+    "row": "ردیف",
+    "feature": "ویژگی",
+    "operator": "عملگر",
+    "value": "مقدار",
+    "select": "انتخاب نمایید"
+  },
+  "person": {
+    "person": "فرد",
+    "lastName": "نام خانوادگی",
+    "firstName": "نام",
+    "nationalCode": "کد ملی",
+    "fatherName": "نام پدر",
+    "birthDate": "تاریخ تولد",
+    "educationDegree": "مدرک تحصیلی",
+    "organization": "واحد سازمانی",
+    "employmentDate": "تاریخ استخدام",
+    "rank": "درجه، رتبه",
+    "studyField": "رشته تحصیلی",
+    "personnelCode": "کد پرسنلی",
+    "listPageTitle": "افراد",
+    "createPageTitle": "ثبت فرد جدید"
+  },
+  "orgChart": {
+    "excellentmanager": "مدیر عالی",
+    "deputy": "معاون",
+    "directorGeneral": "مدیر کل",
+    "manager": "مدیر",
+    "expert": "کارشناس",
+    "cicar": "قائم مقام",
+    "consultant": "مشاور",
+    "officer": "مسئول دفتر",
+    "left": "چپ",
+    "down": "پایین",
+    "active": "فعال",
+    "inactive": "غیر فعال",
+    "temporary": "موقت"
+  },
+  "contract": {
+    "contract": "تنظیمات قرارداد",
+    "worksheetPrice": "نرم هر کاربرگ",
+    "consumableItemsPercentage": "درصد اقلام مصرفی",
+    "supervisorPercentage": "درصد سهم ناظر",
+    "masterPercentage": "درصد سهم استاد راهنما"
+  },
+  "user": {
+    "user": "کاربران",
+    "login": "نام کاربری",
+    "password": "رمز عبور",
+    "repeatPassword": "تکرار رمز عبور",
+    "firstName": "نام",
+    "lastName": "نام خانوادگی ",
+    "email": "ایمیل",
+    "imageUrl": "imageUrl",
+    "langKey": {
+      "langKey": "زبان",
+      "fa": "فارسی",
+      "en": "انگلیسی"
+    },
+    "createdBy": "ایجاد کننده",
+    "createdDate": "زمان ایجاد",
+    "lastModifiedBy": "آخرین تغییر دهنده",
+    "lastModifiedDate": "آخرین زمان تغییر",
+    "person": "شخص",
+    "activated": "وضعیت",
+    "policySets": "دسترسی ها",
+    "authorities": "نقش ها",
+    "authorityType": {
+      "ROLE_ADMIN": "ادمین",
+      "ROLE_USER": "کاربر",
+      "ROLE_MANAGER": "مدیر",
+      "ROLE_EXPERT_EXPERTPERSON": "کارشناس فرد خبره",
+      "ROLE_EXPERT_WORKINGGROUP": "کارشناس کارگروه",
+      "ROLE_SUPERVISOR": "ناظر"
+    },
+    "createPageTitle": "ثبت کاربر جدید"
+  },
+  "regulations": {
+    "title": "آیین نامه ها",
+    "regulation": {
+      "title": "عنوان",
+      "unit": "رده",
+      "creationDate": "تاریخ ایجاد",
+      "status": "وضعیت",
+      "notifyProgramYear": "سال برنامه ریزی ابلاغ",
+      "notifyLetterNo": "شماره نامه ابلاغ",
+      "notifyAttachment": "تصویر نامه ابلاغ"
+    },
+    "certificate": {
+      "formTitle": "شناسنامه",
+      "title": "عنوان آیین نامه",
+      "regulationTypeId": "نوع آیین نامه",
+      "registerNo": "شماره ثبت آیین نامه",
+      "code": "شناسه آیین نامه",
+      "confidentialityId": "سطح طبقه بندی",
+      "compilationStatusId": "وضعیت تدوین",
+      "producerId": "رده تهیه کننده",
+      "confirmerId": "مرجع تائید کننده",
+      "applicationLevelId": "سطح کاربردی آیین نامه",
+      "applicationAreaId": "حوزه کاربردی آیین نامه",
+      "status": "وضعیت",
+      "certificateStatus": {
+        "statusId": "وضعیت آیین نامه",
+        "causeId": "علت تدوین",
+        "revisionCauseId": "علت تجدید نظر",
+        "revisionLevelId": "سطح تجدید نظر",
+        "timeEstimate": "زمان مورد نیاز",
+        "creditEstimate": "اعتبار مورد نیاز",
+        "attachment": "فایل آیین نامه",
+        "prepareDate": "تاریخ تهیه",
+        "description": "توضیحات",
+        "startDate": "تاریخ شروع",
+        "endDate": "تاریخ پایان",
+        "day": "روز",
+        "currency": "ریال"
+      },
+      "certificateList": {
+        "statusDesc": "وضعیت",
+        "startDate": "تاریخ شروع",
+        "endDate": "تاریخ پایان",
+        "description": "توضیحات"
+      }
+    },
+    "rfp": {
+      "title": "کاربرگ انتظارات",
+      "regulationTitle": "عنوان آیین نامه",
+      "preamble": "مقدمه‌",
+      "mainObjective": "هدف اصلی",
+      "mainQuestion": "سوال اصلی",
+      "secondaryObjectives": "اهداف فرعی",
+      "secondaryQuestions": "سوالات فرعی",
+      "mission": "ماموریت کلی که این آیین نامه باید براساس آن نوشته شود",
+      "commands": "فرامین و تدابیر کلی که حتما باید در تدوین مدنظر قرار گیرد",
+      "domain": "محدوده کارکردی آیین‌نامه",
+      "dependencies": "نحوه‌ی تعامل و وابستگی با سایر آیین ‌نامه‌های موجود",
+      "resources": "منابع اخذ استاندارهای مورد نیاز",
+      "opportunities": "فرصت‌های که باید در حین تدوین یا بازنگری به آن توجه شود",
+      "considerations": "ملاحظات، محدودیت‌ها یا تهدیدهایی که باید حین تدوین یا بازنگری به آن توجه شود",
+      "regulationExecutor": "متولی اجرای آیین‌نامه",
+      "stakeholdersInternal": "بهره‌‌برداران درون سازمانی",
+      "stakeholdersExternal": "بهره‌برداران برون سازمانی",
+      "attachmentFiles": "مستندات"
+    },
+    "specializedTeam": {
+      "title": "تیم تخصصی",
+      "expertPerson": "فرد خبره",
+      "responsibility": "مسئولیت",
+      "startDate": "تاریخ شروع",
+      "endDate": "تاریخ پایان",
+      "selectResponsibility": "مسئولیت را انتخاب نمایید",
+      "TeamMembers": "عضویت در سایر تیم‌‌های تخصصی",
+      "ExpertAppointments": "عضویت در کارگروه‌‌ها",
+      "certificateTitle": "آیین‌ نامه",
+      "WorkingGroupTitle": "کارگروه",
+      "message": {
+        "error": "خطا",
+        "duplicate": "شخص تکراری است",
+        "uniqueBoos": "هر تیم فقط میتواند یک رئيس داشته باشد",
+        "maxMember": "هر فرد خبره حداکثر در ۳ تیم می‌تواند مسئولیت داشته باشد",
+        "uniqueSecretary": "هر تیم فقط میتواند یک دبیر داشته باشد",
+        "uniqueSupervisor": "هر تیم فقط میتواند یک استاد راهنما داشته باشد",
+        "uniqueSupervision": "هر تیم فقط میتواند یک ناظر فعال داشته باشد",
+        "minRequir": "هر تیم باید یک رئيس یک دبیر و حداقل یک عضو داشته باشد",
+        "minRequirSupervision": "هر تیم باید یک ناظر داشته باشد",
+        "selectRegulations": "ابتدا یک آیین نامه را انتخاب کنید"
+      }
+    },
+    "supervisionAdd": {
+      "title": "تعیین ناظر",
+      "expertPerson": "فرد خبره",
+      "responsibility": "مسئولیت",
+      "startDate": "تاریخ شروع",
+      "endDate": "تاریخ پایان",
+      "selectResponsibility": "مسئولیت را انتخاب نمایید",
+      "TeamMembers": "عضویت در سایر تیم‌‌های تخصصی",
+      "ExpertAppointments": "عضویت در کارگروه‌‌ها",
+      "certificateTitle": "آیین‌ نامه",
+      "WorkingGroupTitle": "کارگروه",
+      "message": {
+        "error": "خطا",
+        "duplicate": "شخص تکراری است",
+        "uniqueBoos": "هر تیم فقط میتواند یک رئيس داشته باشد",
+        "maxMember": "هر فرد خبره حداکثر در ۳ تیم می‌تواند مسئولیت داشته باشد",
+        "uniqueSecretary": "هر تیم فقط میتواند یک دبیر داشته باشد",
+        "uniqueSupervisor": "هر تیم فقط میتواند یک استاد راهنما داشته باشد",
+        "uniqueSupervision": "هر تیم فقط میتواند یک ناظر فعال داشته باشد",
+        "minRequir": "هر تیم باید یک رئيس یک دبیر و حداقل یک عضو داشته باشد",
+        "minRequirSupervision": "هر تیم باید یک ناظر داشته باشد",
+        "selectRegulations": "ابتدا یک آیین نامه را انتخاب کنید"
+      }
+    },
+    "proposal": {
+      "message": {
+        "deleteAttach": "اجازه حذف ضمیمه کاربرگ انتظارات را ندارید."
+      },
+      "formTitle": "پیشنهادیه",
+      "compilationNecessity": "ضرورت آیین نامه",
+      "compilationImportance": "اهمیت تدوین آیین نامه",
+      "regulationAbstract": "بیان چکیده آیین نامه",
+      "regulationTitle": "عنوان آیین نامه",
+      "history": "پیشینه،سابقه اقدامات تدوینی/بازنگری انجام شده در داخل و خارج سازمان",
+      "generalFramework": "چارچوب کلی گزارش نهایی",
+      "attachListTitle": "مهم ترین منابع مورد استفاده در تدوین/بازنگری",
+      "worksheet": {
+        "worksheet": "برآورد تعداد کاربرگ های آیین نامه",
+        "title": "موضوع",
+        "worksheetTitle": "عنوان کاربرگ",
+        "worksheetCount": "تعداد",
+        "worksheetAmount": "هزینه"
+      },
+      "organize": {
+        "organize": "سازماندهی و زمانبندی مراحل انجام تدوین/بازنگری",
+        "step": "مرحله",
+        "title": "عنوان مرحله",
+        "description": "شرح فعالیت",
+        "timeEstimate": "مدت زمان مورد نیاز - روز"
+      },
+      "attachList": {
+        "row": "ردیف",
+        "documentName": "نام سند",
+        "description": "توضیحات",
+        "operation": "عملیات"
+      }
+    },
+    "najaExpertsSession": {
+      "sessionData": "اطلاعات جلسه",
+      "SessionLists": "لیست جلسات هیئت خبرگی",
+      "najaExpertsSession": "جلسه هیئت خبرگی",
+      "sessionType": "نوع",
+      "sessionTitle": "عنوان",
+      "sessionSubject": "موضوع",
+      "sessionDate": "تاریخ",
+      "startTime": "ساعت شروع",
+      "endTime": "ساعت پایان",
+      "sessionNo": "شماره جلسه",
+      "invitationNo": "شماره دعوتنامه",
+      "sessionPlace": "محل برگزاری",
+      "sessionCoordinator": "اداره کننده",
+      "sessionSummary": "خلاصه مذاکرات",
+      "confirmationDescriptionRfp": "توضیحات کاربرگ انتظارات",
+      "confirmationDescriptionTeam": "توضیحات تیم تخصصی",
+      "confirmationDescriptionProposal": "توضیحات پیشنهادیه",
+      "confirmationStatusRfpID": "کاربرگ انتظارات",
+      "confirmationStatusTeamID": "تیم تخصصی",
+      "confirmationStatusProposalID": "پیشنهادیه",
+      "confirmationStatusRfp": "کاربرگ انتظارات",
+      "confirmationStatusTeam": "تیم تخصصی",
+      "confirmationStatusProposal": "پیشنهادیه",
+      "attachment": "صورتجلسه",
+      "certificate": "عنوان آیین نامه",
+      "sessionMembers": {
+        "sessionMembers": "اعضا",
+        "fullname": "نام و نام خانوادگی",
+        "responsibility": "سمت",
+        "proxyName": "نماینده",
+        "precense": {
+          "precense": "وضعیت",
+          "absent": "غایب",
+          "present": "حاضر"
+        }
+      },
+      "enactments": {
+        "enactments": "مصوبات",
+        "enactmentDescription": "توضیحات",
+        "enactmentTitle": "عنوان"
+      }
+    },
+    "contract": {
+      "title": "قرارداد"
+    },
+    "baseTheory": {
+      "baseTheory": "نظریه مبنا",
+      "registrationDate": "تاریخ ثبت",
+      "baseTheoryList": "لیست نظریه مبنا",
+      "confirmationDescriptionRfp": "توضیحات کاربرگ انتظارات",
+      "confirmationDescriptionTeam": "توضیحات تیم تخصصی",
+      "confirmationDescriptionProposal": "توضیحات پیشنهادیه",
+      "confirmationStatusRfpID": "کاربرگ انتظارات",
+      "confirmationStatusTeamID": "تیم تخصصی",
+      "confirmationStatusProposalID": "پیشنهادیه",
+      "confirmationStatusRfp": "کاربرگ انتظارات",
+      "confirmationStatusTeam": "تیم تخصصی",
+      "confirmationStatusProposal": "پیشنهادیه"
+    }
+  },
+  "orgUnit": {
+    "orgUnit": "واحد سازمانی",
+    "displayName": "عنوان",
+    "code": "کد",
+    "activated": "فعال",
+    "status": "وضعیت",
+    "createPageTitle": "ثبت واحد سازمانی جدید",
+    "subOrgUnit": "زیرمجموعه واحد سازمانی",
+    "active": "فعال",
+    "deActive": "غیر فعال",
+    "viewOrder": "ترتیب نمایش"
+  },
+  "policy": {
+    "policy": "دسترسی",
+    "name": "عنوان دسترسی",
+    "active": "وضعیت",
+    "creatorUser": "ایجاد کننده",
+    "lastModifiedBy": "آخرین تغییر دهنده",
+    "editDate": "تاریخ آخرین بروزرسانی",
+    "description": "توضیحات",
+    "operation": "عملیات",
+    "edit": "ویرایش سیاست",
+    "add": "افزودن سیاست",
+    "assign-to-user": "انتساب دسترسی به کاربر",
+    "assign-to-organ": "انتساب دسترسی به سازمان",
+    "email": "ایمیل"
+  },
+  "menu-management": {
+    "menu-management": "مدیریت منوها",
+    "ROLE_ADMIN": "مدیر سیستم",
+    "ROLE_SUPERVISOR": "ناظر",
+    "ROLE_USER": "کاربر",
+    "notification": "شما قادر به گرفتن دسترسی مدیریت منو از کاربر مدیر سیستم نیستید.",
+    "menu": {
+      "unselected": "عدم نمایش ",
+      "selected": "نمایش"
+    }
+  },
+  "orgUnit": {
+    "orgUnit": "واحد سازمانی",
+    "displayName": "عنوان",
+    "code": "کد",
+    "activated": "فعال",
+    "status": "وضعیت",
+    "createPageTitle": "ثبت واحد سازمانی جدید",
+    "subOrgUnit": "زیرمجموعه واحد سازمانی",
+    "active": "فعال",
+    "deActive": "غیر فعال",
+    "viewOrder": "ترتیب نمایش"
+  },
+  "policy": {
+    "policy": "دسترسی",
+    "name": "عنوان دسترسی",
+    "active": "وضعیت",
+    "creatorUser": "ایجاد کننده",
+    "lastModifiedBy": "آخرین تغییر دهنده",
+    "editDate": "تاریخ آخرین بروزرسانی",
+    "description": "توضیحات",
+    "operation": "عملیات",
+    "edit": "ویرایش سیاست",
+    "add": "افزودن سیاست",
+    "assign-to-user": "انتساب دسترسی به کاربر",
+    "assign-to-organ": "انتساب دسترسی به سازمان",
+    "email": "ایمیل"
+  },
+  "menu-management": {
+    "menu-management": "مدیریت منوها",
+    "ROLE_ADMIN": "مدیر سیستم",
+    "ROLE_SUPERVISOR": "ناظر",
+    "ROLE_USER": "کاربر",
+    "notification": "شما قادر به گرفتن دسترسی مدیریت منو از کاربر مدیر سیستم نیستید.",
+    "menu": {
+      "unselected": "عدم نمایش ",
+      "selected": "نمایش"
+    },
+    "roles": "نقش ها",
+    "menus": "منو ها"
+  },
+  "notify-program": {
+    "certificates": "آیین نامه ها",
+    "certificate-select": "انتخاب آیین نامه",
+    "add": "افزودن آیین نامه",
+    "notify-program-view": "لیست ابلاغ برنامه",
+    "notify-program": "ابلاغ برنامه",
+    "orgUnit": "رده",
+    "letterNo": "شماره نامه",
+    "programYear": "سال برنامه ریزی",
+    "createdDate": "تاریخ ثبت",
+    "attachment": "تصویر نامه",
+    "certificate": {
+      "certificatesSelected": "آیین نامه های انتخابی",
+      "title": "عنوان",
+      "status": "وضعیت",
+      "type": "نوع",
+      "description": "توضیحات",
+      "noData": "برای واحد سازمانی انتخاب شده آیین نامه ای یافت نشد.",
+      "code": "شناسه آیین نامه",
+      "registerNo": "شماره ثبت آیین نامه"
+    }
+  },
+  "entityType": {
+    "entityType": "موجودیت",
+    "name": "نام",
+    "persianName": "نام فارسی",
+    "fields": "ویژگی ها",
+    "actions": "عملیات",
+    "menu": "منو"
+  },
+  "field": {
+    "name": "نام",
+    "persianName": "نام فارسی",
+    "type": "نوع",
+    "valueType": "نوع",
+    "required": "ضروری",
+    "mainValue": "مقادیر پایه",
+    "defaultValue": "مقادیر پیش فرض"
+  },
+  "targetSpecification": {
+    "targets": "اهداف",
+    "targetSpecification": "تعیین اهداف",
+    "targetTitle": "هدف میزتخصصی",
+    "activityTypes": "نحوه فعالیت میز تخصصی",
+    "certificate": "آیین نامه",
+    "targetSpecificationMembers": "اعضا میز تخصصی",
+    "createPageTitle": "ثبت هدف جدید"
+  },
+  "targetSpecificationMember": {
+    "memberName": "نام و نام خانوادگی",
+    "memberPost": "سمت",
+    "memberType": {
+      "memberType": "نوع عضو",
+      "INTERNALMEMBER": "عضو داخلی",
+      "FOREIGNMEMBER": "عضو بیرونی"
+    },
+    "targetSpecification": "تعیین اهداف",
+    "teamMember": "عضو تیم"
+  },
+  "sessionPlanning": {
+    "sessionPlanning": "برنامه ریزی جلسات تخصصی",
+    "sessionDate": "تاریخ جلسه",
+    "sessionTime": "ساعت جلسه",
+    "certificate": "آیین نامه",
+    "sessionMemberDuties": "وظیفه اعضای جلسه",
+    "targetSpecification": "موضوع بحث",
+    "sessionMemberDuty": {
+      "duty": "وظیفه",
+      "targetSpecificationMember": "عضو تیم تخصصی",
+      "memberName": "نام و نام خانوادگی",
+      "memberPost": "سمت"
+    },
+    "createPageTitle": "ثبت برنامه ریزی جدید"
+  }
+}

@@ -1,0 +1,17 @@
+:host ::ng-deep .ui-dialog-content {
+    overflow: hidden;
+}
+
+:host ::ng-deep .pi-caret-right:before {
+    content: "\e904";
+}
+
+:host ::ng-deep .ui-tree {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+:host ::ng-deep .ui-treenode-children {
+    padding: 0 1em 0 0;
+}

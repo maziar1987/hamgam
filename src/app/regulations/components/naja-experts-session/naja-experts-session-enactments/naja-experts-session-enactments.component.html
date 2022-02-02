@@ -1,0 +1,89 @@
+<p-table #dt [value]="enactments" [autoLayout]="true" dataKey="id" selectionMode="single"
+    [(selection)]="selectedEnactment" [columns]="enactmentsCols"  (onRowSelect)="
+                        ($event)" (onRowUnselect)="onRowUnselect($event)"  styleClass="ui-table-najaExpertsSessionEnactment"
+    [rowHover]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+    [showCurrentPageReport]="true" [filterDelay]="0" [globalFilterFields]="[]"
+    currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}">
+
+    <ng-template pTemplate="caption">
+        <div class="ui-table-globalfilter-container">
+            <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                (input)="dt.filterGlobal($event.target.value, 'contains')">
+
+            <button pButton type="button" icon="fa fa-plus" class="ui-button-success float-right" (click)="onCreate()"
+                pTooltip="{{('action.add' | translate) + ' ' + ('regulations.najaExpertsSession.enactments.enactments' | translate)}}"
+                tooltipPosition="top"></button>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th></th>
+            <ng-container *ngFor="let col of columns">
+                <th scope="col">
+                    {{col.header}}
+                </th>
+            </ng-container>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td>
+            <p-menu #menu [popup]="true" [model]="getMenuItems(rowData)" appendTo="body">
+            </p-menu>
+            <button pButton icon="pi pi-bars" type="button" (click)="menu.toggle($event)"
+                    class="ui-button-secondary"></button>
+          </td>
+            <ng-container *ngFor="let col of columns; let i = index">
+                <td >
+                    {{rowData[col.field]}}
+                </td>
+            </ng-container>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
+
+<p-dialog header="{{('action.add' | translate) + ' ' + ('regulations.najaExpertsSession.enactments.enactments' | translate)}}"
+    [(visible)]="displayEnactments" [style]="{width: '40vw'}">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('enactmentTitle') }">
+                <label for="enactmentTitle">
+                    {{'regulations.najaExpertsSession.enactments.enactmentTitle' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input id="enactmentTitle" type="text" pInputText formControlName="enactmentTitle" [placeholder]=""
+                    [ngClass]="{ 'is-invalid' : isInvalid('enactmentTitle') }">
+                <div *ngIf="enactmentTitle?.errors?.required" class="invalid-feedback">
+                    {{'message.required' | translate}}
+                </div>
+            </div>
+            <div class="col-sm-6 form-group ui-fluid" [ngClass]="{ 'has-danger' : isInvalid('enactmentDescription') }">
+                <label for="enactmentDescription">
+                    {{'regulations.najaExpertsSession.enactments.enactmentDescription' | translate}}
+                </label>
+                <textarea formControlName="enactmentDescription" id="enactmentDescription" [rows]="1" pInputTextarea
+                    [ngClass]="{ 'is-invalid' : isInvalid('enactmentDescription') }"></textarea>
+            </div>
+        </div>
+    </form>
+    <p-footer>
+        <button *ngIf="!this.form.value.id" pButton type="button" (click)="addNewEnactment()" label="{{'action.add' | translate}}" icon="pi pi-plus"
+            iconPos="right" class="ui-button-raised ui-button-success" [disabled]="this.form.invalid"></button>
+      <button *ngIf="this.form.value.id" pButton type="button" label="{{'action.edit' | translate}}" icon="pi pi-plus" (click)="editEnactment()"
+              iconPos="right" class="ui-button-raised ui-button-success" [disabled]="this.form.invalid"></button>
+        <button pButton type="button" (click)="cancel()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary">
+        </button>
+    </p-footer>
+</p-dialog>
+

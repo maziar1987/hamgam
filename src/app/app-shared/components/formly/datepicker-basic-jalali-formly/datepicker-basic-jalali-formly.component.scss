@@ -1,0 +1,80 @@
+:host {
+  .custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+    width: 2rem;
+  }
+
+  .custom-day:hover,
+  .custom-day.focused {
+    background-color: #e6e6e6;
+  }
+
+  .weekend {
+    background-color: pink;
+    border-radius: 1rem;
+    color: white;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  :host ::ng-deep {
+    .custom-select {
+      direction: ltr;
+    }
+
+    .ngb-dp-weekday {
+      width: 100%;
+      height: 2rem;
+    }
+
+    .ngb-dp-month {
+      pointer-events: none;
+      width: 100%;
+    }
+
+    .ngb-dp-day {
+      // pointer-events: none;
+      width: 100%;
+    }
+
+    .ngb-dp-week-number {
+      // pointer-events: none;
+      width: 100%;
+    }
+
+    .input-group > .form-control:not(:first-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    .right .ngb-dp-navigation-chevron {
+      transform: rotate(-135deg);
+    }
+
+    .ngb-dp-navigation-chevron {
+      transform: rotate(45deg);
+    }
+
+    .ngb-datepicker-navigation-select > .custom-select {
+      padding: 0px 1.1rem;
+    }
+
+    .ngb-dp-day {
+      text-align: center;
+    }
+  }
+
+  .input-group-append > .btn {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
+
+}

@@ -1,0 +1,21 @@
+<p-table [value]="users" [(selection)]="selectedUsers">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3em">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th>User</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-rowData>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td>{{item.name}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<button type="button" (click)="ok()" pButton label="Ok"></button>
+<button type="button" (click)="cancel()" pButton label="Cancel"></button>

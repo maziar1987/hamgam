@@ -1,0 +1,26 @@
+<form class="form-inline">
+    <div class="form-group">
+        <div class="input-group">
+            <input class="form-control custom-width" placeholder="yyyy-mm-dd" name="dp"
+                (dateSelect)="onDateSelect($event)" [ngModel]="date" (ngModelChange)="valuechange($event)" ngbDatepicker
+                [disabled]="isDisabled" [dayTemplate]="customDay" [footerTemplate]="footerTemplate" #d="ngbDatepicker">
+            <div class="input-group-append custom-margin">
+                <button class="btn btn-outline-secondary oi oi-calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<ng-template #customDay let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled"
+    let-focused="focused">
+    <span class="custom-day" [class.weekend]="isWeekend(date)" [class.focused]="focused" [class.bg-info]="selected"
+        [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+        {{ date.day }}
+    </span>
+</ng-template>
+
+<ng-template #footerTemplate>
+    <hr class="my-0">
+    <button class="btn btn-primary btn-sm m-2 float-left" (click)="date = today; d.close()">Today</button>
+    <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+</ng-template>

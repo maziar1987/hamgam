@@ -1,0 +1,13 @@
+<ngb-datepicker #dp [(ngModel)]="date" [firstDayOfWeek]="6" dir="ltr" (dateSelect)="onDateSelect($event)" [footerTemplate]="footerTemplate">
+</ngb-datepicker>
+
+<ng-template #footerTemplate>
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="my-0">
+            <button pButton type="button" label="امروز" class="ui-button-success btn-sm m-2 float-left"
+                (click)="selectToday()"></button>
+            <!-- <button type="button" class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">بستن</button> -->
+        </div>
+    </div>
+</ng-template>

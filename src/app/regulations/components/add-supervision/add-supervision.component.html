@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-12">
+        <h5>{{'regulations.supervisionAdd.title'|translate}}</h5>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <fieldset>
+            <p-dataView #dv [value]="teams" filterBy="fullName" layout="grid"  emptyMessage="اطلاعاتی وجود ندارد">
+                <p-header>
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <button pButton type="button" label="افزودن ناظر" icon="pi pi-plus" iconPos="right"
+                                class="ui-button-raised ui-button-success  " (click)="showModal()"></button>
+                        </div>
+                        <div class="col-md-4">
+                            <input style="width:100%;" type="search" pInputText placeholder="جستجو"
+                                (input)="dv.filter($event.target.value)">
+                        </div>
+                    </div>
+                </p-header>
+                <ng-template let-team pTemplate="gridItem">
+                    <div class="p-col-12 p-md-3">
+                        <div class="card">
+                            <div class="">
+                                <img [src]="team.personImageFileUrl" class="person-image img-fluid rounded-circle"
+                                    alt="">
+                            </div>
+                            <div class="">
+                                <div class="product-description"><i pTooltip="عضو غیر فعال" tooltipPosition="bottom" *ngIf="!tActive(team)" style="font-size: smaller; color: crimson;" class="pi pi-circle-on"></i><i pTooltip="عضو فعال" tooltipPosition="bottom" *ngIf="tActive(team)" style="font-size: smaller; color: chartreuse;" class="pi pi-circle-on"></i>{{team.fullName}}</div>
+                                <div class="product-description">{{team.responsibility.title}}</div>
+                                <div class="product-description">{{team.endDate | persianDate:'shortDate'}}<span *ngIf="team.endDate">-</span>{{team.startDate | persianDate:'shortDate'}}</div>
+                                <a *ngIf="IsSupervision(team)" class="delete-icon" href="javascript:;" (click)="DeleteItem(team)"> <i pTooltip="حذف" tooltipPosition="bottom"
+                                        class="pi pi-times"></i> </a>
+                                <a *ngIf="IsSupervision(team)" class="edit-icon" href="javascript:;" (click)="EditeItem(team)"> <i pTooltip="ویرایش" tooltipPosition="bottom"
+                                        class="pi pi-pencil"></i> </a>
+                                <a class="info-icon"  href="experts/{{team.expertPersonId}}" target="_blank"> <i pTooltip="مشخصات" tooltipPosition="bottom"
+                                            class="pi pi-info"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+            <div class="row">
+                <div class="col">
+                    <app-workflow-button-group></app-workflow-button-group>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+

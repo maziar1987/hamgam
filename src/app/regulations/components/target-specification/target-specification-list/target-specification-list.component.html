@@ -1,0 +1,97 @@
+<app-spinner-border [loading]="loading"></app-spinner-border>
+
+<div class="animate-bottom" *ngIf="!loading">
+    <div class="row">
+        <div class="col-md-12 form-group ui-fluid">
+            <label for="certificateId">{{'targetSpecification.certificate' | translate}}</label>
+            <input id="certificateId" type="text" pInputText [value]="certificateTitle" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 form-group ui-fluid">
+
+            <label for="certificateId">{{'targetSpecification.targets' | translate}}</label>
+
+            <div class="card bg-secondary-primeng border-0 box-shadow">
+
+                <div class="row py-2 px-3">
+                    <div class="col mb-2">
+
+                        <button pButton type="button" icon="fa fa-plus" pTooltip="{{'action.new' | translate }}"
+                            tooltipPosition="top" (click)="onCreate()" class="ui-button-success float-right"></button>
+
+                        <div class="ui-inputgroup justify-content-end">
+                            <button pButton type="button" icon="pi pi-refresh" class="ui-button-primary"
+                                (click)="onRefresh()" pTooltip="{{'action.reload' | translate }}"
+                                tooltipPosition="top"></button>
+                            <input type="text" class="col-md-3" pInputText placeholder="{{'action.search' | translate}}"
+                                [(ngModel)]="searchValue" (keyup.enter)="onSearch()">
+                            <button pButton type="button" icon="fa fa-search" class="ui-button-primary"
+                                (click)="onSearch()" pTooltip="{{'action.search' | translate }}"
+                                tooltipPosition="top"></button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="targets?.length <= 0">
+                    <div class="col text-center py-2">
+                        <span>{{'message.noData' | translate }}
+                        </span>
+                    </div>
+                </div>
+
+                <div *ngFor="let target of targets" class="card mx-3 mb-2">
+                    <div class="card-body">
+                        <div class="row border-bottom mb-2">
+                            <div class="col-md-6">
+                                <!-- <button pButton type="button" icon="fa fa-eye" pTooltip="{{'action.view' | translate }}"
+                                tooltipPosition="top" (click)="onView(target)"
+                                class="ui-button-primary float-right mb-1"></button> -->
+                            </div>
+                            <div class="col-md-6">
+                                <p-menu #menu [popup]="true" [model]="getMenuItems(target)" appendTo="body"></p-menu>
+                                <button pButton icon="fa fa-bars" (click)="menu.toggle($event)"
+                                    class="ui-button-secondary float-left mb-1"></button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-group ui-fluid">
+                                <label class="col-md-4" for="targetSpecificationMembers">
+                                    {{'targetSpecification.targetSpecificationMembers' | translate}}
+                                </label>
+                                {{getMembersName(target.targetSpecificationMembers)}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group ui-fluid">
+                                <label class="col-md-4" for="targetTitle">
+                                    {{'targetSpecification.targetTitle' | translate}}
+                                </label>
+                                {{target.targetTitle}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 ui-fluid">
+                                <label class="col-md-4" for="activityTypes">
+                                    {{'targetSpecification.activityTypes' | translate}}
+                                </label>
+                                {{getActivityTypesTitle(target)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+                (onPageChange)="onPageChange($event)" dropdownAppendTo="body" [showCurrentPageReport]="true"
+                currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}"></p-paginator>
+
+        </div>
+    </div>
+</div>
+
+<app-accept #accept_modal_ts (accept)="delete($event)"></app-accept>

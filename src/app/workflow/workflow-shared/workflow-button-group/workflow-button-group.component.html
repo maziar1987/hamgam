@@ -1,0 +1,14 @@
+<hr class="my-2" *ngIf="(buttonsLength$ | async) > 0" />
+<div *ngIf="(isLoading$ | async)"
+  [ngClass]='{ "position-absolute w-100 text-center overflow-hide": (isLoading$ | async)}'>
+  <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="5" fill="#EEEEEE" animationDuration=".5s">
+  </p-progressSpinner>
+</div>
+<ng-container *ngFor="let btn of buttons$ | async; index as i;">
+  <button *ngIf="!btn.invisible" pButton type="button" (click)="btn.onClick({srcElementEvent: $event})"
+    label="{{btn.label}}" icon="{{btn.iconClass}}" iconPos="right" [ngClass]="btn.cssClass"
+    [disabled]="btn.disabled || (isLoading$ | async)"></button>
+</ng-container>
+
+
+<app-workflow-create-activity-modal></app-workflow-create-activity-modal>

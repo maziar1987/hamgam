@@ -1,0 +1,14 @@
+.part2-font {
+    font-size: 60%;
+}
+
+:host::ng-deep {
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .notification-dot {
+        font-size: 60%;
+        margin-right: -2px;
+    }
+}

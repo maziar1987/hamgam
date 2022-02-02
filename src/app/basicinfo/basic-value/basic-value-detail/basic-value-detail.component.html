@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12">
+        <h5>{{'basicinfo.detailTitle'|translate}}</h5>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12 form-group row">
+        <label for="title" class="col-md-4 col-form-label">{{'basicinfo.title' | translate}}: </label>
+        <div class="col-md-8">
+            <p>{{basicInfo.title}}</p>
+        </div>
+    </div>
+    <!-- <div class="col-md-6 form-group row">
+        <label for="title" class="col-md-4 col-form-label">{{'basicinfo.readonly' | translate}}: </label>
+        <div class="col-md-8">
+            <p-checkbox [(ngModel)]="basicInfo.readonly" inputId="readonly" binary="true"></p-checkbox>
+        </div>
+    </div> -->
+</div>
+
+<div class="row">
+    <div class="col-md-6 form-group row">
+        <label class="col-md-4 col-form-label">{{'basicinfo.sort' | translate}}: </label>
+        <div class="col-md-8">
+            <p><p>{{'basicinfo.' + basicInfo.sortType |translate}}</p>
+        </div>
+    </div>
+    <div class="col-md-6 form-group row">
+        <label class="col-md-4 col-form-label">{{'basicinfo.status' | translate}}: </label>
+        <div class="col-md-8">
+            <p>{{'basicinfo.' + basicInfo.status |translate}}</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6 form-group row">
+        <label class="col-md-4 col-form-label">{{'basicinfo.code' | translate}}: </label>
+        <div class="col-md-8">
+
+            <p>{{basicInfo.code}}</p>
+        </div>
+    </div>
+    <div class="col-md-6 form-group row">
+        <label class="col-md-4 col-form-label">{{'basicinfo.viewOrder' | translate}}: </label>
+        <div class="col-md-8">
+            <p>{{basicInfo.viewOrder}}</p>
+        </div>
+    </div>
+
+</div>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <!-- <button *ngIf="this.basicInfo.readonly" pButton type="button" (click)="onEdit()"
+            label="{{'action.edit' | translate}}" icon="fa fa-edit" iconPos="right"
+            class="ui-button-raised ui-button-primary col-md-2"></button> -->
+        <button *ngIf="this.basicInfo.readonly" pButton type="button" (click)="onDelete()"
+            label="{{'action.delete' | translate}}" class="ui-button-raised ui-button-danger mr-2 col-md-1"></button>
+        <button pButton type="button" (click)="onBack()" label="{{'action.back' | translate}}"
+            class="ui-button-raised ui-button-secondary mr-2 col-md-1">
+        </button>
+    </div>
+</div>
+
+<app-accept #accept_modal (accept)="delete($event)"></app-accept>

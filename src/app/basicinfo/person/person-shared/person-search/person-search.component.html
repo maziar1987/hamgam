@@ -1,0 +1,69 @@
+<p-dialog [(visible)]="visible" (onHide)="onHide()" [style]="{width: '50vw'}" [transitionOptions]="'60ms'">
+  <p-header>
+    {{('message.search' | translate) + ' ' + ('person.person' | translate)}}
+  </p-header>
+  <div class="row">
+    <div class="col-sm-12">
+      <p-table #dt [value]="people" [autoLayout]="true" dataKey="id" selectionMode="single"
+               [(selection)]="selectedPeople" styleClass="ui-table-people" [rowHover]="true" [columns]="cols"
+               (onRowSelect)="onRowSelect($event)" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+               [showCurrentPageReport]="true" [filterDelay]="0"
+               (onFilter)="utils.filterTree($event)"
+               [globalFilterFields]="['personnelCode', 'firstName', 'lastName', 'fatherName']">
+        <ng-template pTemplate="caption">
+          <div class="ui-table-globalfilter-container">
+            <div class="ui-inputgroup justify-content-end">
+              <button pButton type="button" icon="pi pi-refresh" class="ui-button-primary"
+                      (click)="onRefresh()" pTooltip="{{'action.refresh' | translate }}"
+                      tooltipPosition="top"></button>
+              <input type="text" pInputText placeholder="{{'action.search' | translate}}"
+                     [(ngModel)]="searchValue" (keyup.enter)="onSearch()">
+              <button pButton type="button" icon="fa fa-search" class="ui-button-primary"
+                      (click)="onSearch()" pTooltip="{{'action.search' | translate }}"
+                      tooltipPosition="top"></button>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th scope="row" *ngFor="let col of columns">
+              {{col.header}}
+            </th>
+            <th scope="row"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns; let i = index">
+              {{rowData[col.field]}}
+            </td>
+            <td>
+              <button (click)="onSelect(rowData)" pButton type="button"
+                      class="ui-button-primary float-left" icon="fa fa-check"
+                      pTooltip="{{'action.select' | translate}}" tooltipPosition="top"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8" style="text-align:center">{{'message.noData' | translate }}
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+
+      <p-paginator [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10,20,30]"
+                   (onPageChange)="onPageChange($event)" dropdownAppendTo="body"
+                   currentPageReportTemplate="مشاهده ورودی های {first} تا {last} از {totalRecords}"></p-paginator>
+    </div>
+  </div>
+  <p-footer>
+    <button pButton type="button" (click)="onBack()" label="{{'action.cancel' | translate}}"
+            class="ui-button-raised ui-button-secondary mr-2 col-md-2">
+    </button>
+  </p-footer>
+</p-dialog>

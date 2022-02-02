@@ -1,0 +1,9 @@
+:host::ng-deep {
+    .ui-dialog .ui-dialog-content {
+        overflow: hidden;
+    }
+
+    .ui-tree {
+        height: 60vh;
+    }
+}
